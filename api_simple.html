@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 <meta name="generator" content="pdoc 0.9.2" />
 <title>dearpygui.simple API documentation</title>
-<meta name="description" content="" />
+<meta name="description" content="DearPyGui&#39;s simple contains wrappings of the core API." />
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
 <link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
@@ -25,20 +25,469 @@
 <h1 class="title">Module <code>dearpygui.simple</code></h1>
 </header>
 <section id="section-intro">
+<p>DearPyGui's simple contains wrappings of the core API.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">from typing import List, Any, Callable, Union
+<pre><code class="python">&#34;&#34;&#34;DearPyGui&#39;s simple contains wrappings of the core API.
+&#34;&#34;&#34;
+from contextlib import contextmanager
+from typing import List, Any, Callable, Union
 import dearpygui.core as internal_dpg
 
-def start_dearpygui():
-    vp = internal_dpg.create_viewport()
-    internal_dpg.setup_dearpygui(viewport=vp)
-    internal_dpg.show_viewport(vp)
-    while(internal_dpg.is_dearpygui_running()):
-        internal_dpg.render_dearpygui_frame()   
-    internal_dpg.cleanup_dearpygui()
+########################################################################################################################
+# context manager container wrappers
+########################################################################################################################
+
+
+@contextmanager
+def managed_columns(name: str, columns: int, *, border: bool = True, show: bool = True, parent: str = &#34;&#34;,
+                    before: str = &#34;&#34;):
+    &#34;&#34;&#34;Wraps add_managed_columns() and automates calling end().
+
+    Args:
+        name: Unique name used to programmatically refer to the item. If label is unused this will be the label,
+            anything after &#34;##&#34; that occurs in the name will not be shown on screen.
+        columns: The number of columns to be created.
+        **border: Shows a border.
+        **show: Decides if the item is shown of not.
+        **parent: Parent this item will be added to. (runtime adding)
+        **before: This item will be displayed before the specified item in the parent. (runtime adding)
+
+    Returns:
+        None
+    &#34;&#34;&#34;
+    try:
+        yield internal_dpg.add_managed_columns(name, columns, border=border, show=show, parent=parent, before=before)
+
+    finally:
+        internal_dpg.end()
+
+
+@contextmanager
+def window(name: str, *, width: int = 200, height: int = 200, x_pos: int = 200, y_pos: int = 200, autosize: bool = False,
+           no_resize: bool = False, no_title_bar: bool = False, no_move: bool = False, no_scrollbar: bool = False,
+           no_collapse: bool = False, horizontal_scrollbar: bool = False, no_focus_on_appearing: bool = False,
+           no_bring_to_front_on_focus: bool = False, menubar: bool = False, no_close: bool = False,
+           no_background: bool = False, label: str = &#34;__DearPyGuiDefault&#34;, show: bool = True, collapsed: bool = False,
+           on_close: Callable = None):
+    &#34;&#34;&#34;Wraps add_window() and automates calling end().
+
+    Args:
+        name: Unique name used to programmatically refer to the item. If label is unused this will be the label,
+            anything after &#34;##&#34; that occurs in the name will not be shown on screen.
+        **width: Width of the item.
+        **height: Height of the item.
+        **x_pos: x position the window will start at
+        **y_pos: y position the window will start at
+        **autosize: Autosized the window to fit it&#39;s items.
+        **no_resize: Allows for the window size to be changed or fixed
+        **no_title_bar: Title name for the title bar of the window
+        **no_move: Allows for the window&#39;s position to be changed or fixed
+        **no_scrollbar: Disable scrollbars (window can still scroll with mouse or programmatically)
+        **no_collapse: Disable user collapsing window by double-clicking on it
+        **horizontal_scrollbar: Allow horizontal scrollbar to appear (off by default).
+        **no_focus_on_appearing: Disable taking focus when transitioning from hidden to visible state
+        **no_bring_to_front_on_focus: Disable bringing window to front when taking focus (e.g. clicking on it or
+            programmatically giving it focus)
+        **menubar: Decides if the menubar is shown or not.
+        **no_close: Decides if the window can be closed.
+        **no_background:
+        **label: Displayed name of the item.
+        **show: sets if the item is shown or not window.
+        **collapsed: Collapse the window
+        **on_close: Callback ran when window is closed
+
+    Returns:
+        None
+    &#34;&#34;&#34;
+    try:
+        if label == &#34;__DearPyGuiDefault&#34;:
+            yield internal_dpg.add_window(name, width=width, height=height, x_pos=x_pos, y_pos=y_pos, autosize=autosize,
+                                          no_resize=no_resize, no_title_bar=no_title_bar, no_move=no_move,
+                                          no_scrollbar=no_scrollbar, no_collapse=no_collapse,
+                                          horizontal_scrollbar=horizontal_scrollbar,
+                                          no_focus_on_appearing=no_focus_on_appearing,
+                                          no_bring_to_front_on_focus=no_bring_to_front_on_focus,
+                                          menubar=menubar, no_close=no_close, no_background=no_background,
+                                          show=show, collapsed=collapsed, on_close=on_close)
+        else:
+            yield internal_dpg.add_window(name, width=width, height=height, x_pos=x_pos, y_pos=y_pos, autosize=autosize,
+                                          no_resize=no_resize, no_title_bar=no_title_bar, no_move=no_move,
+                                          no_scrollbar=no_scrollbar, no_collapse=no_collapse,
+                                          horizontal_scrollbar=horizontal_scrollbar,
+                                          no_focus_on_appearing=no_focus_on_appearing,
+                                          no_bring_to_front_on_focus=no_bring_to_front_on_focus,
+                                          menubar=menubar, no_close=no_close,
+                                          no_background=no_background, label=label, show=show, 
+                                          collapsed=collapsed, on_close=on_close)
+    finally:
+        internal_dpg.end()
+
+
+@contextmanager
+def menu_bar(name: str, *, show: bool = True, parent: str = &#34;&#34;, before: str = &#34;&#34;):
+    &#34;&#34;&#34;Wraps add_menu_bar() and automates calling end().
+
+    Args:
+        name: Unique name used to programmatically refer to the item. If label is unused this will be the label,
+            anything after &#34;##&#34; that occurs in the name will not be shown on screen.
+        **show: Decides if the item is shown of not.
+        **parent: Parent this item will be added to. (runtime adding)
+        **before: This item will be displayed before the specified item in the parent. (runtime adding)
+
+    Returns:
+        None
+    &#34;&#34;&#34;
+    try:
+        yield internal_dpg.add_menu_bar(name, show=show, parent=parent, before=before)
+    finally:
+        internal_dpg.end()
+
+
+@contextmanager
+def menu(name: str, *, label: str = &#34;__DearPyGuiDefault&#34;, show: bool = True, parent: str = &#34;&#34;,
+         before: str = &#34;&#34;, enabled: bool = True):
+    &#34;&#34;&#34;Wraps add_menu() and automates calling end().
+
+    Args:
+        name: Unique name used to programmatically refer to the item. If label is unused this will be the label,
+            anything after &#34;##&#34; that occurs in the name will not be shown on screen.
+        **label: Displayed name of the item.
+        **show: Decides if the item is shown of not.
+        **parent: Parent this item will be added to. (runtime adding)
+        **before: This item will be displayed before the specified item in the parent. (runtime adding)
+        **enabled: Will enable or disable the menu.
+
+    Returns:
+        None
+    &#34;&#34;&#34;
+    try: 
+        if label == &#34;__DearPyGuiDefault&#34;:
+            yield internal_dpg.add_menu(name, show=show, parent=parent, before=before, enabled=enabled)
+        else:
+            yield internal_dpg.add_menu(name, label=label, show=show, parent=parent,
+                                        before=before, enabled=enabled)
+    finally:
+        internal_dpg.end()
+
+
+@contextmanager
+def child(name: str, *, show: bool = True, tip: str = &#34;&#34;, parent: str = &#34;&#34;, before: str = &#34;&#34;, width: int = 0,
+          height: int = 0, border: bool = True, autosize_x: bool = False, autosize_y: bool = False,
+          no_scrollbar: bool = False, horizontal_scrollbar: bool = False, menubar: bool = False):
+    &#34;&#34;&#34;Wraps add_child() and automates calling end().
+
+    Args:
+        name: Unique name used to programmatically refer to the item. If label is unused this will be the label,
+            anything after &#34;##&#34; that occurs in the name will not be shown on screen.
+        show: Decides if the item is shown of not.
+        **tip: Adds a simple tooltip
+        **parent: Parent to add this item to. (runtime adding)
+        **before: This item will be displayed before the specified item in the parent. (runtime adding)
+        **width: Width of the item.
+        **height: Height of the item.
+        **border: Shows/Hides the border around the sides
+        **autosize_x: Autosize the window to fit its items in the x.
+        **autosize_y: Autosize the window to fit its items in the y.
+        **no_scrollbar: Disable scrollbars (window can still scroll with mouse or programmatically)
+        **horizontal_scrollbar: Allow horizontal scrollbar to appear (off by default)
+        **menubar: adds a bar to add menus
+
+    Returns:
+        None
+    &#34;&#34;&#34;
+    try: 
+        yield internal_dpg.add_child(name, show=show, tip=tip, parent=parent, before=before, width=width,
+                                     height=height, border=border, autosize_x=autosize_x, autosize_y=autosize_y,
+                                     no_scrollbar=no_scrollbar, horizontal_scrollbar=horizontal_scrollbar,
+                                     menubar=menubar)
+    finally:
+        internal_dpg.end()
+
+
+@contextmanager
+def collapsing_header(name: str, *, label: str = &#34;__DearPyGuiDefault&#34;, show: bool = True, 
+                      tip: str = &#34;&#34;, parent: str = &#34;&#34;, before: str = &#34;&#34;,closable: bool = False, 
+                      default_open: bool = False, open_on_double_click: bool = False, open_on_arrow: bool = False, 
+                      leaf: bool = False, bullet: bool = False):
+    &#34;&#34;&#34;Wraps add_collapsing_header() and automates calling end().
+
+    Args:
+        name: Unique name used to programmatically refer to the item. If label is unused this will be the label,
+            anything after &#34;##&#34; that occurs in the name will not be shown on screen.
+        **label: Displayed name of the item.
+        **show: Decides if the item is shown of not.
+        **tip: Adds a simple tooltip
+        **parent: Parent to add this item to. (runtime adding)
+        **before: This item will be displayed before the specified item in the parent. (runtime adding)
+        **closable: Decides if the header can be collapsed.
+        **default_open: Decides if item is open by default.
+        **open_on_double_click: Need double-click to open node.
+        **open_on_arrow: Only open when clicking on the arrow part.
+        **leaf: No collapsing, no arrow (use as a convenience for leaf nodes).
+        **bullet: Display a bullet instead of arrow.
+
+
+    Returns:
+        None
+    &#34;&#34;&#34;
+    try:
+        if label == &#34;__DearPyGuiDefault&#34;:
+            yield internal_dpg.add_collapsing_header(name, show=show, tip=tip, parent=parent, before=before, 
+                                                     closable=closable, default_open=default_open, 
+                                                     open_on_double_click=open_on_double_click,
+                                                     open_on_arrow=open_on_arrow, leaf=leaf, bullet=bullet)
+        else:
+            yield internal_dpg.add_collapsing_header(name, show=show, label=label, tip=tip, parent=parent, before=before, 
+                                                     closable=closable, default_open=default_open, 
+                                                     open_on_double_click=open_on_double_click,
+                                                     open_on_arrow=open_on_arrow, leaf=leaf, bullet=bullet)
+    finally:
+        internal_dpg.end()
+
+
+@contextmanager
+def group(name: str, *, show: bool = True, tip: str = &#34;&#34;, parent: str = &#34;&#34;, before: str = &#34;&#34;, width: int = 0,
+          horizontal: bool = False, horizontal_spacing: float = -1.0):
+    &#34;&#34;&#34;Wraps add_group() and automates calling end().
+
+    Args:
+        name: Unique name used to programmatically refer to the item. If label is unused this will be the label,
+            anything after &#34;##&#34; that occurs in the name will not be shown on screen.
+        **show: Decides if the item is shown of not.
+        **tip: Adds a simple tooltip
+        **parent: Parent to add this item to. (runtime adding)
+        **before: This item will be displayed before the specified item in the parent. (runtime adding)
+        **width: Width of the item.
+        **horizontal: Adds the items on the same row by default.
+        **horizontal_spacing: Decides the spacing for the items.
+
+    Returns:
+        None
+    &#34;&#34;&#34;
+    try:
+        yield internal_dpg.add_group(name, show=show, tip=tip, parent=parent, before=before, width=width,
+                                     horizontal=horizontal, horizontal_spacing=horizontal_spacing)
+    finally:
+        internal_dpg.end()
+
+@contextmanager
+def node(name: str, *, label: str = &#34;__DearPyGuiDefault&#34;, show: bool = True, draggable: bool = True,
+         parent: str = &#34;&#34;, before: str = &#34;&#34;, x_pos: int = 100, y_pos: int = 100):
+    &#34;&#34;&#34;Wraps add_node() and automates calling end().
+    Args:
+        name: Unique name used to programmatically refer to the item. If label is unused this will be the label,
+            anything after &#34;##&#34; that occurs in the name will not be shown on screen.
+        **label: Displayed name of the item.
+        **parent: Parent to add this item to. (runtime adding)
+        **before: This item will be displayed before the specified item in the parent. (runtime adding)
+        **show: sets if the item is shown or not window.
+        **draggable: Allow node to be draggable.
+        **x_pos: x position the node will start at
+        **y_pos: y position the node will start at
+    Returns:
+        None
+    &#34;&#34;&#34;
+    try:
+        if label == &#34;__DearPyGuiDefault&#34;:
+            yield internal_dpg.add_node(name, show=show, parent=parent, before=before, 
+                                                     draggable=draggable, x_pos=x_pos, y_pos=y_pos)
+        else:
+            yield internal_dpg.add_node(name, label=label, show=show, parent=parent, before=before, 
+                                                     draggable=draggable, x_pos=x_pos, y_pos=y_pos)
+    finally:
+        internal_dpg.end()
+
+@contextmanager
+def node_attribute(name: str, *, show: bool = True, output: bool = False,
+         static: bool = False, parent: str = &#34;&#34;, before: str = &#34;&#34;):
+    &#34;&#34;&#34;Wraps add_node_attribute() and automates calling end().
+    Args:
+        name: Unique name used to programmatically refer to the item. If label is unused this will be the label,
+            anything after &#34;##&#34; that occurs in the name will not be shown on screen.
+        **parent: Parent to add this item to. (runtime adding)
+        **before: This item will be displayed before the specified item in the parent. (runtime adding)
+        **show: sets if the item is shown or not window.
+        **output: Set as output attribute
+        **static: Set as static attribute
+    Returns:
+        None
+    &#34;&#34;&#34;
+    try:
+        yield internal_dpg.add_node_attribute(name, show=show, parent=parent, before=before, 
+                                                    output=output, static=static)
+
+    finally:
+        internal_dpg.end()
+
+@contextmanager
+def node_editor(name: str, *, show: bool = True, parent: str = &#34;&#34;, before: str = &#34;&#34;, link_callback: Callable = None, delink_callback: Callable = None):
+    &#34;&#34;&#34;Wraps add_node_editor() and automates calling end().
+    Args:
+        name: Unique name used to programmatically refer to the item. If label is unused this will be the label,
+            anything after &#34;##&#34; that occurs in the name will not be shown on screen.
+        **parent: Parent to add this item to. (runtime adding)
+        **before: This item will be displayed before the specified item in the parent. (runtime adding)
+        **show: sets if the item is shown or not window.
+        **link_callback: Callback ran when a new link is created
+        **delink_callback: Callback ran when a link is detached
+    Returns:
+        None
+    &#34;&#34;&#34;
+    try:
+        yield internal_dpg.add_node_editor(name, show=show, parent=parent, before=before, link_callback=link_callback, delink_callback=delink_callback)
+    finally:
+        internal_dpg.end()
+
+
+@contextmanager
+def tab_bar(name: str, *, reorderable: bool = False, callback: Callable = None, callback_data: Any = None,  show: bool = True,
+            parent: str = &#34;&#34;, before: str = &#34;&#34;):
+    &#34;&#34;&#34;Wraps add_tab_bar() and automates calling end().
+
+    Args:
+        name: Unique name used to programmatically refer to the item. If label is unused this will be the label,
+            anything after &#34;##&#34; that occurs in the name will not be shown on screen.
+        **reorderable: Allows for moveable tabs.
+        **callback: Registers a callback.
+        **callback_data: Callback data.
+        **show: Decides if the item is shown of not.
+        **parent: Parent to add this item to. (runtime adding)
+        **before: This item will be displayed before the specified item in the parent. (runtime adding)
+
+    Returns:
+        None
+    &#34;&#34;&#34;
+    try:
+        yield internal_dpg.add_tab_bar(name, reorderable=reorderable, callback=callback, callback_data=callback_data,
+                                       show=show, parent=parent, before=before)
+    finally:
+        internal_dpg.end()
+
+
+@contextmanager
+def tab(name: str, *, closable: bool = False, label: str = &#34;__DearPyGuiDefault&#34;, show: bool = True, tip: str = &#34;&#34;,
+        no_reorder: bool = False, leading: bool = False, trailing: bool = False, no_tooltip: bool = False,
+        parent: str = &#34;&#34;, before: str = &#34;&#34;):
+    &#34;&#34;&#34;Wraps add_tab() and automates calling end().
+
+    Args:
+        name: Unique name used to programmatically refer to the item. If label is unused this will be the label,
+            anything after &#34;##&#34; that occurs in the name will not be shown on screen.
+        **closable: creates a button on the tab that can hide the tab.
+        **label: Displayed name of the item.
+        **show: Decides if the item is shown of not.
+        **no_reorder: Disable reordering this tab or having another tab cross over this tab
+        **leading: Enforce the tab position to the left of the tab bar (after the tab list popup button)
+        **trailing: Enforce the tab position to the right of the tab bar (before the scrolling buttons)
+        **no_tooltip: Disable tooltip for the given tab
+        **tip: Adds a simple tooltip.
+        **parent: Parent to add this item to. (runtime adding)
+        **before: This item will be displayed before the specified item in the parent. (runtime adding)
+
+    Returns:
+        None
+    &#34;&#34;&#34;
+    try:
+        if label == &#34;__DearPyGuiDefault&#34;:
+            yield internal_dpg.add_tab(name, closable=closable, show=show, tip=tip, parent=parent, before=before,
+                                       no_reorder=no_reorder, leading=leading, trailing=trailing, no_tooltip=no_tooltip)
+        else:
+            yield internal_dpg.add_tab(name, closable=closable, label=label, show=show, tip=tip, parent=parent,
+                                       before=before, no_reorder=no_reorder, leading=leading, trailing=trailing, no_tooltip=no_tooltip)
+    finally:
+        internal_dpg.end()
+
+
+@contextmanager
+def tree_node(name: str, *, label: str = &#34;__DearPyGuiDefault&#34;, show: bool = True, tip: str = &#34;&#34;, parent: str = &#34;&#34;, 
+              before: str = &#34;&#34;, default_open: bool = False, open_on_double_click: bool = False, 
+              open_on_arrow: bool = False, leaf: bool = False, bullet: bool = False):
+    &#34;&#34;&#34;Wraps add_tree_node() and automates calling end().
+
+    Args:
+        name: Unique name used to programmatically refer to the item. If label is unused this will be the label,
+            anything after &#34;##&#34; that occurs in the name will not be shown on screen.
+        **label: Displayed name of the item.
+        **show: Decides if the item is shown of not.
+        **tip: Adds a simple tooltip.
+        **parent: Parent to add this item to. (runtime adding)
+        **before: This item will be displayed before the specified item in the parent. (runtime adding)
+        **default_open: Decides if item is open by default.
+        **open_on_double_click: Need double-click to open node.
+        **open_on_arrow: Only open when clicking on the arrow part.
+        **leaf: No collapsing, no arrow (use as a convenience for leaf nodes).
+        **bullet: Display a bullet instead of arrow.
+
+    Returns:
+        None
+    &#34;&#34;&#34;
+    try:
+        if label == &#34;__DearPyGuiDefault&#34;:
+            yield internal_dpg.add_tree_node(name, show=show, tip=tip, parent=parent,
+                                             before=before, default_open=default_open, 
+                                             open_on_double_click=open_on_double_click, 
+                                             open_on_arrow=open_on_arrow,
+                                             leaf=leaf, bullet=bullet)
+        else:
+            yield internal_dpg.add_tree_node(name, show=show, tip=tip, parent=parent,
+                                             before=before, default_open=default_open, 
+                                             open_on_double_click=open_on_double_click, 
+                                             open_on_arrow=open_on_arrow,
+                                             leaf=leaf, bullet=bullet, label=label)
+    finally:
+        internal_dpg.end()
+
+
+@contextmanager
+def tooltip(tipparent: str, name: str, *, parent: str = &#34;&#34;, before: str = &#34;&#34;, show: bool = True):
+    &#34;&#34;&#34;Wraps add_tooltip() and automates calling end().
+
+    Args:
+        tipparent: Sets the item&#39;s tool tip to be the same as the named item&#39;s tool tip.
+        name: Unique name used to programmatically refer to the item. If label is unused this will be the label,
+            anything after &#34;##&#34; that occurs in the name will not be shown on screen.
+        **parent: Parent to add this item to. (runtime adding)
+        **before: This item will be displayed before the specified item in the parent. (runtime adding)
+        **show: Decides if the item is shown of not.
+
+    Returns:
+        None
+    &#34;&#34;&#34;
+    try:
+        yield internal_dpg.add_tooltip(tipparent, name, parent=parent, before=before, show=show)
+    finally:
+        internal_dpg.end()
+
+
+@contextmanager
+def popup(popupparent: str, name: str, *, mousebutton: int = 1, modal: bool = False, parent: str = &#34;&#34;, 
+          before: str = &#34;&#34;, width: int = 0, height: int = 0, show: bool = True):
+    &#34;&#34;&#34;Wraps add_popup() and automates calling end().
+
+    Args:
+        popupparent: Parent that the popup will be assigned to.
+        name: Unique name used to programmatically refer to the item. If label is unused this will be the label,
+            anything after &#34;##&#34; that occurs in the name will not be shown on screen.
+        **mousebutton: The mouse code that will trigger the popup. Default is 1 or mvMouseButton_Right.
+            (mvMouseButton_Left, mvMouseButton_Right, mvMouseButton_Middle, mvMouseButton_X1, mvMouseButton_X2)
+        **modal: Makes the popup modal.
+        **parent: Parent to add this item to. (runtime adding)
+        **before: This item will be displayed before the specified item in the parent. (runtime adding)
+        **width: Width of the item.
+        **height: Height of the item.
+        **show: Decides if the item is shown of not.
+
+    Returns:
+        None
+    &#34;&#34;&#34;
+    try:
+        yield internal_dpg.add_popup(popupparent, name, mousebutton=mousebutton, modal=modal, parent=parent,
+                                     before=before, width=width, height=height, show=show)
+    finally:
+        internal_dpg.end()
 
 ########################################################################################################################
 # Old Commands
@@ -97,155 +546,28 @@ def hide_item(item: str, *, children_only: bool = False):
         None
     &#34;&#34;&#34;
     if children_only:
-        children = get_item_children(item)
+        children = internal_dpg.get_item_children(item)
         for child in children:
             internal_dpg.configure_item(child, show=False)
     else:
         internal_dpg.configure_item(item, show=False)
 
-def enable_item(item: str):
-    &#34;&#34;&#34;Enables the item.
+
+# item configure commands
+def set_item_name(item: str, name: str):
+    &#34;&#34;&#34;Sets the item&#39;s name, anything after the characters &#34;##&#34; in the name will not be shown.
+
+        If no label is specified then by default this will be the displayed label.
 
     Args:
-        **item: Item to enable.
+        item: Item name will be applied to.
+        name: Unique name used to programmatically refer to the item. If label is unused this will be the label,
+            anything after &#34;##&#34; that occurs in the name will not be shown on screen.
 
     Returns:
         None
     &#34;&#34;&#34;
-    internal_dpg.configure_item(item, enabled=True)
-
-
-def disable_item(item: str):
-    &#34;&#34;&#34;Disables the item.
-
-    Args:
-        **item: Item to disable.
-
-    Returns:
-        None
-    &#34;&#34;&#34;
-    internal_dpg.configure_item(item, enable=False)
-
-
-def is_item_shown(item: str) -&gt; Union[bool, None]:
-    &#34;&#34;&#34;Checks if item is shown.
-
-    Returns:
-        status as a bool
-    &#34;&#34;&#34;
-    return internal_dpg.get_item_configuration(item)[&#34;show&#34;]
-
-def is_item_enabled(item: str) -&gt; Union[bool, None]:
-    &#34;&#34;&#34;Checks if item is enabled.
-
-    Returns:
-        status as a bool
-    &#34;&#34;&#34;
-    return internal_dpg.get_item_configuration(item)[&#34;enabled&#34;]
-
-
-def is_item_container(item: str) -&gt; Union[bool, None]:
-    &#34;&#34;&#34;Checks if item is a container.
-
-    Returns:
-        status as a bool
-    &#34;&#34;&#34;
-    return internal_dpg.get_item_info(item)[&#34;container&#34;]
-
-def is_item_hovered(item: str) -&gt; Union[bool, None]:
-    &#34;&#34;&#34;Checks if item is hovered.
-
-    Returns:
-        status as a bool
-    &#34;&#34;&#34;
-    return internal_dpg.get_item_state(item)[&#34;hovered&#34;]
-
-
-def is_item_active(item: str) -&gt; Union[bool, None]:
-    &#34;&#34;&#34;Checks if item is active.
-
-    Returns:
-        status as a bool
-    &#34;&#34;&#34;
-    return internal_dpg.get_item_state(item)[&#34;active&#34;]
-
-def is_item_focused(item: str) -&gt; Union[bool, None]:
-    &#34;&#34;&#34;Checks if item is focused.
-
-    Returns:
-        status as a bool
-    &#34;&#34;&#34;
-    return internal_dpg.get_item_state(item)[&#34;focused&#34;]
-
-def is_item_clicked(item: str) -&gt; Union[bool, None]:
-    &#34;&#34;&#34;Checks if item is clicked.
-
-    Returns:
-        status as a bool
-    &#34;&#34;&#34;
-    return internal_dpg.get_item_state(item)[&#34;clicked&#34;]
-
-def is_item_visible(item: str) -&gt; Union[bool, None]:
-    &#34;&#34;&#34;Checks if item is visible.
-
-    Returns:
-        status as a bool
-    &#34;&#34;&#34;
-    return internal_dpg.get_item_state(item)[&#34;visible&#34;]
-
-
-def is_item_edited(item: str) -&gt; Union[bool, None]:
-    &#34;&#34;&#34;Checks if item is edited.
-
-    Returns:
-        status as a bool
-    &#34;&#34;&#34;
-    return internal_dpg.get_item_state(item)[&#34;edited&#34;]
-
-
-def is_item_activated(item: str) -&gt; Union[bool, None]:
-    &#34;&#34;&#34;Checks if item is activated.
-
-    Returns:
-        status as a bool
-    &#34;&#34;&#34;
-    return internal_dpg.get_item_state(item)[&#34;activated&#34;]
-
-
-def is_item_deactivated(item: str) -&gt; Union[bool, None]:
-    &#34;&#34;&#34;Checks if item is deactivated.
-
-    Returns:
-        status as a bool
-    &#34;&#34;&#34;
-    return internal_dpg.get_item_state(item)[&#34;deactivated&#34;]
-
-
-def is_item_deactivated_after_edit(item: str) -&gt; Union[bool, None]:
-    &#34;&#34;&#34;Checks if item is deactivated_after_edit.
-
-    Returns:
-        status as a bool
-    &#34;&#34;&#34;
-    return internal_dpg.get_item_state(item)[&#34;deactivated_after_edit&#34;]
-
-
-def is_item_toggled_open(item: str) -&gt; Union[bool, None]:
-    &#34;&#34;&#34;Checks if item is toggled_open.
-
-    Returns:
-        status as a bool
-    &#34;&#34;&#34;
-    return internal_dpg.get_item_state(item)[&#34;toggled_open&#34;]
-
-
-def is_item_ok(item: str) -&gt; Union[bool, None]:
-    &#34;&#34;&#34;Checks if item is a ok.
-
-    Returns:
-        status as a bool
-    &#34;&#34;&#34;
-    return internal_dpg.get_item_state(item)[&#34;ok&#34;]
+    internal_dpg.configure_item(item, name=name)
 
 
 def set_item_label(item: str, label: str):
@@ -253,7 +575,7 @@ def set_item_label(item: str, label: str):
 
     Args:
         item: Item label will be applied to.
-        label: Displayed name to be applied.
+        label: Displayed name of the item.
 
     Returns:
         None
@@ -261,17 +583,17 @@ def set_item_label(item: str, label: str):
     internal_dpg.configure_item(item, label=label)
 
 
-def set_item_source(item: str, source: str):
-    &#34;&#34;&#34;Sets the item&#39;s value, to the source&#39;s value. Widget&#39;s value will now be &#34;linked&#34; to source&#39;s value.
+def set_item_tip(item: str, tip: str):
+    &#34;&#34;&#34;Sets the item&#39;s tip.
 
     Args:
-        item: Item to me linked.
-        source: Source to link to.
+        item: Item the tip will be applied to.
+        tip: tip to be applied.
 
     Returns:
         None
     &#34;&#34;&#34;
-    internal_dpg.configure_item(item, source=source)
+    internal_dpg.configure_item(item, tip=tip)
 
 
 def set_item_width(item: str, width: int):
@@ -279,7 +601,7 @@ def set_item_width(item: str, width: int):
 
     Args:
         item: Item the Width will be applied to.
-        width: Width to be applied.
+        width: Width of the item. width to be applied.
 
     Returns:
         None
@@ -292,37 +614,12 @@ def set_item_height(item: str, height: int):
 
     Args:
         item: Item the Height will be applied to.
-        height: Height to be applied.
+        height: Height of the item. height to be applied.
 
     Returns:
         None
     &#34;&#34;&#34;
     internal_dpg.configure_item(item, height=height)
-
-def set_item_callback(item: str, callback: Callable):
-    &#34;&#34;&#34;Sets the item&#39;s callack.
-
-    Args:
-        item: Item the callback will be applied to.
-        callback: Callback to be applied.
-
-    Returns:
-        None
-    &#34;&#34;&#34;
-    internal_dpg.configure_item(item, callback=callback)
-
-
-def set_item_user_data(item: str, user_data: Any):
-    &#34;&#34;&#34;Sets the item&#39;s callack_data to any python object.
-
-    Args:
-        item: Item the callback will be applied to.
-        user_data: Callback_data to be applied.
-
-    Returns:
-        None
-    &#34;&#34;&#34;
-    internal_dpg.configure_item(item, user_data=user_data)
 
 
 def get_item_label(item: str) -&gt; Union[str, None]:
@@ -332,6 +629,14 @@ def get_item_label(item: str) -&gt; Union[str, None]:
         label as a string or None
     &#34;&#34;&#34;
     return internal_dpg.get_item_configuration(item)[&#34;label&#34;]
+
+def get_item_tip(item: str) -&gt; Union[str, None]:
+    &#34;&#34;&#34;Gets the item&#39;s tip.
+
+    Returns:
+        tip as a string or None
+    &#34;&#34;&#34;
+    return internal_dpg.get_item_configuration(item)[&#34;tip&#34;]
 
 
 def get_item_width(item: str) -&gt; Union[int, None]:
@@ -351,93 +656,32 @@ def get_item_height(item: str) -&gt; Union[int, None]:
     &#34;&#34;&#34;
     return internal_dpg.get_item_configuration(item)[&#34;height&#34;]
 
-def get_item_callback(item: str) -&gt; Union[str, None]:
-    &#34;&#34;&#34;Gets the item&#39;s callback.
+
+def set_drawing_size(drawing: str, width: int, height: int):
+    &#34;&#34;&#34;Sets the drawing&#39;s size, width and height.
+
+    Args:
+        drawing: Drawing that will be set.
+        width: x axis width to set
+        height: y axis height to set
 
     Returns:
-        callback as a string or None
+        None
     &#34;&#34;&#34;
-    return internal_dpg.get_item_configuration(item)[&#34;callback&#34;]
+    internal_dpg.configure_item(drawing, width=width, height=height)
 
-def get_item_user_data(item: str) -&gt; Union[Any, None]:
-    &#34;&#34;&#34;Gets the item&#39;s callback data.
+
+def get_drawing_size(drawing: str) -&gt; Union[List[int], None]:
+    &#34;&#34;&#34;Gets the drawing&#39;s scale.
+
+    Args:
+        drawing: Drawing that will be set.
 
     Returns:
-        callback data as a python object or None
+        list as [width, height] or None
     &#34;&#34;&#34;
-    return internal_dpg.get_item_configuration(item)[&#34;user_data&#34;]
-
-def get_item_source(item: str) -&gt; Union[str, None]:
-    &#34;&#34;&#34;Gets the item&#39;s source.
-
-    Returns:
-        source as a string or None
-    &#34;&#34;&#34;
-    return internal_dpg.get_item_configuration(item)[&#34;source&#34;]
-
-
-def get_item_parent(item: str) -&gt; Union[str, None]:
-    &#34;&#34;&#34;Gets the item&#39;s parent.
-
-    Returns:
-        parent as a string or None
-    &#34;&#34;&#34;
-    return internal_dpg.get_item_info(item)[&#34;parent&#34;]
-
-
-def get_item_children(item: str) -&gt; Union[List[str], None]:
-    &#34;&#34;&#34;Gets the item&#39;s children.
-
-    Returns:
-        children as a list of string or None
-    &#34;&#34;&#34;
-    return internal_dpg.get_item_info(item)[&#34;children&#34;]
-
-
-def get_item_type(item: str) -&gt; Union[str]:
-    &#34;&#34;&#34;Gets the item&#39;s type.
-
-    Returns:
-        type as a string or None
-    &#34;&#34;&#34;
-    return internal_dpg.get_item_info(item)[&#34;type&#34;]
-
-
-def get_item_rect_size(item: str) -&gt; Union[List[int]]:
-    &#34;&#34;&#34;Gets the item&#39;s current size.
-
-    Returns:
-        size as a float list
-    &#34;&#34;&#34;
-    return internal_dpg.get_item_state(item)[&#34;rect_size&#34;]
-
-
-def get_item_rect_min(item: str) -&gt; Union[List[int]]:
-    &#34;&#34;&#34;Gets the item&#39;s current rect_min.
-
-    Returns:
-        rect_min as a float
-    &#34;&#34;&#34;
-    return internal_dpg.get_item_state(item)[&#34;rect_min&#34;]
-
-
-def get_item_rect_max(item: str) -&gt; Union[List[int]]:
-    &#34;&#34;&#34;Gets the item&#39;s current rect_max.
-
-    Returns:
-        rect_max as a float
-    &#34;&#34;&#34;
-    return internal_dpg.get_item_state(item)[&#34;rect_max&#34;]
-
-
-def get_item_pos(item: str) -&gt; Union[List[int]]:
-    &#34;&#34;&#34;Gets the item&#39;s current pos.
-
-    Returns:
-        pos as a float
-    &#34;&#34;&#34;
-    return internal_dpg.get_item_state(item)[&#34;pos&#34;]
-
+    config = internal_dpg.get_item_configuration(drawing)
+    return [config[&#34;width&#34;], config[&#34;height&#34;]]
 
 def show_style_editor(sender: str=&#34;&#34;, data: Any=None) -&gt; None:
     &#34;&#34;&#34;Shows the standard style editor window
@@ -445,7 +689,7 @@ def show_style_editor(sender: str=&#34;&#34;, data: Any=None) -&gt; None:
     Returns:
         None
     &#34;&#34;&#34;
-    internal_dpg.show_tool(internal_dpg.mvTool_Style)
+    internal_dpg.configure_item(&#34;style##standard&#34;, show=True)
 
 def show_metrics(sender: str=&#34;&#34;, data: Any=None) -&gt; None:
     &#34;&#34;&#34;Shows the standard metrics window
@@ -453,7 +697,7 @@ def show_metrics(sender: str=&#34;&#34;, data: Any=None) -&gt; None:
     Returns:
         None
     &#34;&#34;&#34;
-    internal_dpg.show_tool(internal_dpg.mvTool_Metrics)
+    internal_dpg.configure_item(&#34;metrics##standard&#34;, show=True)
 
 def show_about(sender: str=&#34;&#34;, data: Any=None) -&gt; None:
     &#34;&#34;&#34;Shows the standard about window
@@ -461,7 +705,7 @@ def show_about(sender: str=&#34;&#34;, data: Any=None) -&gt; None:
     Returns:
         None
     &#34;&#34;&#34;
-    internal_dpg.show_tool(internal_dpg.mvTool_About)
+    internal_dpg.configure_item(&#34;about##standard&#34;, show=True)
 
 def show_debug(sender: str=&#34;&#34;, data: Any=None) -&gt; None:
     &#34;&#34;&#34;Shows the standard debug window
@@ -469,7 +713,7 @@ def show_debug(sender: str=&#34;&#34;, data: Any=None) -&gt; None:
     Returns:
         None
     &#34;&#34;&#34;
-    internal_dpg.show_tool(internal_dpg.mvTool_Debug)
+    internal_dpg.configure_item(&#34;debug##standard&#34;, show=True)
 
 def show_documentation(sender: str=&#34;&#34;, data: Any=None) -&gt; None:
     &#34;&#34;&#34;Shows the standard documentation window
@@ -477,23 +721,15 @@ def show_documentation(sender: str=&#34;&#34;, data: Any=None) -&gt; None:
     Returns:
         None
     &#34;&#34;&#34;
-    internal_dpg.show_tool(internal_dpg.mvTool_Doc)
+    internal_dpg.configure_item(&#34;documentation##standard&#34;, show=True)
 
-def show_font_manager(sender: str=&#34;&#34;, data: Any=None) -&gt; None:
-    &#34;&#34;&#34;Shows the standard documentation window
-
-    Returns:
-        None
-    &#34;&#34;&#34;
-    internal_dpg.show_tool(internal_dpg.mvTool_Font)
-
-def show_item_registry(sender: str=&#34;&#34;, data: Any=None) -&gt; None:
-    &#34;&#34;&#34;Shows the standard documentation window
+def show_logger() -&gt; None:
+    &#34;&#34;&#34;Shows the logger window
 
     Returns:
         None
     &#34;&#34;&#34;
-    internal_dpg.show_tool(internal_dpg.mvTool_ItemRegistry)</code></pre>
+    internal_dpg.show_logger()</code></pre>
 </details>
 </section>
 <section>
@@ -503,15 +739,40 @@ def show_item_registry(sender: str=&#34;&#34;, data: Any=None) -&gt; None:
 <section>
 <h2 class="section-title" id="header-functions">Functions</h2>
 <dl>
-<dt id="dearpygui.simple.disable_item"><code class="name flex">
-<span>def <span class="ident">disable_item</span></span>(<span>item: str)</span>
+<dt id="dearpygui.simple.child"><code class="name flex">
+<span>def <span class="ident">child</span></span>(<span>name: str, *, show: bool = True, tip: str = '', parent: str = '', before: str = '', width: int = 0, height: int = 0, border: bool = True, autosize_x: bool = False, autosize_y: bool = False, no_scrollbar: bool = False, horizontal_scrollbar: bool = False, menubar: bool = False)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Disables the item.</p>
+<div class="desc"><p>Wraps add_child() and automates calling end().</p>
 <h2 id="args">Args</h2>
 <dl>
-<dt><strong><code>**item</code></strong></dt>
-<dd>Item to disable.</dd>
+<dt><strong><code>name</code></strong></dt>
+<dd>Unique name used to programmatically refer to the item. If label is unused this will be the label,
+anything after "##" that occurs in the name will not be shown on screen.</dd>
+<dt><strong><code>show</code></strong></dt>
+<dd>Decides if the item is shown of not.</dd>
+<dt><strong><code>**tip</code></strong></dt>
+<dd>Adds a simple tooltip</dd>
+<dt><strong><code>**parent</code></strong></dt>
+<dd>Parent to add this item to. (runtime adding)</dd>
+<dt><strong><code>**before</code></strong></dt>
+<dd>This item will be displayed before the specified item in the parent. (runtime adding)</dd>
+<dt><strong><code>**width</code></strong></dt>
+<dd>Width of the item.</dd>
+<dt><strong><code>**height</code></strong></dt>
+<dd>Height of the item.</dd>
+<dt><strong><code>**border</code></strong></dt>
+<dd>Shows/Hides the border around the sides</dd>
+<dt><strong><code>**autosize_x</code></strong></dt>
+<dd>Autosize the window to fit its items in the x.</dd>
+<dt><strong><code>**autosize_y</code></strong></dt>
+<dd>Autosize the window to fit its items in the y.</dd>
+<dt><strong><code>**no_scrollbar</code></strong></dt>
+<dd>Disable scrollbars (window can still scroll with mouse or programmatically)</dd>
+<dt><strong><code>**horizontal_scrollbar</code></strong></dt>
+<dd>Allow horizontal scrollbar to appear (off by default)</dd>
+<dt><strong><code>**menubar</code></strong></dt>
+<dd>adds a bar to add menus</dd>
 </dl>
 <h2 id="returns">Returns</h2>
 <p>None</p></div>
@@ -519,27 +780,72 @@ def show_item_registry(sender: str=&#34;&#34;, data: Any=None) -&gt; None:
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def disable_item(item: str):
-    &#34;&#34;&#34;Disables the item.
+<pre><code class="python">@contextmanager
+def child(name: str, *, show: bool = True, tip: str = &#34;&#34;, parent: str = &#34;&#34;, before: str = &#34;&#34;, width: int = 0,
+          height: int = 0, border: bool = True, autosize_x: bool = False, autosize_y: bool = False,
+          no_scrollbar: bool = False, horizontal_scrollbar: bool = False, menubar: bool = False):
+    &#34;&#34;&#34;Wraps add_child() and automates calling end().
 
     Args:
-        **item: Item to disable.
+        name: Unique name used to programmatically refer to the item. If label is unused this will be the label,
+            anything after &#34;##&#34; that occurs in the name will not be shown on screen.
+        show: Decides if the item is shown of not.
+        **tip: Adds a simple tooltip
+        **parent: Parent to add this item to. (runtime adding)
+        **before: This item will be displayed before the specified item in the parent. (runtime adding)
+        **width: Width of the item.
+        **height: Height of the item.
+        **border: Shows/Hides the border around the sides
+        **autosize_x: Autosize the window to fit its items in the x.
+        **autosize_y: Autosize the window to fit its items in the y.
+        **no_scrollbar: Disable scrollbars (window can still scroll with mouse or programmatically)
+        **horizontal_scrollbar: Allow horizontal scrollbar to appear (off by default)
+        **menubar: adds a bar to add menus
 
     Returns:
         None
     &#34;&#34;&#34;
-    internal_dpg.configure_item(item, enable=False)</code></pre>
+    try: 
+        yield internal_dpg.add_child(name, show=show, tip=tip, parent=parent, before=before, width=width,
+                                     height=height, border=border, autosize_x=autosize_x, autosize_y=autosize_y,
+                                     no_scrollbar=no_scrollbar, horizontal_scrollbar=horizontal_scrollbar,
+                                     menubar=menubar)
+    finally:
+        internal_dpg.end()</code></pre>
 </details>
 </dd>
-<dt id="dearpygui.simple.enable_item"><code class="name flex">
-<span>def <span class="ident">enable_item</span></span>(<span>item: str)</span>
+<dt id="dearpygui.simple.collapsing_header"><code class="name flex">
+<span>def <span class="ident">collapsing_header</span></span>(<span>name: str, *, label: str = '__DearPyGuiDefault', show: bool = True, tip: str = '', parent: str = '', before: str = '', closable: bool = False, default_open: bool = False, open_on_double_click: bool = False, open_on_arrow: bool = False, leaf: bool = False, bullet: bool = False)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Enables the item.</p>
+<div class="desc"><p>Wraps add_collapsing_header() and automates calling end().</p>
 <h2 id="args">Args</h2>
 <dl>
-<dt><strong><code>**item</code></strong></dt>
-<dd>Item to enable.</dd>
+<dt><strong><code>name</code></strong></dt>
+<dd>Unique name used to programmatically refer to the item. If label is unused this will be the label,
+anything after "##" that occurs in the name will not be shown on screen.</dd>
+<dt><strong><code>**label</code></strong></dt>
+<dd>Displayed name of the item.</dd>
+<dt><strong><code>**show</code></strong></dt>
+<dd>Decides if the item is shown of not.</dd>
+<dt><strong><code>**tip</code></strong></dt>
+<dd>Adds a simple tooltip</dd>
+<dt><strong><code>**parent</code></strong></dt>
+<dd>Parent to add this item to. (runtime adding)</dd>
+<dt><strong><code>**before</code></strong></dt>
+<dd>This item will be displayed before the specified item in the parent. (runtime adding)</dd>
+<dt><strong><code>**closable</code></strong></dt>
+<dd>Decides if the header can be collapsed.</dd>
+<dt><strong><code>**default_open</code></strong></dt>
+<dd>Decides if item is open by default.</dd>
+<dt><strong><code>**open_on_double_click</code></strong></dt>
+<dd>Need double-click to open node.</dd>
+<dt><strong><code>**open_on_arrow</code></strong></dt>
+<dd>Only open when clicking on the arrow part.</dd>
+<dt><strong><code>**leaf</code></strong></dt>
+<dd>No collapsing, no arrow (use as a convenience for leaf nodes).</dd>
+<dt><strong><code>**bullet</code></strong></dt>
+<dd>Display a bullet instead of arrow.</dd>
 </dl>
 <h2 id="returns">Returns</h2>
 <p>None</p></div>
@@ -547,56 +853,74 @@ def show_item_registry(sender: str=&#34;&#34;, data: Any=None) -&gt; None:
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def enable_item(item: str):
-    &#34;&#34;&#34;Enables the item.
+<pre><code class="python">@contextmanager
+def collapsing_header(name: str, *, label: str = &#34;__DearPyGuiDefault&#34;, show: bool = True, 
+                      tip: str = &#34;&#34;, parent: str = &#34;&#34;, before: str = &#34;&#34;,closable: bool = False, 
+                      default_open: bool = False, open_on_double_click: bool = False, open_on_arrow: bool = False, 
+                      leaf: bool = False, bullet: bool = False):
+    &#34;&#34;&#34;Wraps add_collapsing_header() and automates calling end().
 
     Args:
-        **item: Item to enable.
+        name: Unique name used to programmatically refer to the item. If label is unused this will be the label,
+            anything after &#34;##&#34; that occurs in the name will not be shown on screen.
+        **label: Displayed name of the item.
+        **show: Decides if the item is shown of not.
+        **tip: Adds a simple tooltip
+        **parent: Parent to add this item to. (runtime adding)
+        **before: This item will be displayed before the specified item in the parent. (runtime adding)
+        **closable: Decides if the header can be collapsed.
+        **default_open: Decides if item is open by default.
+        **open_on_double_click: Need double-click to open node.
+        **open_on_arrow: Only open when clicking on the arrow part.
+        **leaf: No collapsing, no arrow (use as a convenience for leaf nodes).
+        **bullet: Display a bullet instead of arrow.
+
 
     Returns:
         None
     &#34;&#34;&#34;
-    internal_dpg.configure_item(item, enabled=True)</code></pre>
+    try:
+        if label == &#34;__DearPyGuiDefault&#34;:
+            yield internal_dpg.add_collapsing_header(name, show=show, tip=tip, parent=parent, before=before, 
+                                                     closable=closable, default_open=default_open, 
+                                                     open_on_double_click=open_on_double_click,
+                                                     open_on_arrow=open_on_arrow, leaf=leaf, bullet=bullet)
+        else:
+            yield internal_dpg.add_collapsing_header(name, show=show, label=label, tip=tip, parent=parent, before=before, 
+                                                     closable=closable, default_open=default_open, 
+                                                     open_on_double_click=open_on_double_click,
+                                                     open_on_arrow=open_on_arrow, leaf=leaf, bullet=bullet)
+    finally:
+        internal_dpg.end()</code></pre>
 </details>
 </dd>
-<dt id="dearpygui.simple.get_item_callback"><code class="name flex">
-<span>def <span class="ident">get_item_callback</span></span>(<span>item: str) ‑> Optional[str]</span>
+<dt id="dearpygui.simple.get_drawing_size"><code class="name flex">
+<span>def <span class="ident">get_drawing_size</span></span>(<span>drawing: str) ‑> Optional[List[int]]</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Gets the item's callback.</p>
+<div class="desc"><p>Gets the drawing's scale.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>drawing</code></strong></dt>
+<dd>Drawing that will be set.</dd>
+</dl>
 <h2 id="returns">Returns</h2>
-<p>callback as a string or None</p></div>
+<p>list as [width, height] or None</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def get_item_callback(item: str) -&gt; Union[str, None]:
-    &#34;&#34;&#34;Gets the item&#39;s callback.
+<pre><code class="python">def get_drawing_size(drawing: str) -&gt; Union[List[int], None]:
+    &#34;&#34;&#34;Gets the drawing&#39;s scale.
+
+    Args:
+        drawing: Drawing that will be set.
 
     Returns:
-        callback as a string or None
+        list as [width, height] or None
     &#34;&#34;&#34;
-    return internal_dpg.get_item_configuration(item)[&#34;callback&#34;]</code></pre>
-</details>
-</dd>
-<dt id="dearpygui.simple.get_item_children"><code class="name flex">
-<span>def <span class="ident">get_item_children</span></span>(<span>item: str) ‑> Optional[List[str]]</span>
-</code></dt>
-<dd>
-<div class="desc"><p>Gets the item's children.</p>
-<h2 id="returns">Returns</h2>
-<p>children as a list of string or None</p></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">def get_item_children(item: str) -&gt; Union[List[str], None]:
-    &#34;&#34;&#34;Gets the item&#39;s children.
-
-    Returns:
-        children as a list of string or None
-    &#34;&#34;&#34;
-    return internal_dpg.get_item_info(item)[&#34;children&#34;]</code></pre>
+    config = internal_dpg.get_item_configuration(drawing)
+    return [config[&#34;width&#34;], config[&#34;height&#34;]]</code></pre>
 </details>
 </dd>
 <dt id="dearpygui.simple.get_item_height"><code class="name flex">
@@ -639,164 +963,24 @@ def show_item_registry(sender: str=&#34;&#34;, data: Any=None) -&gt; None:
     return internal_dpg.get_item_configuration(item)[&#34;label&#34;]</code></pre>
 </details>
 </dd>
-<dt id="dearpygui.simple.get_item_parent"><code class="name flex">
-<span>def <span class="ident">get_item_parent</span></span>(<span>item: str) ‑> Optional[str]</span>
+<dt id="dearpygui.simple.get_item_tip"><code class="name flex">
+<span>def <span class="ident">get_item_tip</span></span>(<span>item: str) ‑> Optional[str]</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Gets the item's parent.</p>
+<div class="desc"><p>Gets the item's tip.</p>
 <h2 id="returns">Returns</h2>
-<p>parent as a string or None</p></div>
+<p>tip as a string or None</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def get_item_parent(item: str) -&gt; Union[str, None]:
-    &#34;&#34;&#34;Gets the item&#39;s parent.
+<pre><code class="python">def get_item_tip(item: str) -&gt; Union[str, None]:
+    &#34;&#34;&#34;Gets the item&#39;s tip.
 
     Returns:
-        parent as a string or None
+        tip as a string or None
     &#34;&#34;&#34;
-    return internal_dpg.get_item_info(item)[&#34;parent&#34;]</code></pre>
-</details>
-</dd>
-<dt id="dearpygui.simple.get_item_pos"><code class="name flex">
-<span>def <span class="ident">get_item_pos</span></span>(<span>item: str) ‑> List[int]</span>
-</code></dt>
-<dd>
-<div class="desc"><p>Gets the item's current pos.</p>
-<h2 id="returns">Returns</h2>
-<p>pos as a float</p></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">def get_item_pos(item: str) -&gt; Union[List[int]]:
-    &#34;&#34;&#34;Gets the item&#39;s current pos.
-
-    Returns:
-        pos as a float
-    &#34;&#34;&#34;
-    return internal_dpg.get_item_state(item)[&#34;pos&#34;]</code></pre>
-</details>
-</dd>
-<dt id="dearpygui.simple.get_item_rect_max"><code class="name flex">
-<span>def <span class="ident">get_item_rect_max</span></span>(<span>item: str) ‑> List[int]</span>
-</code></dt>
-<dd>
-<div class="desc"><p>Gets the item's current rect_max.</p>
-<h2 id="returns">Returns</h2>
-<p>rect_max as a float</p></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">def get_item_rect_max(item: str) -&gt; Union[List[int]]:
-    &#34;&#34;&#34;Gets the item&#39;s current rect_max.
-
-    Returns:
-        rect_max as a float
-    &#34;&#34;&#34;
-    return internal_dpg.get_item_state(item)[&#34;rect_max&#34;]</code></pre>
-</details>
-</dd>
-<dt id="dearpygui.simple.get_item_rect_min"><code class="name flex">
-<span>def <span class="ident">get_item_rect_min</span></span>(<span>item: str) ‑> List[int]</span>
-</code></dt>
-<dd>
-<div class="desc"><p>Gets the item's current rect_min.</p>
-<h2 id="returns">Returns</h2>
-<p>rect_min as a float</p></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">def get_item_rect_min(item: str) -&gt; Union[List[int]]:
-    &#34;&#34;&#34;Gets the item&#39;s current rect_min.
-
-    Returns:
-        rect_min as a float
-    &#34;&#34;&#34;
-    return internal_dpg.get_item_state(item)[&#34;rect_min&#34;]</code></pre>
-</details>
-</dd>
-<dt id="dearpygui.simple.get_item_rect_size"><code class="name flex">
-<span>def <span class="ident">get_item_rect_size</span></span>(<span>item: str) ‑> List[int]</span>
-</code></dt>
-<dd>
-<div class="desc"><p>Gets the item's current size.</p>
-<h2 id="returns">Returns</h2>
-<p>size as a float list</p></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">def get_item_rect_size(item: str) -&gt; Union[List[int]]:
-    &#34;&#34;&#34;Gets the item&#39;s current size.
-
-    Returns:
-        size as a float list
-    &#34;&#34;&#34;
-    return internal_dpg.get_item_state(item)[&#34;rect_size&#34;]</code></pre>
-</details>
-</dd>
-<dt id="dearpygui.simple.get_item_source"><code class="name flex">
-<span>def <span class="ident">get_item_source</span></span>(<span>item: str) ‑> Optional[str]</span>
-</code></dt>
-<dd>
-<div class="desc"><p>Gets the item's source.</p>
-<h2 id="returns">Returns</h2>
-<p>source as a string or None</p></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">def get_item_source(item: str) -&gt; Union[str, None]:
-    &#34;&#34;&#34;Gets the item&#39;s source.
-
-    Returns:
-        source as a string or None
-    &#34;&#34;&#34;
-    return internal_dpg.get_item_configuration(item)[&#34;source&#34;]</code></pre>
-</details>
-</dd>
-<dt id="dearpygui.simple.get_item_type"><code class="name flex">
-<span>def <span class="ident">get_item_type</span></span>(<span>item: str) ‑> str</span>
-</code></dt>
-<dd>
-<div class="desc"><p>Gets the item's type.</p>
-<h2 id="returns">Returns</h2>
-<p>type as a string or None</p></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">def get_item_type(item: str) -&gt; Union[str]:
-    &#34;&#34;&#34;Gets the item&#39;s type.
-
-    Returns:
-        type as a string or None
-    &#34;&#34;&#34;
-    return internal_dpg.get_item_info(item)[&#34;type&#34;]</code></pre>
-</details>
-</dd>
-<dt id="dearpygui.simple.get_item_user_data"><code class="name flex">
-<span>def <span class="ident">get_item_user_data</span></span>(<span>item: str) ‑> Optional[Any]</span>
-</code></dt>
-<dd>
-<div class="desc"><p>Gets the item's callback data.</p>
-<h2 id="returns">Returns</h2>
-<p>callback data as a python object or None</p></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">def get_item_user_data(item: str) -&gt; Union[Any, None]:
-    &#34;&#34;&#34;Gets the item&#39;s callback data.
-
-    Returns:
-        callback data as a python object or None
-    &#34;&#34;&#34;
-    return internal_dpg.get_item_configuration(item)[&#34;user_data&#34;]</code></pre>
+    return internal_dpg.get_item_configuration(item)[&#34;tip&#34;]</code></pre>
 </details>
 </dd>
 <dt id="dearpygui.simple.get_item_width"><code class="name flex">
@@ -854,6 +1038,63 @@ def show_item_registry(sender: str=&#34;&#34;, data: Any=None) -&gt; None:
     return [config[&#34;x_pos&#34;], config[&#34;y_pos&#34;]]</code></pre>
 </details>
 </dd>
+<dt id="dearpygui.simple.group"><code class="name flex">
+<span>def <span class="ident">group</span></span>(<span>name: str, *, show: bool = True, tip: str = '', parent: str = '', before: str = '', width: int = 0, horizontal: bool = False, horizontal_spacing: float = -1.0)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Wraps add_group() and automates calling end().</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>name</code></strong></dt>
+<dd>Unique name used to programmatically refer to the item. If label is unused this will be the label,
+anything after "##" that occurs in the name will not be shown on screen.</dd>
+<dt><strong><code>**show</code></strong></dt>
+<dd>Decides if the item is shown of not.</dd>
+<dt><strong><code>**tip</code></strong></dt>
+<dd>Adds a simple tooltip</dd>
+<dt><strong><code>**parent</code></strong></dt>
+<dd>Parent to add this item to. (runtime adding)</dd>
+<dt><strong><code>**before</code></strong></dt>
+<dd>This item will be displayed before the specified item in the parent. (runtime adding)</dd>
+<dt><strong><code>**width</code></strong></dt>
+<dd>Width of the item.</dd>
+<dt><strong><code>**horizontal</code></strong></dt>
+<dd>Adds the items on the same row by default.</dd>
+<dt><strong><code>**horizontal_spacing</code></strong></dt>
+<dd>Decides the spacing for the items.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>None</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@contextmanager
+def group(name: str, *, show: bool = True, tip: str = &#34;&#34;, parent: str = &#34;&#34;, before: str = &#34;&#34;, width: int = 0,
+          horizontal: bool = False, horizontal_spacing: float = -1.0):
+    &#34;&#34;&#34;Wraps add_group() and automates calling end().
+
+    Args:
+        name: Unique name used to programmatically refer to the item. If label is unused this will be the label,
+            anything after &#34;##&#34; that occurs in the name will not be shown on screen.
+        **show: Decides if the item is shown of not.
+        **tip: Adds a simple tooltip
+        **parent: Parent to add this item to. (runtime adding)
+        **before: This item will be displayed before the specified item in the parent. (runtime adding)
+        **width: Width of the item.
+        **horizontal: Adds the items on the same row by default.
+        **horizontal_spacing: Decides the spacing for the items.
+
+    Returns:
+        None
+    &#34;&#34;&#34;
+    try:
+        yield internal_dpg.add_group(name, show=show, tip=tip, parent=parent, before=before, width=width,
+                                     horizontal=horizontal, horizontal_spacing=horizontal_spacing)
+    finally:
+        internal_dpg.end()</code></pre>
+</details>
+</dd>
 <dt id="dearpygui.simple.hide_item"><code class="name flex">
 <span>def <span class="ident">hide_item</span></span>(<span>item: str, *, children_only: bool = False)</span>
 </code></dt>
@@ -880,304 +1121,33 @@ def show_item_registry(sender: str=&#34;&#34;, data: Any=None) -&gt; None:
         None
     &#34;&#34;&#34;
     if children_only:
-        children = get_item_children(item)
+        children = internal_dpg.get_item_children(item)
         for child in children:
             internal_dpg.configure_item(child, show=False)
     else:
         internal_dpg.configure_item(item, show=False)</code></pre>
 </details>
 </dd>
-<dt id="dearpygui.simple.is_item_activated"><code class="name flex">
-<span>def <span class="ident">is_item_activated</span></span>(<span>item: str) ‑> Optional[bool]</span>
+<dt id="dearpygui.simple.managed_columns"><code class="name flex">
+<span>def <span class="ident">managed_columns</span></span>(<span>name: str, columns: int, *, border: bool = True, show: bool = True, parent: str = '', before: str = '')</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Checks if item is activated.</p>
-<h2 id="returns">Returns</h2>
-<p>status as a bool</p></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">def is_item_activated(item: str) -&gt; Union[bool, None]:
-    &#34;&#34;&#34;Checks if item is activated.
-
-    Returns:
-        status as a bool
-    &#34;&#34;&#34;
-    return internal_dpg.get_item_state(item)[&#34;activated&#34;]</code></pre>
-</details>
-</dd>
-<dt id="dearpygui.simple.is_item_active"><code class="name flex">
-<span>def <span class="ident">is_item_active</span></span>(<span>item: str) ‑> Optional[bool]</span>
-</code></dt>
-<dd>
-<div class="desc"><p>Checks if item is active.</p>
-<h2 id="returns">Returns</h2>
-<p>status as a bool</p></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">def is_item_active(item: str) -&gt; Union[bool, None]:
-    &#34;&#34;&#34;Checks if item is active.
-
-    Returns:
-        status as a bool
-    &#34;&#34;&#34;
-    return internal_dpg.get_item_state(item)[&#34;active&#34;]</code></pre>
-</details>
-</dd>
-<dt id="dearpygui.simple.is_item_clicked"><code class="name flex">
-<span>def <span class="ident">is_item_clicked</span></span>(<span>item: str) ‑> Optional[bool]</span>
-</code></dt>
-<dd>
-<div class="desc"><p>Checks if item is clicked.</p>
-<h2 id="returns">Returns</h2>
-<p>status as a bool</p></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">def is_item_clicked(item: str) -&gt; Union[bool, None]:
-    &#34;&#34;&#34;Checks if item is clicked.
-
-    Returns:
-        status as a bool
-    &#34;&#34;&#34;
-    return internal_dpg.get_item_state(item)[&#34;clicked&#34;]</code></pre>
-</details>
-</dd>
-<dt id="dearpygui.simple.is_item_container"><code class="name flex">
-<span>def <span class="ident">is_item_container</span></span>(<span>item: str) ‑> Optional[bool]</span>
-</code></dt>
-<dd>
-<div class="desc"><p>Checks if item is a container.</p>
-<h2 id="returns">Returns</h2>
-<p>status as a bool</p></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">def is_item_container(item: str) -&gt; Union[bool, None]:
-    &#34;&#34;&#34;Checks if item is a container.
-
-    Returns:
-        status as a bool
-    &#34;&#34;&#34;
-    return internal_dpg.get_item_info(item)[&#34;container&#34;]</code></pre>
-</details>
-</dd>
-<dt id="dearpygui.simple.is_item_deactivated"><code class="name flex">
-<span>def <span class="ident">is_item_deactivated</span></span>(<span>item: str) ‑> Optional[bool]</span>
-</code></dt>
-<dd>
-<div class="desc"><p>Checks if item is deactivated.</p>
-<h2 id="returns">Returns</h2>
-<p>status as a bool</p></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">def is_item_deactivated(item: str) -&gt; Union[bool, None]:
-    &#34;&#34;&#34;Checks if item is deactivated.
-
-    Returns:
-        status as a bool
-    &#34;&#34;&#34;
-    return internal_dpg.get_item_state(item)[&#34;deactivated&#34;]</code></pre>
-</details>
-</dd>
-<dt id="dearpygui.simple.is_item_deactivated_after_edit"><code class="name flex">
-<span>def <span class="ident">is_item_deactivated_after_edit</span></span>(<span>item: str) ‑> Optional[bool]</span>
-</code></dt>
-<dd>
-<div class="desc"><p>Checks if item is deactivated_after_edit.</p>
-<h2 id="returns">Returns</h2>
-<p>status as a bool</p></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">def is_item_deactivated_after_edit(item: str) -&gt; Union[bool, None]:
-    &#34;&#34;&#34;Checks if item is deactivated_after_edit.
-
-    Returns:
-        status as a bool
-    &#34;&#34;&#34;
-    return internal_dpg.get_item_state(item)[&#34;deactivated_after_edit&#34;]</code></pre>
-</details>
-</dd>
-<dt id="dearpygui.simple.is_item_edited"><code class="name flex">
-<span>def <span class="ident">is_item_edited</span></span>(<span>item: str) ‑> Optional[bool]</span>
-</code></dt>
-<dd>
-<div class="desc"><p>Checks if item is edited.</p>
-<h2 id="returns">Returns</h2>
-<p>status as a bool</p></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">def is_item_edited(item: str) -&gt; Union[bool, None]:
-    &#34;&#34;&#34;Checks if item is edited.
-
-    Returns:
-        status as a bool
-    &#34;&#34;&#34;
-    return internal_dpg.get_item_state(item)[&#34;edited&#34;]</code></pre>
-</details>
-</dd>
-<dt id="dearpygui.simple.is_item_enabled"><code class="name flex">
-<span>def <span class="ident">is_item_enabled</span></span>(<span>item: str) ‑> Optional[bool]</span>
-</code></dt>
-<dd>
-<div class="desc"><p>Checks if item is enabled.</p>
-<h2 id="returns">Returns</h2>
-<p>status as a bool</p></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">def is_item_enabled(item: str) -&gt; Union[bool, None]:
-    &#34;&#34;&#34;Checks if item is enabled.
-
-    Returns:
-        status as a bool
-    &#34;&#34;&#34;
-    return internal_dpg.get_item_configuration(item)[&#34;enabled&#34;]</code></pre>
-</details>
-</dd>
-<dt id="dearpygui.simple.is_item_focused"><code class="name flex">
-<span>def <span class="ident">is_item_focused</span></span>(<span>item: str) ‑> Optional[bool]</span>
-</code></dt>
-<dd>
-<div class="desc"><p>Checks if item is focused.</p>
-<h2 id="returns">Returns</h2>
-<p>status as a bool</p></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">def is_item_focused(item: str) -&gt; Union[bool, None]:
-    &#34;&#34;&#34;Checks if item is focused.
-
-    Returns:
-        status as a bool
-    &#34;&#34;&#34;
-    return internal_dpg.get_item_state(item)[&#34;focused&#34;]</code></pre>
-</details>
-</dd>
-<dt id="dearpygui.simple.is_item_hovered"><code class="name flex">
-<span>def <span class="ident">is_item_hovered</span></span>(<span>item: str) ‑> Optional[bool]</span>
-</code></dt>
-<dd>
-<div class="desc"><p>Checks if item is hovered.</p>
-<h2 id="returns">Returns</h2>
-<p>status as a bool</p></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">def is_item_hovered(item: str) -&gt; Union[bool, None]:
-    &#34;&#34;&#34;Checks if item is hovered.
-
-    Returns:
-        status as a bool
-    &#34;&#34;&#34;
-    return internal_dpg.get_item_state(item)[&#34;hovered&#34;]</code></pre>
-</details>
-</dd>
-<dt id="dearpygui.simple.is_item_ok"><code class="name flex">
-<span>def <span class="ident">is_item_ok</span></span>(<span>item: str) ‑> Optional[bool]</span>
-</code></dt>
-<dd>
-<div class="desc"><p>Checks if item is a ok.</p>
-<h2 id="returns">Returns</h2>
-<p>status as a bool</p></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">def is_item_ok(item: str) -&gt; Union[bool, None]:
-    &#34;&#34;&#34;Checks if item is a ok.
-
-    Returns:
-        status as a bool
-    &#34;&#34;&#34;
-    return internal_dpg.get_item_state(item)[&#34;ok&#34;]</code></pre>
-</details>
-</dd>
-<dt id="dearpygui.simple.is_item_shown"><code class="name flex">
-<span>def <span class="ident">is_item_shown</span></span>(<span>item: str) ‑> Optional[bool]</span>
-</code></dt>
-<dd>
-<div class="desc"><p>Checks if item is shown.</p>
-<h2 id="returns">Returns</h2>
-<p>status as a bool</p></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">def is_item_shown(item: str) -&gt; Union[bool, None]:
-    &#34;&#34;&#34;Checks if item is shown.
-
-    Returns:
-        status as a bool
-    &#34;&#34;&#34;
-    return internal_dpg.get_item_configuration(item)[&#34;show&#34;]</code></pre>
-</details>
-</dd>
-<dt id="dearpygui.simple.is_item_toggled_open"><code class="name flex">
-<span>def <span class="ident">is_item_toggled_open</span></span>(<span>item: str) ‑> Optional[bool]</span>
-</code></dt>
-<dd>
-<div class="desc"><p>Checks if item is toggled_open.</p>
-<h2 id="returns">Returns</h2>
-<p>status as a bool</p></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">def is_item_toggled_open(item: str) -&gt; Union[bool, None]:
-    &#34;&#34;&#34;Checks if item is toggled_open.
-
-    Returns:
-        status as a bool
-    &#34;&#34;&#34;
-    return internal_dpg.get_item_state(item)[&#34;toggled_open&#34;]</code></pre>
-</details>
-</dd>
-<dt id="dearpygui.simple.is_item_visible"><code class="name flex">
-<span>def <span class="ident">is_item_visible</span></span>(<span>item: str) ‑> Optional[bool]</span>
-</code></dt>
-<dd>
-<div class="desc"><p>Checks if item is visible.</p>
-<h2 id="returns">Returns</h2>
-<p>status as a bool</p></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">def is_item_visible(item: str) -&gt; Union[bool, None]:
-    &#34;&#34;&#34;Checks if item is visible.
-
-    Returns:
-        status as a bool
-    &#34;&#34;&#34;
-    return internal_dpg.get_item_state(item)[&#34;visible&#34;]</code></pre>
-</details>
-</dd>
-<dt id="dearpygui.simple.set_item_callback"><code class="name flex">
-<span>def <span class="ident">set_item_callback</span></span>(<span>item: str, callback: Callable)</span>
-</code></dt>
-<dd>
-<div class="desc"><p>Sets the item's callack.</p>
+<div class="desc"><p>Wraps add_managed_columns() and automates calling end().</p>
 <h2 id="args">Args</h2>
 <dl>
-<dt><strong><code>item</code></strong></dt>
-<dd>Item the callback will be applied to.</dd>
-<dt><strong><code>callback</code></strong></dt>
-<dd>Callback to be applied.</dd>
+<dt><strong><code>name</code></strong></dt>
+<dd>Unique name used to programmatically refer to the item. If label is unused this will be the label,
+anything after "##" that occurs in the name will not be shown on screen.</dd>
+<dt><strong><code>columns</code></strong></dt>
+<dd>The number of columns to be created.</dd>
+<dt><strong><code>**border</code></strong></dt>
+<dd>Shows a border.</dd>
+<dt><strong><code>**show</code></strong></dt>
+<dd>Decides if the item is shown of not.</dd>
+<dt><strong><code>**parent</code></strong></dt>
+<dd>Parent this item will be added to. (runtime adding)</dd>
+<dt><strong><code>**before</code></strong></dt>
+<dd>This item will be displayed before the specified item in the parent. (runtime adding)</dd>
 </dl>
 <h2 id="returns">Returns</h2>
 <p>None</p></div>
@@ -1185,17 +1155,377 @@ def show_item_registry(sender: str=&#34;&#34;, data: Any=None) -&gt; None:
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def set_item_callback(item: str, callback: Callable):
-    &#34;&#34;&#34;Sets the item&#39;s callack.
+<pre><code class="python">@contextmanager
+def managed_columns(name: str, columns: int, *, border: bool = True, show: bool = True, parent: str = &#34;&#34;,
+                    before: str = &#34;&#34;):
+    &#34;&#34;&#34;Wraps add_managed_columns() and automates calling end().
 
     Args:
-        item: Item the callback will be applied to.
-        callback: Callback to be applied.
+        name: Unique name used to programmatically refer to the item. If label is unused this will be the label,
+            anything after &#34;##&#34; that occurs in the name will not be shown on screen.
+        columns: The number of columns to be created.
+        **border: Shows a border.
+        **show: Decides if the item is shown of not.
+        **parent: Parent this item will be added to. (runtime adding)
+        **before: This item will be displayed before the specified item in the parent. (runtime adding)
 
     Returns:
         None
     &#34;&#34;&#34;
-    internal_dpg.configure_item(item, callback=callback)</code></pre>
+    try:
+        yield internal_dpg.add_managed_columns(name, columns, border=border, show=show, parent=parent, before=before)
+
+    finally:
+        internal_dpg.end()</code></pre>
+</details>
+</dd>
+<dt id="dearpygui.simple.menu"><code class="name flex">
+<span>def <span class="ident">menu</span></span>(<span>name: str, *, label: str = '__DearPyGuiDefault', show: bool = True, parent: str = '', before: str = '', enabled: bool = True)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Wraps add_menu() and automates calling end().</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>name</code></strong></dt>
+<dd>Unique name used to programmatically refer to the item. If label is unused this will be the label,
+anything after "##" that occurs in the name will not be shown on screen.</dd>
+<dt><strong><code>**label</code></strong></dt>
+<dd>Displayed name of the item.</dd>
+<dt><strong><code>**show</code></strong></dt>
+<dd>Decides if the item is shown of not.</dd>
+<dt><strong><code>**parent</code></strong></dt>
+<dd>Parent this item will be added to. (runtime adding)</dd>
+<dt><strong><code>**before</code></strong></dt>
+<dd>This item will be displayed before the specified item in the parent. (runtime adding)</dd>
+<dt><strong><code>**enabled</code></strong></dt>
+<dd>Will enable or disable the menu.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>None</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@contextmanager
+def menu(name: str, *, label: str = &#34;__DearPyGuiDefault&#34;, show: bool = True, parent: str = &#34;&#34;,
+         before: str = &#34;&#34;, enabled: bool = True):
+    &#34;&#34;&#34;Wraps add_menu() and automates calling end().
+
+    Args:
+        name: Unique name used to programmatically refer to the item. If label is unused this will be the label,
+            anything after &#34;##&#34; that occurs in the name will not be shown on screen.
+        **label: Displayed name of the item.
+        **show: Decides if the item is shown of not.
+        **parent: Parent this item will be added to. (runtime adding)
+        **before: This item will be displayed before the specified item in the parent. (runtime adding)
+        **enabled: Will enable or disable the menu.
+
+    Returns:
+        None
+    &#34;&#34;&#34;
+    try: 
+        if label == &#34;__DearPyGuiDefault&#34;:
+            yield internal_dpg.add_menu(name, show=show, parent=parent, before=before, enabled=enabled)
+        else:
+            yield internal_dpg.add_menu(name, label=label, show=show, parent=parent,
+                                        before=before, enabled=enabled)
+    finally:
+        internal_dpg.end()</code></pre>
+</details>
+</dd>
+<dt id="dearpygui.simple.menu_bar"><code class="name flex">
+<span>def <span class="ident">menu_bar</span></span>(<span>name: str, *, show: bool = True, parent: str = '', before: str = '')</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Wraps add_menu_bar() and automates calling end().</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>name</code></strong></dt>
+<dd>Unique name used to programmatically refer to the item. If label is unused this will be the label,
+anything after "##" that occurs in the name will not be shown on screen.</dd>
+<dt><strong><code>**show</code></strong></dt>
+<dd>Decides if the item is shown of not.</dd>
+<dt><strong><code>**parent</code></strong></dt>
+<dd>Parent this item will be added to. (runtime adding)</dd>
+<dt><strong><code>**before</code></strong></dt>
+<dd>This item will be displayed before the specified item in the parent. (runtime adding)</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>None</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@contextmanager
+def menu_bar(name: str, *, show: bool = True, parent: str = &#34;&#34;, before: str = &#34;&#34;):
+    &#34;&#34;&#34;Wraps add_menu_bar() and automates calling end().
+
+    Args:
+        name: Unique name used to programmatically refer to the item. If label is unused this will be the label,
+            anything after &#34;##&#34; that occurs in the name will not be shown on screen.
+        **show: Decides if the item is shown of not.
+        **parent: Parent this item will be added to. (runtime adding)
+        **before: This item will be displayed before the specified item in the parent. (runtime adding)
+
+    Returns:
+        None
+    &#34;&#34;&#34;
+    try:
+        yield internal_dpg.add_menu_bar(name, show=show, parent=parent, before=before)
+    finally:
+        internal_dpg.end()</code></pre>
+</details>
+</dd>
+<dt id="dearpygui.simple.node"><code class="name flex">
+<span>def <span class="ident">node</span></span>(<span>name: str, *, label: str = '__DearPyGuiDefault', show: bool = True, draggable: bool = True, parent: str = '', before: str = '', x_pos: int = 100, y_pos: int = 100)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Wraps add_node() and automates calling end().</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>name</code></strong></dt>
+<dd>Unique name used to programmatically refer to the item. If label is unused this will be the label,
+anything after "##" that occurs in the name will not be shown on screen.</dd>
+<dt><strong><code>**label</code></strong></dt>
+<dd>Displayed name of the item.</dd>
+<dt><strong><code>**parent</code></strong></dt>
+<dd>Parent to add this item to. (runtime adding)</dd>
+<dt><strong><code>**before</code></strong></dt>
+<dd>This item will be displayed before the specified item in the parent. (runtime adding)</dd>
+<dt><strong><code>**show</code></strong></dt>
+<dd>sets if the item is shown or not window.</dd>
+<dt><strong><code>**draggable</code></strong></dt>
+<dd>Allow node to be draggable.</dd>
+<dt><strong><code>**x_pos</code></strong></dt>
+<dd>x position the node will start at</dd>
+<dt><strong><code>**y_pos</code></strong></dt>
+<dd>y position the node will start at</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>None</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@contextmanager
+def node(name: str, *, label: str = &#34;__DearPyGuiDefault&#34;, show: bool = True, draggable: bool = True,
+         parent: str = &#34;&#34;, before: str = &#34;&#34;, x_pos: int = 100, y_pos: int = 100):
+    &#34;&#34;&#34;Wraps add_node() and automates calling end().
+    Args:
+        name: Unique name used to programmatically refer to the item. If label is unused this will be the label,
+            anything after &#34;##&#34; that occurs in the name will not be shown on screen.
+        **label: Displayed name of the item.
+        **parent: Parent to add this item to. (runtime adding)
+        **before: This item will be displayed before the specified item in the parent. (runtime adding)
+        **show: sets if the item is shown or not window.
+        **draggable: Allow node to be draggable.
+        **x_pos: x position the node will start at
+        **y_pos: y position the node will start at
+    Returns:
+        None
+    &#34;&#34;&#34;
+    try:
+        if label == &#34;__DearPyGuiDefault&#34;:
+            yield internal_dpg.add_node(name, show=show, parent=parent, before=before, 
+                                                     draggable=draggable, x_pos=x_pos, y_pos=y_pos)
+        else:
+            yield internal_dpg.add_node(name, label=label, show=show, parent=parent, before=before, 
+                                                     draggable=draggable, x_pos=x_pos, y_pos=y_pos)
+    finally:
+        internal_dpg.end()</code></pre>
+</details>
+</dd>
+<dt id="dearpygui.simple.node_attribute"><code class="name flex">
+<span>def <span class="ident">node_attribute</span></span>(<span>name: str, *, show: bool = True, output: bool = False, static: bool = False, parent: str = '', before: str = '')</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Wraps add_node_attribute() and automates calling end().</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>name</code></strong></dt>
+<dd>Unique name used to programmatically refer to the item. If label is unused this will be the label,
+anything after "##" that occurs in the name will not be shown on screen.</dd>
+<dt><strong><code>**parent</code></strong></dt>
+<dd>Parent to add this item to. (runtime adding)</dd>
+<dt><strong><code>**before</code></strong></dt>
+<dd>This item will be displayed before the specified item in the parent. (runtime adding)</dd>
+<dt><strong><code>**show</code></strong></dt>
+<dd>sets if the item is shown or not window.</dd>
+<dt><strong><code>**output</code></strong></dt>
+<dd>Set as output attribute</dd>
+<dt><strong><code>**static</code></strong></dt>
+<dd>Set as static attribute</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>None</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@contextmanager
+def node_attribute(name: str, *, show: bool = True, output: bool = False,
+         static: bool = False, parent: str = &#34;&#34;, before: str = &#34;&#34;):
+    &#34;&#34;&#34;Wraps add_node_attribute() and automates calling end().
+    Args:
+        name: Unique name used to programmatically refer to the item. If label is unused this will be the label,
+            anything after &#34;##&#34; that occurs in the name will not be shown on screen.
+        **parent: Parent to add this item to. (runtime adding)
+        **before: This item will be displayed before the specified item in the parent. (runtime adding)
+        **show: sets if the item is shown or not window.
+        **output: Set as output attribute
+        **static: Set as static attribute
+    Returns:
+        None
+    &#34;&#34;&#34;
+    try:
+        yield internal_dpg.add_node_attribute(name, show=show, parent=parent, before=before, 
+                                                    output=output, static=static)
+
+    finally:
+        internal_dpg.end()</code></pre>
+</details>
+</dd>
+<dt id="dearpygui.simple.node_editor"><code class="name flex">
+<span>def <span class="ident">node_editor</span></span>(<span>name: str, *, show: bool = True, parent: str = '', before: str = '', link_callback: Callable = None, delink_callback: Callable = None)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Wraps add_node_editor() and automates calling end().</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>name</code></strong></dt>
+<dd>Unique name used to programmatically refer to the item. If label is unused this will be the label,
+anything after "##" that occurs in the name will not be shown on screen.</dd>
+<dt><strong><code>**parent</code></strong></dt>
+<dd>Parent to add this item to. (runtime adding)</dd>
+<dt><strong><code>**before</code></strong></dt>
+<dd>This item will be displayed before the specified item in the parent. (runtime adding)</dd>
+<dt><strong><code>**show</code></strong></dt>
+<dd>sets if the item is shown or not window.</dd>
+<dt><strong><code>**link_callback</code></strong></dt>
+<dd>Callback ran when a new link is created</dd>
+<dt><strong><code>**delink_callback</code></strong></dt>
+<dd>Callback ran when a link is detached</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>None</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@contextmanager
+def node_editor(name: str, *, show: bool = True, parent: str = &#34;&#34;, before: str = &#34;&#34;, link_callback: Callable = None, delink_callback: Callable = None):
+    &#34;&#34;&#34;Wraps add_node_editor() and automates calling end().
+    Args:
+        name: Unique name used to programmatically refer to the item. If label is unused this will be the label,
+            anything after &#34;##&#34; that occurs in the name will not be shown on screen.
+        **parent: Parent to add this item to. (runtime adding)
+        **before: This item will be displayed before the specified item in the parent. (runtime adding)
+        **show: sets if the item is shown or not window.
+        **link_callback: Callback ran when a new link is created
+        **delink_callback: Callback ran when a link is detached
+    Returns:
+        None
+    &#34;&#34;&#34;
+    try:
+        yield internal_dpg.add_node_editor(name, show=show, parent=parent, before=before, link_callback=link_callback, delink_callback=delink_callback)
+    finally:
+        internal_dpg.end()</code></pre>
+</details>
+</dd>
+<dt id="dearpygui.simple.popup"><code class="name flex">
+<span>def <span class="ident">popup</span></span>(<span>popupparent: str, name: str, *, mousebutton: int = 1, modal: bool = False, parent: str = '', before: str = '', width: int = 0, height: int = 0, show: bool = True)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Wraps add_popup() and automates calling end().</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>popupparent</code></strong></dt>
+<dd>Parent that the popup will be assigned to.</dd>
+<dt><strong><code>name</code></strong></dt>
+<dd>Unique name used to programmatically refer to the item. If label is unused this will be the label,
+anything after "##" that occurs in the name will not be shown on screen.</dd>
+<dt><strong><code>**mousebutton</code></strong></dt>
+<dd>The mouse code that will trigger the popup. Default is 1 or mvMouseButton_Right.
+(mvMouseButton_Left, mvMouseButton_Right, mvMouseButton_Middle, mvMouseButton_X1, mvMouseButton_X2)</dd>
+<dt><strong><code>**modal</code></strong></dt>
+<dd>Makes the popup modal.</dd>
+<dt><strong><code>**parent</code></strong></dt>
+<dd>Parent to add this item to. (runtime adding)</dd>
+<dt><strong><code>**before</code></strong></dt>
+<dd>This item will be displayed before the specified item in the parent. (runtime adding)</dd>
+<dt><strong><code>**width</code></strong></dt>
+<dd>Width of the item.</dd>
+<dt><strong><code>**height</code></strong></dt>
+<dd>Height of the item.</dd>
+<dt><strong><code>**show</code></strong></dt>
+<dd>Decides if the item is shown of not.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>None</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@contextmanager
+def popup(popupparent: str, name: str, *, mousebutton: int = 1, modal: bool = False, parent: str = &#34;&#34;, 
+          before: str = &#34;&#34;, width: int = 0, height: int = 0, show: bool = True):
+    &#34;&#34;&#34;Wraps add_popup() and automates calling end().
+
+    Args:
+        popupparent: Parent that the popup will be assigned to.
+        name: Unique name used to programmatically refer to the item. If label is unused this will be the label,
+            anything after &#34;##&#34; that occurs in the name will not be shown on screen.
+        **mousebutton: The mouse code that will trigger the popup. Default is 1 or mvMouseButton_Right.
+            (mvMouseButton_Left, mvMouseButton_Right, mvMouseButton_Middle, mvMouseButton_X1, mvMouseButton_X2)
+        **modal: Makes the popup modal.
+        **parent: Parent to add this item to. (runtime adding)
+        **before: This item will be displayed before the specified item in the parent. (runtime adding)
+        **width: Width of the item.
+        **height: Height of the item.
+        **show: Decides if the item is shown of not.
+
+    Returns:
+        None
+    &#34;&#34;&#34;
+    try:
+        yield internal_dpg.add_popup(popupparent, name, mousebutton=mousebutton, modal=modal, parent=parent,
+                                     before=before, width=width, height=height, show=show)
+    finally:
+        internal_dpg.end()</code></pre>
+</details>
+</dd>
+<dt id="dearpygui.simple.set_drawing_size"><code class="name flex">
+<span>def <span class="ident">set_drawing_size</span></span>(<span>drawing: str, width: int, height: int)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Sets the drawing's size, width and height.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>drawing</code></strong></dt>
+<dd>Drawing that will be set.</dd>
+<dt><strong><code>width</code></strong></dt>
+<dd>x axis width to set</dd>
+<dt><strong><code>height</code></strong></dt>
+<dd>y axis height to set</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>None</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def set_drawing_size(drawing: str, width: int, height: int):
+    &#34;&#34;&#34;Sets the drawing&#39;s size, width and height.
+
+    Args:
+        drawing: Drawing that will be set.
+        width: x axis width to set
+        height: y axis height to set
+
+    Returns:
+        None
+    &#34;&#34;&#34;
+    internal_dpg.configure_item(drawing, width=width, height=height)</code></pre>
 </details>
 </dd>
 <dt id="dearpygui.simple.set_item_height"><code class="name flex">
@@ -1208,7 +1538,7 @@ def show_item_registry(sender: str=&#34;&#34;, data: Any=None) -&gt; None:
 <dt><strong><code>item</code></strong></dt>
 <dd>Item the Height will be applied to.</dd>
 <dt><strong><code>height</code></strong></dt>
-<dd>Height to be applied.</dd>
+<dd>Height of the item. height to be applied.</dd>
 </dl>
 <h2 id="returns">Returns</h2>
 <p>None</p></div>
@@ -1221,7 +1551,7 @@ def show_item_registry(sender: str=&#34;&#34;, data: Any=None) -&gt; None:
 
     Args:
         item: Item the Height will be applied to.
-        height: Height to be applied.
+        height: Height of the item. height to be applied.
 
     Returns:
         None
@@ -1239,7 +1569,7 @@ def show_item_registry(sender: str=&#34;&#34;, data: Any=None) -&gt; None:
 <dt><strong><code>item</code></strong></dt>
 <dd>Item label will be applied to.</dd>
 <dt><strong><code>label</code></strong></dt>
-<dd>Displayed name to be applied.</dd>
+<dd>Displayed name of the item.</dd>
 </dl>
 <h2 id="returns">Returns</h2>
 <p>None</p></div>
@@ -1252,7 +1582,7 @@ def show_item_registry(sender: str=&#34;&#34;, data: Any=None) -&gt; None:
 
     Args:
         item: Item label will be applied to.
-        label: Displayed name to be applied.
+        label: Displayed name of the item.
 
     Returns:
         None
@@ -1260,17 +1590,20 @@ def show_item_registry(sender: str=&#34;&#34;, data: Any=None) -&gt; None:
     internal_dpg.configure_item(item, label=label)</code></pre>
 </details>
 </dd>
-<dt id="dearpygui.simple.set_item_source"><code class="name flex">
-<span>def <span class="ident">set_item_source</span></span>(<span>item: str, source: str)</span>
+<dt id="dearpygui.simple.set_item_name"><code class="name flex">
+<span>def <span class="ident">set_item_name</span></span>(<span>item: str, name: str)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Sets the item's value, to the source's value. Widget's value will now be "linked" to source's value.</p>
+<div class="desc"><p>Sets the item's name, anything after the characters "##" in the name will not be shown.</p>
+<pre><code>If no label is specified then by default this will be the displayed label.
+</code></pre>
 <h2 id="args">Args</h2>
 <dl>
 <dt><strong><code>item</code></strong></dt>
-<dd>Item to me linked.</dd>
-<dt><strong><code>source</code></strong></dt>
-<dd>Source to link to.</dd>
+<dd>Item name will be applied to.</dd>
+<dt><strong><code>name</code></strong></dt>
+<dd>Unique name used to programmatically refer to the item. If label is unused this will be the label,
+anything after "##" that occurs in the name will not be shown on screen.</dd>
 </dl>
 <h2 id="returns">Returns</h2>
 <p>None</p></div>
@@ -1278,30 +1611,33 @@ def show_item_registry(sender: str=&#34;&#34;, data: Any=None) -&gt; None:
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def set_item_source(item: str, source: str):
-    &#34;&#34;&#34;Sets the item&#39;s value, to the source&#39;s value. Widget&#39;s value will now be &#34;linked&#34; to source&#39;s value.
+<pre><code class="python">def set_item_name(item: str, name: str):
+    &#34;&#34;&#34;Sets the item&#39;s name, anything after the characters &#34;##&#34; in the name will not be shown.
+
+        If no label is specified then by default this will be the displayed label.
 
     Args:
-        item: Item to me linked.
-        source: Source to link to.
+        item: Item name will be applied to.
+        name: Unique name used to programmatically refer to the item. If label is unused this will be the label,
+            anything after &#34;##&#34; that occurs in the name will not be shown on screen.
 
     Returns:
         None
     &#34;&#34;&#34;
-    internal_dpg.configure_item(item, source=source)</code></pre>
+    internal_dpg.configure_item(item, name=name)</code></pre>
 </details>
 </dd>
-<dt id="dearpygui.simple.set_item_user_data"><code class="name flex">
-<span>def <span class="ident">set_item_user_data</span></span>(<span>item: str, user_data: Any)</span>
+<dt id="dearpygui.simple.set_item_tip"><code class="name flex">
+<span>def <span class="ident">set_item_tip</span></span>(<span>item: str, tip: str)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Sets the item's callack_data to any python object.</p>
+<div class="desc"><p>Sets the item's tip.</p>
 <h2 id="args">Args</h2>
 <dl>
 <dt><strong><code>item</code></strong></dt>
-<dd>Item the callback will be applied to.</dd>
-<dt><strong><code>user_data</code></strong></dt>
-<dd>Callback_data to be applied.</dd>
+<dd>Item the tip will be applied to.</dd>
+<dt><strong><code>tip</code></strong></dt>
+<dd>tip to be applied.</dd>
 </dl>
 <h2 id="returns">Returns</h2>
 <p>None</p></div>
@@ -1309,17 +1645,17 @@ def show_item_registry(sender: str=&#34;&#34;, data: Any=None) -&gt; None:
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def set_item_user_data(item: str, user_data: Any):
-    &#34;&#34;&#34;Sets the item&#39;s callack_data to any python object.
+<pre><code class="python">def set_item_tip(item: str, tip: str):
+    &#34;&#34;&#34;Sets the item&#39;s tip.
 
     Args:
-        item: Item the callback will be applied to.
-        user_data: Callback_data to be applied.
+        item: Item the tip will be applied to.
+        tip: tip to be applied.
 
     Returns:
         None
     &#34;&#34;&#34;
-    internal_dpg.configure_item(item, user_data=user_data)</code></pre>
+    internal_dpg.configure_item(item, tip=tip)</code></pre>
 </details>
 </dd>
 <dt id="dearpygui.simple.set_item_width"><code class="name flex">
@@ -1332,7 +1668,7 @@ def show_item_registry(sender: str=&#34;&#34;, data: Any=None) -&gt; None:
 <dt><strong><code>item</code></strong></dt>
 <dd>Item the Width will be applied to.</dd>
 <dt><strong><code>width</code></strong></dt>
-<dd>Width to be applied.</dd>
+<dd>Width of the item. width to be applied.</dd>
 </dl>
 <h2 id="returns">Returns</h2>
 <p>None</p></div>
@@ -1345,7 +1681,7 @@ def show_item_registry(sender: str=&#34;&#34;, data: Any=None) -&gt; None:
 
     Args:
         item: Item the Width will be applied to.
-        width: Width to be applied.
+        width: Width of the item. width to be applied.
 
     Returns:
         None
@@ -1404,7 +1740,7 @@ def show_item_registry(sender: str=&#34;&#34;, data: Any=None) -&gt; None:
     Returns:
         None
     &#34;&#34;&#34;
-    internal_dpg.show_tool(internal_dpg.mvTool_About)</code></pre>
+    internal_dpg.configure_item(&#34;about##standard&#34;, show=True)</code></pre>
 </details>
 </dd>
 <dt id="dearpygui.simple.show_debug"><code class="name flex">
@@ -1424,7 +1760,7 @@ def show_item_registry(sender: str=&#34;&#34;, data: Any=None) -&gt; None:
     Returns:
         None
     &#34;&#34;&#34;
-    internal_dpg.show_tool(internal_dpg.mvTool_Debug)</code></pre>
+    internal_dpg.configure_item(&#34;debug##standard&#34;, show=True)</code></pre>
 </details>
 </dd>
 <dt id="dearpygui.simple.show_documentation"><code class="name flex">
@@ -1444,27 +1780,7 @@ def show_item_registry(sender: str=&#34;&#34;, data: Any=None) -&gt; None:
     Returns:
         None
     &#34;&#34;&#34;
-    internal_dpg.show_tool(internal_dpg.mvTool_Doc)</code></pre>
-</details>
-</dd>
-<dt id="dearpygui.simple.show_font_manager"><code class="name flex">
-<span>def <span class="ident">show_font_manager</span></span>(<span>sender: str = '', data: Any = None) ‑> NoneType</span>
-</code></dt>
-<dd>
-<div class="desc"><p>Shows the standard documentation window</p>
-<h2 id="returns">Returns</h2>
-<p>None</p></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">def show_font_manager(sender: str=&#34;&#34;, data: Any=None) -&gt; None:
-    &#34;&#34;&#34;Shows the standard documentation window
-
-    Returns:
-        None
-    &#34;&#34;&#34;
-    internal_dpg.show_tool(internal_dpg.mvTool_Font)</code></pre>
+    internal_dpg.configure_item(&#34;documentation##standard&#34;, show=True)</code></pre>
 </details>
 </dd>
 <dt id="dearpygui.simple.show_item"><code class="name flex">
@@ -1495,24 +1811,24 @@ def show_item_registry(sender: str=&#34;&#34;, data: Any=None) -&gt; None:
     internal_dpg.configure_item(item, show=True)</code></pre>
 </details>
 </dd>
-<dt id="dearpygui.simple.show_item_registry"><code class="name flex">
-<span>def <span class="ident">show_item_registry</span></span>(<span>sender: str = '', data: Any = None) ‑> NoneType</span>
+<dt id="dearpygui.simple.show_logger"><code class="name flex">
+<span>def <span class="ident">show_logger</span></span>(<span>) ‑> NoneType</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Shows the standard documentation window</p>
+<div class="desc"><p>Shows the logger window</p>
 <h2 id="returns">Returns</h2>
 <p>None</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def show_item_registry(sender: str=&#34;&#34;, data: Any=None) -&gt; None:
-    &#34;&#34;&#34;Shows the standard documentation window
+<pre><code class="python">def show_logger() -&gt; None:
+    &#34;&#34;&#34;Shows the logger window
 
     Returns:
         None
     &#34;&#34;&#34;
-    internal_dpg.show_tool(internal_dpg.mvTool_ItemRegistry)</code></pre>
+    internal_dpg.show_logger()</code></pre>
 </details>
 </dd>
 <dt id="dearpygui.simple.show_metrics"><code class="name flex">
@@ -1532,7 +1848,7 @@ def show_item_registry(sender: str=&#34;&#34;, data: Any=None) -&gt; None:
     Returns:
         None
     &#34;&#34;&#34;
-    internal_dpg.show_tool(internal_dpg.mvTool_Metrics)</code></pre>
+    internal_dpg.configure_item(&#34;metrics##standard&#34;, show=True)</code></pre>
 </details>
 </dd>
 <dt id="dearpygui.simple.show_style_editor"><code class="name flex">
@@ -1552,25 +1868,373 @@ def show_item_registry(sender: str=&#34;&#34;, data: Any=None) -&gt; None:
     Returns:
         None
     &#34;&#34;&#34;
-    internal_dpg.show_tool(internal_dpg.mvTool_Style)</code></pre>
+    internal_dpg.configure_item(&#34;style##standard&#34;, show=True)</code></pre>
 </details>
 </dd>
-<dt id="dearpygui.simple.start_dearpygui"><code class="name flex">
-<span>def <span class="ident">start_dearpygui</span></span>(<span>)</span>
+<dt id="dearpygui.simple.tab"><code class="name flex">
+<span>def <span class="ident">tab</span></span>(<span>name: str, *, closable: bool = False, label: str = '__DearPyGuiDefault', show: bool = True, tip: str = '', no_reorder: bool = False, leading: bool = False, trailing: bool = False, no_tooltip: bool = False, parent: str = '', before: str = '')</span>
 </code></dt>
 <dd>
-<div class="desc"></div>
+<div class="desc"><p>Wraps add_tab() and automates calling end().</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>name</code></strong></dt>
+<dd>Unique name used to programmatically refer to the item. If label is unused this will be the label,
+anything after "##" that occurs in the name will not be shown on screen.</dd>
+<dt><strong><code>**closable</code></strong></dt>
+<dd>creates a button on the tab that can hide the tab.</dd>
+<dt><strong><code>**label</code></strong></dt>
+<dd>Displayed name of the item.</dd>
+<dt><strong><code>**show</code></strong></dt>
+<dd>Decides if the item is shown of not.</dd>
+<dt><strong><code>**no_reorder</code></strong></dt>
+<dd>Disable reordering this tab or having another tab cross over this tab</dd>
+<dt><strong><code>**leading</code></strong></dt>
+<dd>Enforce the tab position to the left of the tab bar (after the tab list popup button)</dd>
+<dt><strong><code>**trailing</code></strong></dt>
+<dd>Enforce the tab position to the right of the tab bar (before the scrolling buttons)</dd>
+<dt><strong><code>**no_tooltip</code></strong></dt>
+<dd>Disable tooltip for the given tab</dd>
+<dt><strong><code>**tip</code></strong></dt>
+<dd>Adds a simple tooltip.</dd>
+<dt><strong><code>**parent</code></strong></dt>
+<dd>Parent to add this item to. (runtime adding)</dd>
+<dt><strong><code>**before</code></strong></dt>
+<dd>This item will be displayed before the specified item in the parent. (runtime adding)</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>None</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def start_dearpygui():
-    vp = internal_dpg.create_viewport()
-    internal_dpg.setup_dearpygui(viewport=vp)
-    internal_dpg.show_viewport(vp)
-    while(internal_dpg.is_dearpygui_running()):
-        internal_dpg.render_dearpygui_frame()   
-    internal_dpg.cleanup_dearpygui()</code></pre>
+<pre><code class="python">@contextmanager
+def tab(name: str, *, closable: bool = False, label: str = &#34;__DearPyGuiDefault&#34;, show: bool = True, tip: str = &#34;&#34;,
+        no_reorder: bool = False, leading: bool = False, trailing: bool = False, no_tooltip: bool = False,
+        parent: str = &#34;&#34;, before: str = &#34;&#34;):
+    &#34;&#34;&#34;Wraps add_tab() and automates calling end().
+
+    Args:
+        name: Unique name used to programmatically refer to the item. If label is unused this will be the label,
+            anything after &#34;##&#34; that occurs in the name will not be shown on screen.
+        **closable: creates a button on the tab that can hide the tab.
+        **label: Displayed name of the item.
+        **show: Decides if the item is shown of not.
+        **no_reorder: Disable reordering this tab or having another tab cross over this tab
+        **leading: Enforce the tab position to the left of the tab bar (after the tab list popup button)
+        **trailing: Enforce the tab position to the right of the tab bar (before the scrolling buttons)
+        **no_tooltip: Disable tooltip for the given tab
+        **tip: Adds a simple tooltip.
+        **parent: Parent to add this item to. (runtime adding)
+        **before: This item will be displayed before the specified item in the parent. (runtime adding)
+
+    Returns:
+        None
+    &#34;&#34;&#34;
+    try:
+        if label == &#34;__DearPyGuiDefault&#34;:
+            yield internal_dpg.add_tab(name, closable=closable, show=show, tip=tip, parent=parent, before=before,
+                                       no_reorder=no_reorder, leading=leading, trailing=trailing, no_tooltip=no_tooltip)
+        else:
+            yield internal_dpg.add_tab(name, closable=closable, label=label, show=show, tip=tip, parent=parent,
+                                       before=before, no_reorder=no_reorder, leading=leading, trailing=trailing, no_tooltip=no_tooltip)
+    finally:
+        internal_dpg.end()</code></pre>
+</details>
+</dd>
+<dt id="dearpygui.simple.tab_bar"><code class="name flex">
+<span>def <span class="ident">tab_bar</span></span>(<span>name: str, *, reorderable: bool = False, callback: Callable = None, callback_data: Any = None, show: bool = True, parent: str = '', before: str = '')</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Wraps add_tab_bar() and automates calling end().</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>name</code></strong></dt>
+<dd>Unique name used to programmatically refer to the item. If label is unused this will be the label,
+anything after "##" that occurs in the name will not be shown on screen.</dd>
+<dt><strong><code>**reorderable</code></strong></dt>
+<dd>Allows for moveable tabs.</dd>
+<dt><strong><code>**callback</code></strong></dt>
+<dd>Registers a callback.</dd>
+<dt><strong><code>**callback_data</code></strong></dt>
+<dd>Callback data.</dd>
+<dt><strong><code>**show</code></strong></dt>
+<dd>Decides if the item is shown of not.</dd>
+<dt><strong><code>**parent</code></strong></dt>
+<dd>Parent to add this item to. (runtime adding)</dd>
+<dt><strong><code>**before</code></strong></dt>
+<dd>This item will be displayed before the specified item in the parent. (runtime adding)</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>None</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@contextmanager
+def tab_bar(name: str, *, reorderable: bool = False, callback: Callable = None, callback_data: Any = None,  show: bool = True,
+            parent: str = &#34;&#34;, before: str = &#34;&#34;):
+    &#34;&#34;&#34;Wraps add_tab_bar() and automates calling end().
+
+    Args:
+        name: Unique name used to programmatically refer to the item. If label is unused this will be the label,
+            anything after &#34;##&#34; that occurs in the name will not be shown on screen.
+        **reorderable: Allows for moveable tabs.
+        **callback: Registers a callback.
+        **callback_data: Callback data.
+        **show: Decides if the item is shown of not.
+        **parent: Parent to add this item to. (runtime adding)
+        **before: This item will be displayed before the specified item in the parent. (runtime adding)
+
+    Returns:
+        None
+    &#34;&#34;&#34;
+    try:
+        yield internal_dpg.add_tab_bar(name, reorderable=reorderable, callback=callback, callback_data=callback_data,
+                                       show=show, parent=parent, before=before)
+    finally:
+        internal_dpg.end()</code></pre>
+</details>
+</dd>
+<dt id="dearpygui.simple.tooltip"><code class="name flex">
+<span>def <span class="ident">tooltip</span></span>(<span>tipparent: str, name: str, *, parent: str = '', before: str = '', show: bool = True)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Wraps add_tooltip() and automates calling end().</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>tipparent</code></strong></dt>
+<dd>Sets the item's tool tip to be the same as the named item's tool tip.</dd>
+<dt><strong><code>name</code></strong></dt>
+<dd>Unique name used to programmatically refer to the item. If label is unused this will be the label,
+anything after "##" that occurs in the name will not be shown on screen.</dd>
+<dt><strong><code>**parent</code></strong></dt>
+<dd>Parent to add this item to. (runtime adding)</dd>
+<dt><strong><code>**before</code></strong></dt>
+<dd>This item will be displayed before the specified item in the parent. (runtime adding)</dd>
+<dt><strong><code>**show</code></strong></dt>
+<dd>Decides if the item is shown of not.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>None</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@contextmanager
+def tooltip(tipparent: str, name: str, *, parent: str = &#34;&#34;, before: str = &#34;&#34;, show: bool = True):
+    &#34;&#34;&#34;Wraps add_tooltip() and automates calling end().
+
+    Args:
+        tipparent: Sets the item&#39;s tool tip to be the same as the named item&#39;s tool tip.
+        name: Unique name used to programmatically refer to the item. If label is unused this will be the label,
+            anything after &#34;##&#34; that occurs in the name will not be shown on screen.
+        **parent: Parent to add this item to. (runtime adding)
+        **before: This item will be displayed before the specified item in the parent. (runtime adding)
+        **show: Decides if the item is shown of not.
+
+    Returns:
+        None
+    &#34;&#34;&#34;
+    try:
+        yield internal_dpg.add_tooltip(tipparent, name, parent=parent, before=before, show=show)
+    finally:
+        internal_dpg.end()</code></pre>
+</details>
+</dd>
+<dt id="dearpygui.simple.tree_node"><code class="name flex">
+<span>def <span class="ident">tree_node</span></span>(<span>name: str, *, label: str = '__DearPyGuiDefault', show: bool = True, tip: str = '', parent: str = '', before: str = '', default_open: bool = False, open_on_double_click: bool = False, open_on_arrow: bool = False, leaf: bool = False, bullet: bool = False)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Wraps add_tree_node() and automates calling end().</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>name</code></strong></dt>
+<dd>Unique name used to programmatically refer to the item. If label is unused this will be the label,
+anything after "##" that occurs in the name will not be shown on screen.</dd>
+<dt><strong><code>**label</code></strong></dt>
+<dd>Displayed name of the item.</dd>
+<dt><strong><code>**show</code></strong></dt>
+<dd>Decides if the item is shown of not.</dd>
+<dt><strong><code>**tip</code></strong></dt>
+<dd>Adds a simple tooltip.</dd>
+<dt><strong><code>**parent</code></strong></dt>
+<dd>Parent to add this item to. (runtime adding)</dd>
+<dt><strong><code>**before</code></strong></dt>
+<dd>This item will be displayed before the specified item in the parent. (runtime adding)</dd>
+<dt><strong><code>**default_open</code></strong></dt>
+<dd>Decides if item is open by default.</dd>
+<dt><strong><code>**open_on_double_click</code></strong></dt>
+<dd>Need double-click to open node.</dd>
+<dt><strong><code>**open_on_arrow</code></strong></dt>
+<dd>Only open when clicking on the arrow part.</dd>
+<dt><strong><code>**leaf</code></strong></dt>
+<dd>No collapsing, no arrow (use as a convenience for leaf nodes).</dd>
+<dt><strong><code>**bullet</code></strong></dt>
+<dd>Display a bullet instead of arrow.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>None</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@contextmanager
+def tree_node(name: str, *, label: str = &#34;__DearPyGuiDefault&#34;, show: bool = True, tip: str = &#34;&#34;, parent: str = &#34;&#34;, 
+              before: str = &#34;&#34;, default_open: bool = False, open_on_double_click: bool = False, 
+              open_on_arrow: bool = False, leaf: bool = False, bullet: bool = False):
+    &#34;&#34;&#34;Wraps add_tree_node() and automates calling end().
+
+    Args:
+        name: Unique name used to programmatically refer to the item. If label is unused this will be the label,
+            anything after &#34;##&#34; that occurs in the name will not be shown on screen.
+        **label: Displayed name of the item.
+        **show: Decides if the item is shown of not.
+        **tip: Adds a simple tooltip.
+        **parent: Parent to add this item to. (runtime adding)
+        **before: This item will be displayed before the specified item in the parent. (runtime adding)
+        **default_open: Decides if item is open by default.
+        **open_on_double_click: Need double-click to open node.
+        **open_on_arrow: Only open when clicking on the arrow part.
+        **leaf: No collapsing, no arrow (use as a convenience for leaf nodes).
+        **bullet: Display a bullet instead of arrow.
+
+    Returns:
+        None
+    &#34;&#34;&#34;
+    try:
+        if label == &#34;__DearPyGuiDefault&#34;:
+            yield internal_dpg.add_tree_node(name, show=show, tip=tip, parent=parent,
+                                             before=before, default_open=default_open, 
+                                             open_on_double_click=open_on_double_click, 
+                                             open_on_arrow=open_on_arrow,
+                                             leaf=leaf, bullet=bullet)
+        else:
+            yield internal_dpg.add_tree_node(name, show=show, tip=tip, parent=parent,
+                                             before=before, default_open=default_open, 
+                                             open_on_double_click=open_on_double_click, 
+                                             open_on_arrow=open_on_arrow,
+                                             leaf=leaf, bullet=bullet, label=label)
+    finally:
+        internal_dpg.end()</code></pre>
+</details>
+</dd>
+<dt id="dearpygui.simple.window"><code class="name flex">
+<span>def <span class="ident">window</span></span>(<span>name: str, *, width: int = 200, height: int = 200, x_pos: int = 200, y_pos: int = 200, autosize: bool = False, no_resize: bool = False, no_title_bar: bool = False, no_move: bool = False, no_scrollbar: bool = False, no_collapse: bool = False, horizontal_scrollbar: bool = False, no_focus_on_appearing: bool = False, no_bring_to_front_on_focus: bool = False, menubar: bool = False, no_close: bool = False, no_background: bool = False, label: str = '__DearPyGuiDefault', show: bool = True, collapsed: bool = False, on_close: Callable = None)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Wraps add_window() and automates calling end().</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>name</code></strong></dt>
+<dd>Unique name used to programmatically refer to the item. If label is unused this will be the label,
+anything after "##" that occurs in the name will not be shown on screen.</dd>
+<dt><strong><code>**width</code></strong></dt>
+<dd>Width of the item.</dd>
+<dt><strong><code>**height</code></strong></dt>
+<dd>Height of the item.</dd>
+<dt><strong><code>**x_pos</code></strong></dt>
+<dd>x position the window will start at</dd>
+<dt><strong><code>**y_pos</code></strong></dt>
+<dd>y position the window will start at</dd>
+<dt><strong><code>**autosize</code></strong></dt>
+<dd>Autosized the window to fit it's items.</dd>
+<dt><strong><code>**no_resize</code></strong></dt>
+<dd>Allows for the window size to be changed or fixed</dd>
+<dt><strong><code>**no_title_bar</code></strong></dt>
+<dd>Title name for the title bar of the window</dd>
+<dt><strong><code>**no_move</code></strong></dt>
+<dd>Allows for the window's position to be changed or fixed</dd>
+<dt><strong><code>**no_scrollbar</code></strong></dt>
+<dd>Disable scrollbars (window can still scroll with mouse or programmatically)</dd>
+<dt><strong><code>**no_collapse</code></strong></dt>
+<dd>Disable user collapsing window by double-clicking on it</dd>
+<dt><strong><code>**horizontal_scrollbar</code></strong></dt>
+<dd>Allow horizontal scrollbar to appear (off by default).</dd>
+<dt><strong><code>**no_focus_on_appearing</code></strong></dt>
+<dd>Disable taking focus when transitioning from hidden to visible state</dd>
+<dt><strong><code>**no_bring_to_front_on_focus</code></strong></dt>
+<dd>Disable bringing window to front when taking focus (e.g. clicking on it or
+programmatically giving it focus)</dd>
+<dt><strong><code>**menubar</code></strong></dt>
+<dd>Decides if the menubar is shown or not.</dd>
+<dt><strong><code>**no_close</code></strong></dt>
+<dd>Decides if the window can be closed.</dd>
+<dt>**no_background:</dt>
+<dt><strong><code>**label</code></strong></dt>
+<dd>Displayed name of the item.</dd>
+<dt><strong><code>**show</code></strong></dt>
+<dd>sets if the item is shown or not window.</dd>
+<dt><strong><code>**collapsed</code></strong></dt>
+<dd>Collapse the window</dd>
+<dt><strong><code>**on_close</code></strong></dt>
+<dd>Callback ran when window is closed</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>None</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@contextmanager
+def window(name: str, *, width: int = 200, height: int = 200, x_pos: int = 200, y_pos: int = 200, autosize: bool = False,
+           no_resize: bool = False, no_title_bar: bool = False, no_move: bool = False, no_scrollbar: bool = False,
+           no_collapse: bool = False, horizontal_scrollbar: bool = False, no_focus_on_appearing: bool = False,
+           no_bring_to_front_on_focus: bool = False, menubar: bool = False, no_close: bool = False,
+           no_background: bool = False, label: str = &#34;__DearPyGuiDefault&#34;, show: bool = True, collapsed: bool = False,
+           on_close: Callable = None):
+    &#34;&#34;&#34;Wraps add_window() and automates calling end().
+
+    Args:
+        name: Unique name used to programmatically refer to the item. If label is unused this will be the label,
+            anything after &#34;##&#34; that occurs in the name will not be shown on screen.
+        **width: Width of the item.
+        **height: Height of the item.
+        **x_pos: x position the window will start at
+        **y_pos: y position the window will start at
+        **autosize: Autosized the window to fit it&#39;s items.
+        **no_resize: Allows for the window size to be changed or fixed
+        **no_title_bar: Title name for the title bar of the window
+        **no_move: Allows for the window&#39;s position to be changed or fixed
+        **no_scrollbar: Disable scrollbars (window can still scroll with mouse or programmatically)
+        **no_collapse: Disable user collapsing window by double-clicking on it
+        **horizontal_scrollbar: Allow horizontal scrollbar to appear (off by default).
+        **no_focus_on_appearing: Disable taking focus when transitioning from hidden to visible state
+        **no_bring_to_front_on_focus: Disable bringing window to front when taking focus (e.g. clicking on it or
+            programmatically giving it focus)
+        **menubar: Decides if the menubar is shown or not.
+        **no_close: Decides if the window can be closed.
+        **no_background:
+        **label: Displayed name of the item.
+        **show: sets if the item is shown or not window.
+        **collapsed: Collapse the window
+        **on_close: Callback ran when window is closed
+
+    Returns:
+        None
+    &#34;&#34;&#34;
+    try:
+        if label == &#34;__DearPyGuiDefault&#34;:
+            yield internal_dpg.add_window(name, width=width, height=height, x_pos=x_pos, y_pos=y_pos, autosize=autosize,
+                                          no_resize=no_resize, no_title_bar=no_title_bar, no_move=no_move,
+                                          no_scrollbar=no_scrollbar, no_collapse=no_collapse,
+                                          horizontal_scrollbar=horizontal_scrollbar,
+                                          no_focus_on_appearing=no_focus_on_appearing,
+                                          no_bring_to_front_on_focus=no_bring_to_front_on_focus,
+                                          menubar=menubar, no_close=no_close, no_background=no_background,
+                                          show=show, collapsed=collapsed, on_close=on_close)
+        else:
+            yield internal_dpg.add_window(name, width=width, height=height, x_pos=x_pos, y_pos=y_pos, autosize=autosize,
+                                          no_resize=no_resize, no_title_bar=no_title_bar, no_move=no_move,
+                                          no_scrollbar=no_scrollbar, no_collapse=no_collapse,
+                                          horizontal_scrollbar=horizontal_scrollbar,
+                                          no_focus_on_appearing=no_focus_on_appearing,
+                                          no_bring_to_front_on_focus=no_bring_to_front_on_focus,
+                                          menubar=menubar, no_close=no_close,
+                                          no_background=no_background, label=label, show=show, 
+                                          collapsed=collapsed, on_close=on_close)
+    finally:
+        internal_dpg.end()</code></pre>
 </details>
 </dd>
 </dl>
@@ -1590,54 +2254,43 @@ def show_item_registry(sender: str=&#34;&#34;, data: Any=None) -&gt; None:
 </ul>
 </li>
 <li><h3><a href="#header-functions">Functions</a></h3>
-<ul class="">
-<li><code><a title="dearpygui.simple.disable_item" href="#dearpygui.simple.disable_item">disable_item</a></code></li>
-<li><code><a title="dearpygui.simple.enable_item" href="#dearpygui.simple.enable_item">enable_item</a></code></li>
-<li><code><a title="dearpygui.simple.get_item_callback" href="#dearpygui.simple.get_item_callback">get_item_callback</a></code></li>
-<li><code><a title="dearpygui.simple.get_item_children" href="#dearpygui.simple.get_item_children">get_item_children</a></code></li>
+<ul class="two-column">
+<li><code><a title="dearpygui.simple.child" href="#dearpygui.simple.child">child</a></code></li>
+<li><code><a title="dearpygui.simple.collapsing_header" href="#dearpygui.simple.collapsing_header">collapsing_header</a></code></li>
+<li><code><a title="dearpygui.simple.get_drawing_size" href="#dearpygui.simple.get_drawing_size">get_drawing_size</a></code></li>
 <li><code><a title="dearpygui.simple.get_item_height" href="#dearpygui.simple.get_item_height">get_item_height</a></code></li>
 <li><code><a title="dearpygui.simple.get_item_label" href="#dearpygui.simple.get_item_label">get_item_label</a></code></li>
-<li><code><a title="dearpygui.simple.get_item_parent" href="#dearpygui.simple.get_item_parent">get_item_parent</a></code></li>
-<li><code><a title="dearpygui.simple.get_item_pos" href="#dearpygui.simple.get_item_pos">get_item_pos</a></code></li>
-<li><code><a title="dearpygui.simple.get_item_rect_max" href="#dearpygui.simple.get_item_rect_max">get_item_rect_max</a></code></li>
-<li><code><a title="dearpygui.simple.get_item_rect_min" href="#dearpygui.simple.get_item_rect_min">get_item_rect_min</a></code></li>
-<li><code><a title="dearpygui.simple.get_item_rect_size" href="#dearpygui.simple.get_item_rect_size">get_item_rect_size</a></code></li>
-<li><code><a title="dearpygui.simple.get_item_source" href="#dearpygui.simple.get_item_source">get_item_source</a></code></li>
-<li><code><a title="dearpygui.simple.get_item_type" href="#dearpygui.simple.get_item_type">get_item_type</a></code></li>
-<li><code><a title="dearpygui.simple.get_item_user_data" href="#dearpygui.simple.get_item_user_data">get_item_user_data</a></code></li>
+<li><code><a title="dearpygui.simple.get_item_tip" href="#dearpygui.simple.get_item_tip">get_item_tip</a></code></li>
 <li><code><a title="dearpygui.simple.get_item_width" href="#dearpygui.simple.get_item_width">get_item_width</a></code></li>
 <li><code><a title="dearpygui.simple.get_window_pos" href="#dearpygui.simple.get_window_pos">get_window_pos</a></code></li>
+<li><code><a title="dearpygui.simple.group" href="#dearpygui.simple.group">group</a></code></li>
 <li><code><a title="dearpygui.simple.hide_item" href="#dearpygui.simple.hide_item">hide_item</a></code></li>
-<li><code><a title="dearpygui.simple.is_item_activated" href="#dearpygui.simple.is_item_activated">is_item_activated</a></code></li>
-<li><code><a title="dearpygui.simple.is_item_active" href="#dearpygui.simple.is_item_active">is_item_active</a></code></li>
-<li><code><a title="dearpygui.simple.is_item_clicked" href="#dearpygui.simple.is_item_clicked">is_item_clicked</a></code></li>
-<li><code><a title="dearpygui.simple.is_item_container" href="#dearpygui.simple.is_item_container">is_item_container</a></code></li>
-<li><code><a title="dearpygui.simple.is_item_deactivated" href="#dearpygui.simple.is_item_deactivated">is_item_deactivated</a></code></li>
-<li><code><a title="dearpygui.simple.is_item_deactivated_after_edit" href="#dearpygui.simple.is_item_deactivated_after_edit">is_item_deactivated_after_edit</a></code></li>
-<li><code><a title="dearpygui.simple.is_item_edited" href="#dearpygui.simple.is_item_edited">is_item_edited</a></code></li>
-<li><code><a title="dearpygui.simple.is_item_enabled" href="#dearpygui.simple.is_item_enabled">is_item_enabled</a></code></li>
-<li><code><a title="dearpygui.simple.is_item_focused" href="#dearpygui.simple.is_item_focused">is_item_focused</a></code></li>
-<li><code><a title="dearpygui.simple.is_item_hovered" href="#dearpygui.simple.is_item_hovered">is_item_hovered</a></code></li>
-<li><code><a title="dearpygui.simple.is_item_ok" href="#dearpygui.simple.is_item_ok">is_item_ok</a></code></li>
-<li><code><a title="dearpygui.simple.is_item_shown" href="#dearpygui.simple.is_item_shown">is_item_shown</a></code></li>
-<li><code><a title="dearpygui.simple.is_item_toggled_open" href="#dearpygui.simple.is_item_toggled_open">is_item_toggled_open</a></code></li>
-<li><code><a title="dearpygui.simple.is_item_visible" href="#dearpygui.simple.is_item_visible">is_item_visible</a></code></li>
-<li><code><a title="dearpygui.simple.set_item_callback" href="#dearpygui.simple.set_item_callback">set_item_callback</a></code></li>
+<li><code><a title="dearpygui.simple.managed_columns" href="#dearpygui.simple.managed_columns">managed_columns</a></code></li>
+<li><code><a title="dearpygui.simple.menu" href="#dearpygui.simple.menu">menu</a></code></li>
+<li><code><a title="dearpygui.simple.menu_bar" href="#dearpygui.simple.menu_bar">menu_bar</a></code></li>
+<li><code><a title="dearpygui.simple.node" href="#dearpygui.simple.node">node</a></code></li>
+<li><code><a title="dearpygui.simple.node_attribute" href="#dearpygui.simple.node_attribute">node_attribute</a></code></li>
+<li><code><a title="dearpygui.simple.node_editor" href="#dearpygui.simple.node_editor">node_editor</a></code></li>
+<li><code><a title="dearpygui.simple.popup" href="#dearpygui.simple.popup">popup</a></code></li>
+<li><code><a title="dearpygui.simple.set_drawing_size" href="#dearpygui.simple.set_drawing_size">set_drawing_size</a></code></li>
 <li><code><a title="dearpygui.simple.set_item_height" href="#dearpygui.simple.set_item_height">set_item_height</a></code></li>
 <li><code><a title="dearpygui.simple.set_item_label" href="#dearpygui.simple.set_item_label">set_item_label</a></code></li>
-<li><code><a title="dearpygui.simple.set_item_source" href="#dearpygui.simple.set_item_source">set_item_source</a></code></li>
-<li><code><a title="dearpygui.simple.set_item_user_data" href="#dearpygui.simple.set_item_user_data">set_item_user_data</a></code></li>
+<li><code><a title="dearpygui.simple.set_item_name" href="#dearpygui.simple.set_item_name">set_item_name</a></code></li>
+<li><code><a title="dearpygui.simple.set_item_tip" href="#dearpygui.simple.set_item_tip">set_item_tip</a></code></li>
 <li><code><a title="dearpygui.simple.set_item_width" href="#dearpygui.simple.set_item_width">set_item_width</a></code></li>
 <li><code><a title="dearpygui.simple.set_window_pos" href="#dearpygui.simple.set_window_pos">set_window_pos</a></code></li>
 <li><code><a title="dearpygui.simple.show_about" href="#dearpygui.simple.show_about">show_about</a></code></li>
 <li><code><a title="dearpygui.simple.show_debug" href="#dearpygui.simple.show_debug">show_debug</a></code></li>
 <li><code><a title="dearpygui.simple.show_documentation" href="#dearpygui.simple.show_documentation">show_documentation</a></code></li>
-<li><code><a title="dearpygui.simple.show_font_manager" href="#dearpygui.simple.show_font_manager">show_font_manager</a></code></li>
 <li><code><a title="dearpygui.simple.show_item" href="#dearpygui.simple.show_item">show_item</a></code></li>
-<li><code><a title="dearpygui.simple.show_item_registry" href="#dearpygui.simple.show_item_registry">show_item_registry</a></code></li>
+<li><code><a title="dearpygui.simple.show_logger" href="#dearpygui.simple.show_logger">show_logger</a></code></li>
 <li><code><a title="dearpygui.simple.show_metrics" href="#dearpygui.simple.show_metrics">show_metrics</a></code></li>
 <li><code><a title="dearpygui.simple.show_style_editor" href="#dearpygui.simple.show_style_editor">show_style_editor</a></code></li>
-<li><code><a title="dearpygui.simple.start_dearpygui" href="#dearpygui.simple.start_dearpygui">start_dearpygui</a></code></li>
+<li><code><a title="dearpygui.simple.tab" href="#dearpygui.simple.tab">tab</a></code></li>
+<li><code><a title="dearpygui.simple.tab_bar" href="#dearpygui.simple.tab_bar">tab_bar</a></code></li>
+<li><code><a title="dearpygui.simple.tooltip" href="#dearpygui.simple.tooltip">tooltip</a></code></li>
+<li><code><a title="dearpygui.simple.tree_node" href="#dearpygui.simple.tree_node">tree_node</a></code></li>
+<li><code><a title="dearpygui.simple.window" href="#dearpygui.simple.window">window</a></code></li>
 </ul>
 </li>
 </ul>
