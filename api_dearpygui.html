@@ -74,6 +74,10 @@ def configure_item(item : int, **kwargs) -&gt; None:
         &#34;&#34;&#34;Configures an item after creation.&#34;&#34;&#34;
         internal_dpg.configure_item(item, **kwargs)
 
+def configure_item(item : int, **kwargs) -&gt; None:
+        &#34;&#34;&#34;Configures a viewport after creation.&#34;&#34;&#34;
+        internal_dpg.configure_viewport(item, **kwargs)
+
 
 def setup_registries() -&gt; None:
     &#34;&#34;&#34;Adds default registries for fonts, handlers, textures, and values.&#34;&#34;&#34;
@@ -806,7 +810,7 @@ def set_viewport_clear_color(color: List[int]):
     Returns:
         None
     &#34;&#34;&#34;
-    internal_dpg.configure_viewport(item, clear_color=color)
+    internal_dpg.configure_viewport(0, clear_color=color)
 
 
 def set_viewport_small_icon(icon: str):
@@ -815,7 +819,7 @@ def set_viewport_small_icon(icon: str):
     Returns:
         None
     &#34;&#34;&#34;
-    internal_dpg.configure_viewport(item, small_icon=icon)
+    internal_dpg.configure_viewport(0, small_icon=icon)
 
 
 def set_viewport_large_icon(icon: str):
@@ -824,7 +828,7 @@ def set_viewport_large_icon(icon: str):
     Returns:
         None
     &#34;&#34;&#34;
-    internal_dpg.configure_viewport(item, large_icon=icon)
+    internal_dpg.configure_viewport(0, large_icon=icon)
 
 
 def set_viewport_pos(pos: List[float]):
@@ -833,7 +837,7 @@ def set_viewport_pos(pos: List[float]):
     Returns:
         None
     &#34;&#34;&#34;
-    internal_dpg.configure_viewport(item, pos=pos)
+    internal_dpg.configure_viewport(0, pos=pos)
 
 
 def set_viewport_width(width: int):
@@ -842,7 +846,7 @@ def set_viewport_width(width: int):
     Returns:
         None
     &#34;&#34;&#34;
-    internal_dpg.configure_viewport(item, width=width)
+    internal_dpg.configure_viewport(0, width=width)
 
 
 def set_viewport_height(height: int):
@@ -851,7 +855,7 @@ def set_viewport_height(height: int):
     Returns:
         None
     &#34;&#34;&#34;
-    internal_dpg.configure_viewport(item, height=height)
+    internal_dpg.configure_viewport(0, height=height)
 
 
 def set_viewport_min_width(width: int):
@@ -860,7 +864,7 @@ def set_viewport_min_width(width: int):
     Returns:
         None
     &#34;&#34;&#34;
-    internal_dpg.configure_viewport(item, min_width=width)
+    internal_dpg.configure_viewport(0, min_width=width)
 
 
 def set_viewport_max_width(width: int):
@@ -869,7 +873,7 @@ def set_viewport_max_width(width: int):
     Returns:
         None
     &#34;&#34;&#34;
-    internal_dpg.configure_viewport(item, max_width=width)
+    internal_dpg.configure_viewport(0, max_width=width)
 
 
 def set_viewport_min_height(height: int):
@@ -878,7 +882,7 @@ def set_viewport_min_height(height: int):
     Returns:
         None
     &#34;&#34;&#34;
-    internal_dpg.configure_viewport(item, min_height=width)
+    internal_dpg.configure_viewport(0, min_height=width)
 
 
 def set_viewport_max_height(height: int):
@@ -887,7 +891,7 @@ def set_viewport_max_height(height: int):
     Returns:
         None
     &#34;&#34;&#34;
-    internal_dpg.configure_viewport(item, max_height=height)
+    internal_dpg.configure_viewport(0, max_height=height)
 
 
 def set_viewport_title(title: str):
@@ -896,7 +900,7 @@ def set_viewport_title(title: str):
     Returns:
         None
     &#34;&#34;&#34;
-    internal_dpg.configure_viewport(item, title=title)
+    internal_dpg.configure_viewport(0, title=title)
 
 
 def set_viewport_always_top(value: bool):
@@ -905,7 +909,7 @@ def set_viewport_always_top(value: bool):
     Returns:
         None
     &#34;&#34;&#34;
-    internal_dpg.configure_viewport(item, always_on_top=value)
+    internal_dpg.configure_viewport(0, always_on_top=value)
 
 
 def set_viewport_resizable(value: bool):
@@ -914,7 +918,7 @@ def set_viewport_resizable(value: bool):
     Returns:
         None
     &#34;&#34;&#34;
-    internal_dpg.configure_viewport(item, resizable=value)
+    internal_dpg.configure_viewport(0, resizable=value)
 
 def set_viewport_vsync(value: bool):
     &#34;&#34;&#34;Sets the viewport vsync.
@@ -922,7 +926,7 @@ def set_viewport_vsync(value: bool):
     Returns:
         None
     &#34;&#34;&#34;
-    internal_dpg.configure_viewport(item, vsync=value)
+    internal_dpg.configure_viewport(0, vsync=value)
 
 
 def set_viewport_border(value: bool):
@@ -931,7 +935,7 @@ def set_viewport_border(value: bool):
     Returns:
         None
     &#34;&#34;&#34;
-    internal_dpg.configure_viewport(item, border=value)
+    internal_dpg.configure_viewport(0, border=value)
 
 
 def set_viewport_caption(value: bool):
@@ -940,7 +944,7 @@ def set_viewport_caption(value: bool):
     Returns:
         None
     &#34;&#34;&#34;
-    internal_dpg.configure_viewport(item, caption=value)
+    internal_dpg.configure_viewport(0, caption=value)
 
 
 def set_viewport_overlapped(value: bool):
@@ -949,7 +953,7 @@ def set_viewport_overlapped(value: bool):
     Returns:
         None
     &#34;&#34;&#34;
-    internal_dpg.configure_viewport(item, overlapped=value)
+    internal_dpg.configure_viewport(0, overlapped=value)
 
 
 def set_viewport_maximized_box(value: bool):
@@ -958,7 +962,7 @@ def set_viewport_maximized_box(value: bool):
     Returns:
         None
     &#34;&#34;&#34;
-    internal_dpg.configure_viewport(item, maximized_box=value)
+    internal_dpg.configure_viewport(0, maximized_box=value)
 
 
 def set_viewport_minimized_box(value: bool):
@@ -967,7 +971,7 @@ def set_viewport_minimized_box(value: bool):
     Returns:
         None
     &#34;&#34;&#34;
-    internal_dpg.configure_viewport(item, minimized_box=value)
+    internal_dpg.configure_viewport(0, minimized_box=value)
 
 
 ########################################################################################################################
@@ -5064,19 +5068,9 @@ def clear_selected_nodes(node_editor : int) -&gt; None:
 
         return internal_dpg.clear_selected_nodes(node_editor)
 
-def configure_viewport() -&gt; None:
-        &#34;&#34;&#34;
-        Undocumented
-        Args:
-        Returns:
-                None
-        &#34;&#34;&#34;
-
-        return internal_dpg.configure_viewport()
-
 def create_viewport(*, title: str =&#39;Dear PyGui&#39;, small_icon: str =&#39;&#39;, large_icon: str =&#39;&#39;, width: int =1280, height: int =800, x_pos: int =100, y_pos: int =100, min_width: int =250, max_width: int =10000, min_height: int =250, max_height: int =10000, resizable: bool =True, vsync: bool =True, always_on_top: bool =False, maximized_box: bool =True, minimized_box: bool =True, border: bool =True, caption: bool =True, overlapped: bool =True, clear_color: List[float] =(0, 0, 0, 255)) -&gt; str:
         &#34;&#34;&#34;
-        Undocumented
+        Creates a viewport.
         Args:
                 **title (str): 
                 **small_icon (str): 
@@ -5680,7 +5674,7 @@ def get_values(items : List[int]) -&gt; Any:
 
 def get_viewport_configuration(item : int) -&gt; dict:
         &#34;&#34;&#34;
-        Undocumented
+        Returns viewport configuration.
         Args:
                 item (int): 
         Returns:
@@ -5855,7 +5849,7 @@ def is_plot_queried(plot : int) -&gt; bool:
 
 def is_viewport_created() -&gt; bool:
         &#34;&#34;&#34;
-        Undocumented
+        Checks if a viewport has been created.
         Args:
         Returns:
                 bool
@@ -5905,7 +5899,7 @@ def lock_mutex() -&gt; None:
 
 def maximize_viewport() -&gt; None:
         &#34;&#34;&#34;
-        Undocumented
+        Maximizes the viewport.
         Args:
         Returns:
                 None
@@ -5915,7 +5909,7 @@ def maximize_viewport() -&gt; None:
 
 def minimize_viewport() -&gt; None:
         &#34;&#34;&#34;
-        Undocumented
+        Minimizes the viewport.
         Args:
         Returns:
                 None
@@ -6280,7 +6274,7 @@ def show_tool(tool : int) -&gt; str:
 
 def show_viewport(viewport : str, *, minimized: bool =False, maximized: bool =False) -&gt; None:
         &#34;&#34;&#34;
-        Undocumented
+        Shows the viewport
         Args:
                 viewport (str): 
                 **minimized (bool): 
@@ -15847,44 +15841,21 @@ def collapsing_header(*, label: str =None, id: int =0, indent: int =-1, parent: 
 <span>def <span class="ident">configure_item</span></span>(<span>item: int, **kwargs) ‑> NoneType</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Configures an item after creation.</p></div>
+<div class="desc"><p>Configures a viewport after creation.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">def configure_item(item : int, **kwargs) -&gt; None:
-        &#34;&#34;&#34;Configures an item after creation.&#34;&#34;&#34;
-        internal_dpg.configure_item(item, **kwargs)</code></pre>
-</details>
-</dd>
-<dt id="dearpygui.dearpygui.configure_viewport"><code class="name flex">
-<span>def <span class="ident">configure_viewport</span></span>(<span>) ‑> NoneType</span>
-</code></dt>
-<dd>
-<div class="desc"><p>Undocumented
-Args:</p>
-<h2 id="returns">Returns</h2>
-<p>None</p></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">def configure_viewport() -&gt; None:
-        &#34;&#34;&#34;
-        Undocumented
-        Args:
-        Returns:
-                None
-        &#34;&#34;&#34;
-
-        return internal_dpg.configure_viewport()</code></pre>
+        &#34;&#34;&#34;Configures a viewport after creation.&#34;&#34;&#34;
+        internal_dpg.configure_viewport(item, **kwargs)</code></pre>
 </details>
 </dd>
 <dt id="dearpygui.dearpygui.create_viewport"><code class="name flex">
 <span>def <span class="ident">create_viewport</span></span>(<span>*, title: str = 'Dear PyGui', small_icon: str = '', large_icon: str = '', width: int = 1280, height: int = 800, x_pos: int = 100, y_pos: int = 100, min_width: int = 250, max_width: int = 10000, min_height: int = 250, max_height: int = 10000, resizable: bool = True, vsync: bool = True, always_on_top: bool = False, maximized_box: bool = True, minimized_box: bool = True, border: bool = True, caption: bool = True, overlapped: bool = True, clear_color: List[float] = (0, 0, 0, 255)) ‑> str</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Undocumented</p>
+<div class="desc"><p>Creates a viewport.</p>
 <h2 id="args">Args</h2>
 <dl>
 <dt><strong><code>**title</code></strong> :&ensp;<code>str</code></dt>
@@ -15936,7 +15907,7 @@ Args:</p>
 </summary>
 <pre><code class="python">def create_viewport(*, title: str =&#39;Dear PyGui&#39;, small_icon: str =&#39;&#39;, large_icon: str =&#39;&#39;, width: int =1280, height: int =800, x_pos: int =100, y_pos: int =100, min_width: int =250, max_width: int =10000, min_height: int =250, max_height: int =10000, resizable: bool =True, vsync: bool =True, always_on_top: bool =False, maximized_box: bool =True, minimized_box: bool =True, border: bool =True, caption: bool =True, overlapped: bool =True, clear_color: List[float] =(0, 0, 0, 255)) -&gt; str:
         &#34;&#34;&#34;
-        Undocumented
+        Creates a viewport.
         Args:
                 **title (str): 
                 **small_icon (str): 
@@ -18396,7 +18367,7 @@ Args:</p>
 <span>def <span class="ident">get_viewport_configuration</span></span>(<span>item: int) ‑> dict</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Undocumented</p>
+<div class="desc"><p>Returns viewport configuration.</p>
 <h2 id="args">Args</h2>
 <dl>
 <dt><strong><code>item</code></strong> :&ensp;<code>int</code></dt>
@@ -18410,7 +18381,7 @@ Args:</p>
 </summary>
 <pre><code class="python">def get_viewport_configuration(item : int) -&gt; dict:
         &#34;&#34;&#34;
-        Undocumented
+        Returns viewport configuration.
         Args:
                 item (int): 
         Returns:
@@ -19513,7 +19484,7 @@ Args:</p>
 <span>def <span class="ident">is_viewport_created</span></span>(<span>) ‑> bool</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Undocumented
+<div class="desc"><p>Checks if a viewport has been created.
 Args:</p>
 <h2 id="returns">Returns</h2>
 <p>bool</p></div>
@@ -19523,7 +19494,7 @@ Args:</p>
 </summary>
 <pre><code class="python">def is_viewport_created() -&gt; bool:
         &#34;&#34;&#34;
-        Undocumented
+        Checks if a viewport has been created.
         Args:
         Returns:
                 bool
@@ -19728,7 +19699,7 @@ Args:</p>
 <span>def <span class="ident">maximize_viewport</span></span>(<span>) ‑> NoneType</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Undocumented
+<div class="desc"><p>Maximizes the viewport.
 Args:</p>
 <h2 id="returns">Returns</h2>
 <p>None</p></div>
@@ -19738,7 +19709,7 @@ Args:</p>
 </summary>
 <pre><code class="python">def maximize_viewport() -&gt; None:
         &#34;&#34;&#34;
-        Undocumented
+        Maximizes the viewport.
         Args:
         Returns:
                 None
@@ -19871,7 +19842,7 @@ def menu_bar(*, label: str =None, id: int =0, indent: int =-1, parent: int =0, s
 <span>def <span class="ident">minimize_viewport</span></span>(<span>) ‑> NoneType</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Undocumented
+<div class="desc"><p>Minimizes the viewport.
 Args:</p>
 <h2 id="returns">Returns</h2>
 <p>None</p></div>
@@ -19881,7 +19852,7 @@ Args:</p>
 </summary>
 <pre><code class="python">def minimize_viewport() -&gt; None:
         &#34;&#34;&#34;
-        Undocumented
+        Minimizes the viewport.
         Args:
         Returns:
                 None
@@ -21363,7 +21334,7 @@ Args:</p>
     Returns:
         None
     &#34;&#34;&#34;
-    internal_dpg.configure_viewport(item, always_on_top=value)</code></pre>
+    internal_dpg.configure_viewport(0, always_on_top=value)</code></pre>
 </details>
 </dd>
 <dt id="dearpygui.dearpygui.set_viewport_border"><code class="name flex">
@@ -21383,7 +21354,7 @@ Args:</p>
     Returns:
         None
     &#34;&#34;&#34;
-    internal_dpg.configure_viewport(item, border=value)</code></pre>
+    internal_dpg.configure_viewport(0, border=value)</code></pre>
 </details>
 </dd>
 <dt id="dearpygui.dearpygui.set_viewport_caption"><code class="name flex">
@@ -21403,7 +21374,7 @@ Args:</p>
     Returns:
         None
     &#34;&#34;&#34;
-    internal_dpg.configure_viewport(item, caption=value)</code></pre>
+    internal_dpg.configure_viewport(0, caption=value)</code></pre>
 </details>
 </dd>
 <dt id="dearpygui.dearpygui.set_viewport_clear_color"><code class="name flex">
@@ -21423,7 +21394,7 @@ Args:</p>
     Returns:
         None
     &#34;&#34;&#34;
-    internal_dpg.configure_viewport(item, clear_color=color)</code></pre>
+    internal_dpg.configure_viewport(0, clear_color=color)</code></pre>
 </details>
 </dd>
 <dt id="dearpygui.dearpygui.set_viewport_height"><code class="name flex">
@@ -21443,7 +21414,7 @@ Args:</p>
     Returns:
         None
     &#34;&#34;&#34;
-    internal_dpg.configure_viewport(item, height=height)</code></pre>
+    internal_dpg.configure_viewport(0, height=height)</code></pre>
 </details>
 </dd>
 <dt id="dearpygui.dearpygui.set_viewport_large_icon"><code class="name flex">
@@ -21463,7 +21434,7 @@ Args:</p>
     Returns:
         None
     &#34;&#34;&#34;
-    internal_dpg.configure_viewport(item, large_icon=icon)</code></pre>
+    internal_dpg.configure_viewport(0, large_icon=icon)</code></pre>
 </details>
 </dd>
 <dt id="dearpygui.dearpygui.set_viewport_max_height"><code class="name flex">
@@ -21483,7 +21454,7 @@ Args:</p>
     Returns:
         None
     &#34;&#34;&#34;
-    internal_dpg.configure_viewport(item, max_height=height)</code></pre>
+    internal_dpg.configure_viewport(0, max_height=height)</code></pre>
 </details>
 </dd>
 <dt id="dearpygui.dearpygui.set_viewport_max_width"><code class="name flex">
@@ -21503,7 +21474,7 @@ Args:</p>
     Returns:
         None
     &#34;&#34;&#34;
-    internal_dpg.configure_viewport(item, max_width=width)</code></pre>
+    internal_dpg.configure_viewport(0, max_width=width)</code></pre>
 </details>
 </dd>
 <dt id="dearpygui.dearpygui.set_viewport_maximized_box"><code class="name flex">
@@ -21523,7 +21494,7 @@ Args:</p>
     Returns:
         None
     &#34;&#34;&#34;
-    internal_dpg.configure_viewport(item, maximized_box=value)</code></pre>
+    internal_dpg.configure_viewport(0, maximized_box=value)</code></pre>
 </details>
 </dd>
 <dt id="dearpygui.dearpygui.set_viewport_min_height"><code class="name flex">
@@ -21543,7 +21514,7 @@ Args:</p>
     Returns:
         None
     &#34;&#34;&#34;
-    internal_dpg.configure_viewport(item, min_height=width)</code></pre>
+    internal_dpg.configure_viewport(0, min_height=width)</code></pre>
 </details>
 </dd>
 <dt id="dearpygui.dearpygui.set_viewport_min_width"><code class="name flex">
@@ -21563,7 +21534,7 @@ Args:</p>
     Returns:
         None
     &#34;&#34;&#34;
-    internal_dpg.configure_viewport(item, min_width=width)</code></pre>
+    internal_dpg.configure_viewport(0, min_width=width)</code></pre>
 </details>
 </dd>
 <dt id="dearpygui.dearpygui.set_viewport_minimized_box"><code class="name flex">
@@ -21583,7 +21554,7 @@ Args:</p>
     Returns:
         None
     &#34;&#34;&#34;
-    internal_dpg.configure_viewport(item, minimized_box=value)</code></pre>
+    internal_dpg.configure_viewport(0, minimized_box=value)</code></pre>
 </details>
 </dd>
 <dt id="dearpygui.dearpygui.set_viewport_overlapped"><code class="name flex">
@@ -21603,7 +21574,7 @@ Args:</p>
     Returns:
         None
     &#34;&#34;&#34;
-    internal_dpg.configure_viewport(item, overlapped=value)</code></pre>
+    internal_dpg.configure_viewport(0, overlapped=value)</code></pre>
 </details>
 </dd>
 <dt id="dearpygui.dearpygui.set_viewport_pos"><code class="name flex">
@@ -21623,7 +21594,7 @@ Args:</p>
     Returns:
         None
     &#34;&#34;&#34;
-    internal_dpg.configure_viewport(item, pos=pos)</code></pre>
+    internal_dpg.configure_viewport(0, pos=pos)</code></pre>
 </details>
 </dd>
 <dt id="dearpygui.dearpygui.set_viewport_resizable"><code class="name flex">
@@ -21643,7 +21614,7 @@ Args:</p>
     Returns:
         None
     &#34;&#34;&#34;
-    internal_dpg.configure_viewport(item, resizable=value)</code></pre>
+    internal_dpg.configure_viewport(0, resizable=value)</code></pre>
 </details>
 </dd>
 <dt id="dearpygui.dearpygui.set_viewport_resize_callback"><code class="name flex">
@@ -21691,7 +21662,7 @@ Args:</p>
     Returns:
         None
     &#34;&#34;&#34;
-    internal_dpg.configure_viewport(item, small_icon=icon)</code></pre>
+    internal_dpg.configure_viewport(0, small_icon=icon)</code></pre>
 </details>
 </dd>
 <dt id="dearpygui.dearpygui.set_viewport_title"><code class="name flex">
@@ -21711,7 +21682,7 @@ Args:</p>
     Returns:
         None
     &#34;&#34;&#34;
-    internal_dpg.configure_viewport(item, title=title)</code></pre>
+    internal_dpg.configure_viewport(0, title=title)</code></pre>
 </details>
 </dd>
 <dt id="dearpygui.dearpygui.set_viewport_vsync"><code class="name flex">
@@ -21731,7 +21702,7 @@ Args:</p>
     Returns:
         None
     &#34;&#34;&#34;
-    internal_dpg.configure_viewport(item, vsync=value)</code></pre>
+    internal_dpg.configure_viewport(0, vsync=value)</code></pre>
 </details>
 </dd>
 <dt id="dearpygui.dearpygui.set_viewport_width"><code class="name flex">
@@ -21751,7 +21722,7 @@ Args:</p>
     Returns:
         None
     &#34;&#34;&#34;
-    internal_dpg.configure_viewport(item, width=width)</code></pre>
+    internal_dpg.configure_viewport(0, width=width)</code></pre>
 </details>
 </dd>
 <dt id="dearpygui.dearpygui.set_x_scroll"><code class="name flex">
@@ -22129,7 +22100,7 @@ Args:</p>
 <span>def <span class="ident">show_viewport</span></span>(<span>viewport: str, *, minimized: bool = False, maximized: bool = False) ‑> NoneType</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Undocumented</p>
+<div class="desc"><p>Shows the viewport</p>
 <h2 id="args">Args</h2>
 <dl>
 <dt><strong><code>viewport</code></strong> :&ensp;<code>str</code></dt>
@@ -22147,7 +22118,7 @@ Args:</p>
 </summary>
 <pre><code class="python">def show_viewport(viewport : str, *, minimized: bool =False, maximized: bool =False) -&gt; None:
         &#34;&#34;&#34;
-        Undocumented
+        Shows the viewport
         Args:
                 viewport (str): 
                 **minimized (bool): 
@@ -23334,7 +23305,6 @@ def window(*, label: str =None, id: int =0, width: int =0, height: int =0, inden
 <li><code><a title="dearpygui.dearpygui.clipper" href="#dearpygui.dearpygui.clipper">clipper</a></code></li>
 <li><code><a title="dearpygui.dearpygui.collapsing_header" href="#dearpygui.dearpygui.collapsing_header">collapsing_header</a></code></li>
 <li><code><a title="dearpygui.dearpygui.configure_item" href="#dearpygui.dearpygui.configure_item">configure_item</a></code></li>
-<li><code><a title="dearpygui.dearpygui.configure_viewport" href="#dearpygui.dearpygui.configure_viewport">configure_viewport</a></code></li>
 <li><code><a title="dearpygui.dearpygui.create_viewport" href="#dearpygui.dearpygui.create_viewport">create_viewport</a></code></li>
 <li><code><a title="dearpygui.dearpygui.delete_item" href="#dearpygui.dearpygui.delete_item">delete_item</a></code></li>
 <li><code><a title="dearpygui.dearpygui.disable_item" href="#dearpygui.dearpygui.disable_item">disable_item</a></code></li>
