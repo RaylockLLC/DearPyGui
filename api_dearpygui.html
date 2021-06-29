@@ -74,7 +74,8 @@ def configure_item(item : int, **kwargs) -&gt; None:
         &#34;&#34;&#34;Configures an item after creation.&#34;&#34;&#34;
         internal_dpg.configure_item(item, **kwargs)
 
-def configure_item(item : int, **kwargs) -&gt; None:
+
+def configure_viewport(item : int, **kwargs) -&gt; None:
         &#34;&#34;&#34;Configures a viewport after creation.&#34;&#34;&#34;
         internal_dpg.configure_viewport(item, **kwargs)
 
@@ -15841,12 +15842,26 @@ def collapsing_header(*, label: str =None, id: int =0, indent: int =-1, parent: 
 <span>def <span class="ident">configure_item</span></span>(<span>item: int, **kwargs) ‑> NoneType</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Configures a viewport after creation.</p></div>
+<div class="desc"><p>Configures an item after creation.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">def configure_item(item : int, **kwargs) -&gt; None:
+        &#34;&#34;&#34;Configures an item after creation.&#34;&#34;&#34;
+        internal_dpg.configure_item(item, **kwargs)</code></pre>
+</details>
+</dd>
+<dt id="dearpygui.dearpygui.configure_viewport"><code class="name flex">
+<span>def <span class="ident">configure_viewport</span></span>(<span>item: int, **kwargs) ‑> NoneType</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Configures a viewport after creation.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def configure_viewport(item : int, **kwargs) -&gt; None:
         &#34;&#34;&#34;Configures a viewport after creation.&#34;&#34;&#34;
         internal_dpg.configure_viewport(item, **kwargs)</code></pre>
 </details>
@@ -23305,6 +23320,7 @@ def window(*, label: str =None, id: int =0, width: int =0, height: int =0, inden
 <li><code><a title="dearpygui.dearpygui.clipper" href="#dearpygui.dearpygui.clipper">clipper</a></code></li>
 <li><code><a title="dearpygui.dearpygui.collapsing_header" href="#dearpygui.dearpygui.collapsing_header">collapsing_header</a></code></li>
 <li><code><a title="dearpygui.dearpygui.configure_item" href="#dearpygui.dearpygui.configure_item">configure_item</a></code></li>
+<li><code><a title="dearpygui.dearpygui.configure_viewport" href="#dearpygui.dearpygui.configure_viewport">configure_viewport</a></code></li>
 <li><code><a title="dearpygui.dearpygui.create_viewport" href="#dearpygui.dearpygui.create_viewport">create_viewport</a></code></li>
 <li><code><a title="dearpygui.dearpygui.delete_item" href="#dearpygui.dearpygui.delete_item">delete_item</a></code></li>
 <li><code><a title="dearpygui.dearpygui.disable_item" href="#dearpygui.dearpygui.disable_item">disable_item</a></code></li>
