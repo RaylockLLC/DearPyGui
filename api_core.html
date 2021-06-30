@@ -4583,13 +4583,8 @@ Attempt to render widget.</li>
 Overrides 'name' as label.</li>
 <li>id : int = 0
 Unique id used to programmatically refer to the item.If label is unused this will be the label.</li>
-<li>
-<p>file : str = ''</p>
-</li>
-<li>
-<p>parent : int = internal_dpg.mvReservedUUID_2
-Parent to add this item to. (runtime adding)</p>
-</li>
+<li>parent : int = internal_dpg.mvReservedUUID_2
+Parent to add this item to. (runtime adding)</li>
 </ul></div>
 </dd>
 <dt id="dearpygui.core.add_stem_series"><code class="name flex">
@@ -5480,7 +5475,7 @@ Callback ran when window is closed.</li>
 <span>def <span class="ident">cleanup_dearpygui</span></span>(<span>...)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Undocumented</p>
+<div class="desc"><p>Cleans up dearpygui.</p>
 <p>Return Type: None</p></div>
 </dd>
 <dt id="dearpygui.core.clear_selected_links"><code class="name flex">
@@ -6227,14 +6222,14 @@ add explicit dockspace over viewport</li>
 <span>def <span class="ident">get_dearpygui_version</span></span>(<span>...)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Undocumented</p>
+<div class="desc"><p>Returns the dearpygui version.</p>
 <p>Return Type: str</p></div>
 </dd>
 <dt id="dearpygui.core.get_delta_time"><code class="name flex">
 <span>def <span class="ident">get_delta_time</span></span>(<span>...)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Undocumented</p>
+<div class="desc"><p>Returns time since last frame.</p>
 <p>Return Type: float</p></div>
 </dd>
 <dt id="dearpygui.core.get_drawing_mouse_pos"><code class="name flex">
@@ -6372,7 +6367,7 @@ add explicit dockspace over viewport</li>
 <span>def <span class="ident">get_total_time</span></span>(<span>...)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Undocumented</p>
+<div class="desc"><p>Returns total time since Dear PyGui has started.</p>
 <p>Return Type: float</p></div>
 </dd>
 <dt id="dearpygui.core.get_value"><code class="name flex">
@@ -6470,7 +6465,7 @@ add explicit dockspace over viewport</li>
 <span>def <span class="ident">is_dearpygui_running</span></span>(<span>...)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Undocumented</p>
+<div class="desc"><p>Checks if dearpygui is running.</p>
 <p>Return Type: bool</p></div>
 </dd>
 <dt id="dearpygui.core.is_key_down"><code class="name flex">
@@ -6614,6 +6609,18 @@ add explicit dockspace over viewport</li>
 <div class="desc"><p>Undocumented</p>
 <p>Return Type: int</p></div>
 </dd>
+<dt id="dearpygui.core.load_image"><code class="name flex">
+<span>def <span class="ident">load_image</span></span>(<span>...)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Loads an image. Returns width, height, channels, mvBuffer</p>
+<p>Return Type: Any</p>
+<p>Required Arguments</p>
+<hr>
+<ul>
+<li>file : str</li>
+</ul></div>
+</dd>
 <dt id="dearpygui.core.load_init_file"><code class="name flex">
 <span>def <span class="ident">load_init_file</span></span>(<span>...)</span>
 </code></dt>
@@ -6624,7 +6631,7 @@ add explicit dockspace over viewport</li>
 <span>def <span class="ident">lock_mutex</span></span>(<span>...)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Undocumented</p>
+<div class="desc"><p>Locks mutex</p>
 <p>Return Type: None</p></div>
 </dd>
 <dt id="dearpygui.core.maximize_viewport"><code class="name flex">
@@ -6710,7 +6717,7 @@ add explicit dockspace over viewport</li>
 <span>def <span class="ident">render_dearpygui_frame</span></span>(<span>...)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Undocumented</p>
+<div class="desc"><p>Renders a dearpygui frame.</p>
 <p>Return Type: None</p></div>
 </dd>
 <dt id="dearpygui.core.reorder_items"><code class="name flex">
@@ -7043,7 +7050,7 @@ add explicit dockspace over viewport</li>
 <span>def <span class="ident">setup_dearpygui</span></span>(<span>...)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Undocumented</p>
+<div class="desc"><p>Sets up dearpygui</p>
 <p>Return Type: None</p>
 <p>Keyword Arguments</p>
 <hr>
@@ -7115,7 +7122,7 @@ add explicit dockspace over viewport</li>
 <span>def <span class="ident">stop_dearpygui</span></span>(<span>...)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Undocumented</p>
+<div class="desc"><p>Stops dearpygui.</p>
 <p>Return Type: None</p></div>
 </dd>
 <dt id="dearpygui.core.top_container_stack"><code class="name flex">
@@ -7129,7 +7136,7 @@ add explicit dockspace over viewport</li>
 <span>def <span class="ident">unlock_mutex</span></span>(<span>...)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Undocumented</p>
+<div class="desc"><p>Unlocks mutex</p>
 <p>Return Type: None</p></div>
 </dd>
 <dt id="dearpygui.core.unstage_items"><code class="name flex">
@@ -7153,6 +7160,16 @@ add explicit dockspace over viewport</li>
 </dl>
 </section>
 <section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="dearpygui.core.mvBuffer"><code class="flex name class">
+<span>class <span class="ident">mvBuffer</span></span>
+<span>(</span><span>*args, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>mvBuffer object</p></div>
+</dd>
+</dl>
 </section>
 </article>
 <nav id="sidebar">
@@ -7371,6 +7388,7 @@ add explicit dockspace over viewport</li>
 <li><code><a title="dearpygui.core.last_container" href="#dearpygui.core.last_container">last_container</a></code></li>
 <li><code><a title="dearpygui.core.last_item" href="#dearpygui.core.last_item">last_item</a></code></li>
 <li><code><a title="dearpygui.core.last_root" href="#dearpygui.core.last_root">last_root</a></code></li>
+<li><code><a title="dearpygui.core.load_image" href="#dearpygui.core.load_image">load_image</a></code></li>
 <li><code><a title="dearpygui.core.load_init_file" href="#dearpygui.core.load_init_file">load_init_file</a></code></li>
 <li><code><a title="dearpygui.core.lock_mutex" href="#dearpygui.core.lock_mutex">lock_mutex</a></code></li>
 <li><code><a title="dearpygui.core.maximize_viewport" href="#dearpygui.core.maximize_viewport">maximize_viewport</a></code></li>
@@ -7413,6 +7431,13 @@ add explicit dockspace over viewport</li>
 <li><code><a title="dearpygui.core.unlock_mutex" href="#dearpygui.core.unlock_mutex">unlock_mutex</a></code></li>
 <li><code><a title="dearpygui.core.unstage_items" href="#dearpygui.core.unstage_items">unstage_items</a></code></li>
 <li><code><a title="dearpygui.core.use_init_file" href="#dearpygui.core.use_init_file">use_init_file</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="dearpygui.core.mvBuffer" href="#dearpygui.core.mvBuffer">mvBuffer</a></code></h4>
+</li>
 </ul>
 </li>
 </ul>

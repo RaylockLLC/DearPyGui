@@ -47,6 +47,7 @@
 from typing import List, Any, Callable, Union
 from contextlib import contextmanager
 import dearpygui.core as internal_dpg
+from dearpygui.core import mvBuffer
 
 ########################################################################################################################
 # User API Index
@@ -4507,7 +4508,7 @@ def add_stair_series(x : List[float], y : List[float], *, label: str =None, id: 
 
         return internal_dpg.add_stair_series(x, y, label=label, id=id, parent=parent, before=before, source=source, show=show, contribute_to_bounds=contribute_to_bounds)
 
-def add_static_texture(width : int, height : int, default_value : List[float], *, label: str =None, id: int =0, file: str =&#39;&#39;, parent: int =internal_dpg.mvReservedUUID_2) -&gt; int:
+def add_static_texture(width : int, height : int, default_value : List[float], *, label: str =None, id: int =0, parent: int =internal_dpg.mvReservedUUID_2) -&gt; int:
         &#34;&#34;&#34;
         Undocumented function
         Args:
@@ -4516,13 +4517,12 @@ def add_static_texture(width : int, height : int, default_value : List[float], *
                 default_value (List[float]): 
                 **label (str): Overrides &#39;name&#39; as label.
                 **id (int): Unique id used to programmatically refer to the item.If label is unused this will be the label.
-                **file (str): 
                 **parent (int): Parent to add this item to. (runtime adding)
         Returns:
                 int
         &#34;&#34;&#34;
 
-        return internal_dpg.add_static_texture(width, height, default_value, label=label, id=id, file=file, parent=parent)
+        return internal_dpg.add_static_texture(width, height, default_value, label=label, id=id, parent=parent)
 
 def add_stem_series(x : List[float], y : List[float], *, label: str =None, id: int =0, indent: int =-1, parent: int =0, before: int =0, source: int =0, show: bool =True, contribute_to_bounds: bool =True) -&gt; int:
         &#34;&#34;&#34;
@@ -5048,7 +5048,7 @@ def add_window(*, label: str =None, id: int =0, width: int =0, height: int =0, i
 
 def cleanup_dearpygui() -&gt; None:
         &#34;&#34;&#34;
-        Undocumented
+        Cleans up dearpygui.
         Args:
         Returns:
                 None
@@ -5483,7 +5483,7 @@ def get_axis_limits(axis : int) -&gt; List[float]:
 
 def get_dearpygui_version() -&gt; str:
         &#34;&#34;&#34;
-        Undocumented
+        Returns the dearpygui version.
         Args:
         Returns:
                 str
@@ -5493,7 +5493,7 @@ def get_dearpygui_version() -&gt; str:
 
 def get_delta_time() -&gt; float:
         &#34;&#34;&#34;
-        Undocumented
+        Returns time since last frame.
         Args:
         Returns:
                 float
@@ -5652,7 +5652,7 @@ def get_selected_nodes(node_editor : int) -&gt; List[int]:
 
 def get_total_time() -&gt; float:
         &#34;&#34;&#34;
-        Undocumented
+        Returns total time since Dear PyGui has started.
         Args:
         Returns:
                 float
@@ -5749,7 +5749,7 @@ def get_y_scroll_max(item : int) -&gt; float:
 
 def is_dearpygui_running() -&gt; bool:
         &#34;&#34;&#34;
-        Undocumented
+        Checks if dearpygui is running.
         Args:
         Returns:
                 bool
@@ -5897,9 +5897,20 @@ def last_root() -&gt; int:
 
         return internal_dpg.last_root()
 
+def load_image(file : str) -&gt; Any:
+        &#34;&#34;&#34;
+        Loads an image. Returns width, height, channels, mvBuffer
+        Args:
+                file (str): 
+        Returns:
+                Any
+        &#34;&#34;&#34;
+
+        return internal_dpg.load_image(file)
+
 def lock_mutex() -&gt; None:
         &#34;&#34;&#34;
-        Undocumented
+        Locks mutex
         Args:
         Returns:
                 None
@@ -5985,7 +5996,7 @@ def push_container_stack(item : int) -&gt; bool:
 
 def render_dearpygui_frame() -&gt; None:
         &#34;&#34;&#34;
-        Undocumented
+        Renders a dearpygui frame.
         Args:
         Returns:
                 None
@@ -6242,7 +6253,7 @@ def set_y_scroll(item : int, value : float) -&gt; None:
 
 def setup_dearpygui(*, viewport: str =&#39;&#39;) -&gt; None:
         &#34;&#34;&#34;
-        Undocumented
+        Sets up dearpygui
         Args:
                 **viewport (str): 
         Returns:
@@ -6308,7 +6319,7 @@ def stage_items(items : List[int]) -&gt; None:
 
 def stop_dearpygui() -&gt; None:
         &#34;&#34;&#34;
-        Undocumented
+        Stops dearpygui.
         Args:
         Returns:
                 None
@@ -6328,7 +6339,7 @@ def top_container_stack() -&gt; int:
 
 def unlock_mutex() -&gt; None:
         &#34;&#34;&#34;
-        Undocumented
+        Unlocks mutex
         Args:
         Returns:
                 None
@@ -14037,7 +14048,7 @@ mvReservedUUID_9=internal_dpg.mvReservedUUID_9</code></pre>
 </details>
 </dd>
 <dt id="dearpygui.dearpygui.add_static_texture"><code class="name flex">
-<span>def <span class="ident">add_static_texture</span></span>(<span>width: int, height: int, default_value: List[float], *, label: str = None, id: int = 0, file: str = '', parent: int = 12) ‑> int</span>
+<span>def <span class="ident">add_static_texture</span></span>(<span>width: int, height: int, default_value: List[float], *, label: str = None, id: int = 0, parent: int = 12) ‑> int</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Undocumented function</p>
@@ -14053,8 +14064,6 @@ mvReservedUUID_9=internal_dpg.mvReservedUUID_9</code></pre>
 <dd>Overrides 'name' as label.</dd>
 <dt><strong><code>**id</code></strong> :&ensp;<code>int</code></dt>
 <dd>Unique id used to programmatically refer to the item.If label is unused this will be the label.</dd>
-<dt><strong><code>**file</code></strong> :&ensp;<code>str</code></dt>
-<dd>&nbsp;</dd>
 <dt><strong><code>**parent</code></strong> :&ensp;<code>int</code></dt>
 <dd>Parent to add this item to. (runtime adding)</dd>
 </dl>
@@ -14064,7 +14073,7 @@ mvReservedUUID_9=internal_dpg.mvReservedUUID_9</code></pre>
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def add_static_texture(width : int, height : int, default_value : List[float], *, label: str =None, id: int =0, file: str =&#39;&#39;, parent: int =internal_dpg.mvReservedUUID_2) -&gt; int:
+<pre><code class="python">def add_static_texture(width : int, height : int, default_value : List[float], *, label: str =None, id: int =0, parent: int =internal_dpg.mvReservedUUID_2) -&gt; int:
         &#34;&#34;&#34;
         Undocumented function
         Args:
@@ -14073,13 +14082,12 @@ mvReservedUUID_9=internal_dpg.mvReservedUUID_9</code></pre>
                 default_value (List[float]): 
                 **label (str): Overrides &#39;name&#39; as label.
                 **id (int): Unique id used to programmatically refer to the item.If label is unused this will be the label.
-                **file (str): 
                 **parent (int): Parent to add this item to. (runtime adding)
         Returns:
                 int
         &#34;&#34;&#34;
 
-        return internal_dpg.add_static_texture(width, height, default_value, label=label, id=id, file=file, parent=parent)</code></pre>
+        return internal_dpg.add_static_texture(width, height, default_value, label=label, id=id, parent=parent)</code></pre>
 </details>
 </dd>
 <dt id="dearpygui.dearpygui.add_stem_series"><code class="name flex">
@@ -15628,7 +15636,7 @@ def child(*, label: str =None, id: int =0, width: int =0, height: int =0, indent
 <span>def <span class="ident">cleanup_dearpygui</span></span>(<span>) ‑> NoneType</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Undocumented
+<div class="desc"><p>Cleans up dearpygui.
 Args:</p>
 <h2 id="returns">Returns</h2>
 <p>None</p></div>
@@ -15638,7 +15646,7 @@ Args:</p>
 </summary>
 <pre><code class="python">def cleanup_dearpygui() -&gt; None:
         &#34;&#34;&#34;
-        Undocumented
+        Cleans up dearpygui.
         Args:
         Returns:
                 None
@@ -17417,7 +17425,7 @@ Args:</p>
 <span>def <span class="ident">get_dearpygui_version</span></span>(<span>) ‑> str</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Undocumented
+<div class="desc"><p>Returns the dearpygui version.
 Args:</p>
 <h2 id="returns">Returns</h2>
 <p>str</p></div>
@@ -17427,7 +17435,7 @@ Args:</p>
 </summary>
 <pre><code class="python">def get_dearpygui_version() -&gt; str:
         &#34;&#34;&#34;
-        Undocumented
+        Returns the dearpygui version.
         Args:
         Returns:
                 str
@@ -17440,7 +17448,7 @@ Args:</p>
 <span>def <span class="ident">get_delta_time</span></span>(<span>) ‑> float</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Undocumented
+<div class="desc"><p>Returns time since last frame.
 Args:</p>
 <h2 id="returns">Returns</h2>
 <p>float</p></div>
@@ -17450,7 +17458,7 @@ Args:</p>
 </summary>
 <pre><code class="python">def get_delta_time() -&gt; float:
         &#34;&#34;&#34;
-        Undocumented
+        Returns time since last frame.
         Args:
         Returns:
                 float
@@ -18272,7 +18280,7 @@ Args:</p>
 <span>def <span class="ident">get_total_time</span></span>(<span>) ‑> float</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Undocumented
+<div class="desc"><p>Returns total time since Dear PyGui has started.
 Args:</p>
 <h2 id="returns">Returns</h2>
 <p>float</p></div>
@@ -18282,7 +18290,7 @@ Args:</p>
 </summary>
 <pre><code class="python">def get_total_time() -&gt; float:
         &#34;&#34;&#34;
-        Undocumented
+        Returns total time since Dear PyGui has started.
         Args:
         Returns:
                 float
@@ -18910,7 +18918,7 @@ def handler_registry(*, label: str =None, id: int =0, show: bool =True) -&gt; in
 <span>def <span class="ident">is_dearpygui_running</span></span>(<span>) ‑> bool</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Undocumented
+<div class="desc"><p>Checks if dearpygui is running.
 Args:</p>
 <h2 id="returns">Returns</h2>
 <p>bool</p></div>
@@ -18920,7 +18928,7 @@ Args:</p>
 </summary>
 <pre><code class="python">def is_dearpygui_running() -&gt; bool:
         &#34;&#34;&#34;
-        Undocumented
+        Checks if dearpygui is running.
         Args:
         Returns:
                 bool
@@ -19736,11 +19744,39 @@ Args:</p>
         return internal_dpg.last_root()</code></pre>
 </details>
 </dd>
+<dt id="dearpygui.dearpygui.load_image"><code class="name flex">
+<span>def <span class="ident">load_image</span></span>(<span>file: str) ‑> Any</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Loads an image. Returns width, height, channels, mvBuffer</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>file</code></strong> :&ensp;<code>str</code></dt>
+<dd>&nbsp;</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>Any</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def load_image(file : str) -&gt; Any:
+        &#34;&#34;&#34;
+        Loads an image. Returns width, height, channels, mvBuffer
+        Args:
+                file (str): 
+        Returns:
+                Any
+        &#34;&#34;&#34;
+
+        return internal_dpg.load_image(file)</code></pre>
+</details>
+</dd>
 <dt id="dearpygui.dearpygui.lock_mutex"><code class="name flex">
 <span>def <span class="ident">lock_mutex</span></span>(<span>) ‑> NoneType</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Undocumented
+<div class="desc"><p>Locks mutex
 Args:</p>
 <h2 id="returns">Returns</h2>
 <p>None</p></div>
@@ -19750,7 +19786,7 @@ Args:</p>
 </summary>
 <pre><code class="python">def lock_mutex() -&gt; None:
         &#34;&#34;&#34;
-        Undocumented
+        Locks mutex
         Args:
         Returns:
                 None
@@ -20444,7 +20480,7 @@ def popup(parent: int, mousebutton: int = internal_dpg.mvMouseButton_Right, moda
 <span>def <span class="ident">render_dearpygui_frame</span></span>(<span>) ‑> NoneType</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Undocumented
+<div class="desc"><p>Renders a dearpygui frame.
 Args:</p>
 <h2 id="returns">Returns</h2>
 <p>None</p></div>
@@ -20454,7 +20490,7 @@ Args:</p>
 </summary>
 <pre><code class="python">def render_dearpygui_frame() -&gt; None:
         &#34;&#34;&#34;
-        Undocumented
+        Renders a dearpygui frame.
         Args:
         Returns:
                 None
@@ -21855,7 +21891,7 @@ Args:</p>
 <span>def <span class="ident">setup_dearpygui</span></span>(<span>*, viewport: str = '') ‑> NoneType</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Undocumented</p>
+<div class="desc"><p>Sets up dearpygui</p>
 <h2 id="args">Args</h2>
 <dl>
 <dt><strong><code>**viewport</code></strong> :&ensp;<code>str</code></dt>
@@ -21869,7 +21905,7 @@ Args:</p>
 </summary>
 <pre><code class="python">def setup_dearpygui(*, viewport: str =&#39;&#39;) -&gt; None:
         &#34;&#34;&#34;
-        Undocumented
+        Sets up dearpygui
         Args:
                 **viewport (str): 
         Returns:
@@ -22288,7 +22324,7 @@ def staging_container(*, label: str =None, id: int =0) -&gt; int:
 <span>def <span class="ident">stop_dearpygui</span></span>(<span>) ‑> NoneType</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Undocumented
+<div class="desc"><p>Stops dearpygui.
 Args:</p>
 <h2 id="returns">Returns</h2>
 <p>None</p></div>
@@ -22298,7 +22334,7 @@ Args:</p>
 </summary>
 <pre><code class="python">def stop_dearpygui() -&gt; None:
         &#34;&#34;&#34;
-        Undocumented
+        Stops dearpygui.
         Args:
         Returns:
                 None
@@ -22935,7 +22971,7 @@ def tree_node(*, label: str =None, id: int =0, indent: int =-1, parent: int =0, 
 <span>def <span class="ident">unlock_mutex</span></span>(<span>) ‑> NoneType</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Undocumented
+<div class="desc"><p>Unlocks mutex
 Args:</p>
 <h2 id="returns">Returns</h2>
 <p>None</p></div>
@@ -22945,7 +22981,7 @@ Args:</p>
 </summary>
 <pre><code class="python">def unlock_mutex() -&gt; None:
         &#34;&#34;&#34;
-        Undocumented
+        Unlocks mutex
         Args:
         Returns:
                 None
@@ -23211,6 +23247,16 @@ def window(*, label: str =None, id: int =0, width: int =0, height: int =0, inden
 </dl>
 </section>
 <section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="dearpygui.dearpygui.mvBuffer"><code class="flex name class">
+<span>class <span class="ident">mvBuffer</span></span>
+<span>(</span><span>*args, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>mvBuffer object</p></div>
+</dd>
+</dl>
 </section>
 </article>
 <nav id="sidebar">
@@ -23503,6 +23549,7 @@ def window(*, label: str =None, id: int =0, width: int =0, height: int =0, inden
 <li><code><a title="dearpygui.dearpygui.last_container" href="#dearpygui.dearpygui.last_container">last_container</a></code></li>
 <li><code><a title="dearpygui.dearpygui.last_item" href="#dearpygui.dearpygui.last_item">last_item</a></code></li>
 <li><code><a title="dearpygui.dearpygui.last_root" href="#dearpygui.dearpygui.last_root">last_root</a></code></li>
+<li><code><a title="dearpygui.dearpygui.load_image" href="#dearpygui.dearpygui.load_image">load_image</a></code></li>
 <li><code><a title="dearpygui.dearpygui.lock_mutex" href="#dearpygui.dearpygui.lock_mutex">lock_mutex</a></code></li>
 <li><code><a title="dearpygui.dearpygui.maximize_viewport" href="#dearpygui.dearpygui.maximize_viewport">maximize_viewport</a></code></li>
 <li><code><a title="dearpygui.dearpygui.menu" href="#dearpygui.dearpygui.menu">menu</a></code></li>
@@ -23607,6 +23654,13 @@ def window(*, label: str =None, id: int =0, width: int =0, height: int =0, inden
 <li><code><a title="dearpygui.dearpygui.value_registry" href="#dearpygui.dearpygui.value_registry">value_registry</a></code></li>
 <li><code><a title="dearpygui.dearpygui.viewport_drawlist" href="#dearpygui.dearpygui.viewport_drawlist">viewport_drawlist</a></code></li>
 <li><code><a title="dearpygui.dearpygui.window" href="#dearpygui.dearpygui.window">window</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="dearpygui.dearpygui.mvBuffer" href="#dearpygui.dearpygui.mvBuffer">mvBuffer</a></code></h4>
+</li>
 </ul>
 </li>
 </ul>
