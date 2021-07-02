@@ -64,6 +64,8 @@ This item will be displayed before the specified item in the parent.</li>
 Overrides 'id' as value storage key.</li>
 <li>show : bool = True
 Attempt to render widget.</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 <li>
 <p>xbins : int = -1</p>
 </li>
@@ -87,9 +89,6 @@ Attempt to render widget.</li>
 </li>
 <li>
 <p>outliers : bool = True</p>
-</li>
-<li>
-<p>contribute_to_bounds : bool = True</p>
 </li>
 </ul></div>
 </dd>
@@ -126,8 +125,6 @@ Registers a callback.</li>
 Registers a drag callback for drag and drop.</li>
 <li>drop_callback : Callable = None
 Registers a drop callback for drag and drop.</li>
-<li>user_data : Any = None
-User data for callbacks.</li>
 <li>show : bool = True
 Attempt to render widget.</li>
 <li>pos : List[int] = []
@@ -138,6 +135,8 @@ Used by filter widget.</li>
 Scroll tracking</li>
 <li>track_offset : float = 0.5
 0.0f:top, 0.5f:center, 1.0f:bottom</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 <li>
 <p>default_value : List[float] = (0.0, 0.0, 0.0, 0.0)</p>
 </li>
@@ -238,6 +237,8 @@ This item will be displayed before the specified item in the parent.</li>
 Overrides 'id' as value storage key.</li>
 <li>show : bool = True
 Attempt to render widget.</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 <li>
 <p>fill : List[int] = (0, 0, 0, -255)</p>
 </li>
@@ -277,14 +278,13 @@ This item will be displayed before the specified item in the parent.</li>
 Overrides 'id' as value storage key.</li>
 <li>show : bool = True
 Attempt to render widget.</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 <li>
 <p>weight : float = 1.0</p>
 </li>
 <li>
 <p>horizontal : bool = False</p>
-</li>
-<li>
-<p>contribute_to_bounds : bool = True</p>
 </li>
 </ul></div>
 </dd>
@@ -303,6 +303,8 @@ Overrides 'name' as label.</li>
 Unique id used to programmatically refer to the item.If label is unused this will be the label.</li>
 <li>source : int = 0
 Overrides 'id' as value storage key.</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 <li>
 <p>default_value : bool = False</p>
 </li>
@@ -343,8 +345,6 @@ Registers a callback.</li>
 Registers a drag callback for drag and drop.</li>
 <li>drop_callback : Callable = None
 Registers a drop callback for drag and drop.</li>
-<li>user_data : Any = None
-User data for callbacks.</li>
 <li>show : bool = True
 Attempt to render widget.</li>
 <li>enabled : bool = True
@@ -357,6 +357,8 @@ Used by filter widget.</li>
 Scroll tracking</li>
 <li>track_offset : float = 0.5
 0.0f:top, 0.5f:center, 1.0f:bottom</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 <li>small : bool = False
 Small button, useful for embedding in text.</li>
 <li>arrow : bool = False
@@ -405,6 +407,8 @@ This item will be displayed before the specified item in the parent.</li>
 Overrides 'id' as value storage key.</li>
 <li>show : bool = True
 Attempt to render widget.</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 <li>
 <p>bull_color : List[int] = (0, 255, 113, 255)</p>
 </li>
@@ -413,9 +417,6 @@ Attempt to render widget.</li>
 </li>
 <li>
 <p>weight : int = 0.25</p>
-</li>
-<li>
-<p>contribute_to_bounds : bool = True</p>
 </li>
 <li>
 <p>tooltip : bool = True</p>
@@ -447,6 +448,8 @@ Overrides 'name' as label.</li>
 Unique id used to programmatically refer to the item.If label is unused this will be the label.</li>
 <li>parent : int = 0
 Parent to add this item to. (runtime adding)</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 </ul></div>
 </dd>
 <dt id="dearpygui.core.add_checkbox"><code class="name flex">
@@ -478,8 +481,6 @@ Registers a callback.</li>
 Registers a drag callback for drag and drop.</li>
 <li>drop_callback : Callable = None
 Registers a drop callback for drag and drop.</li>
-<li>user_data : Any = None
-User data for callbacks.</li>
 <li>show : bool = True
 Attempt to render widget.</li>
 <li>enabled : bool = True
@@ -492,6 +493,8 @@ Used by filter widget.</li>
 Scroll tracking</li>
 <li>track_offset : float = 0.5
 0.0f:top, 0.5f:center, 1.0f:bottom</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 <li>default_value : bool = False</li>
 </ul></div>
 </dd>
@@ -536,6 +539,8 @@ Delays searching container for specified items until the end of the app. Possibl
 Scroll tracking</li>
 <li>track_offset : float = 0.5
 0.0f:top, 0.5f:center, 1.0f:bottom</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 <li>border : bool = True
 Shows/Hides the border around the sides.</li>
 <li>autosize_x : bool = False
@@ -605,6 +610,8 @@ This item will be displayed before the specified item in the parent.</li>
 Attempt to render widget.</li>
 <li>delay_search : str = False
 Delays searching container for specified items until the end of the app. Possible optimization when a container has many children that are not accessed often.</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 </ul></div>
 </dd>
 <dt id="dearpygui.core.add_collapsing_header"><code class="name flex">
@@ -644,6 +651,8 @@ Delays searching container for specified items until the end of the app. Possibl
 Scroll tracking</li>
 <li>track_offset : float = 0.5
 0.0f:top, 0.5f:center, 1.0f:bottom</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 <li>closable : bool = False
 Adds the ability to hide this widget by pressing the (x) in the top right of widget.</li>
 <li>default_open : bool = False
@@ -694,8 +703,6 @@ Registers a callback.</li>
 Registers a drag callback for drag and drop.</li>
 <li>drop_callback : Callable = None
 Registers a drop callback for drag and drop.</li>
-<li>user_data : Any = None
-User data for callbacks.</li>
 <li>show : bool = True
 Attempt to render widget.</li>
 <li>enabled : bool = True
@@ -708,6 +715,8 @@ Used by filter widget.</li>
 Scroll tracking</li>
 <li>track_offset : float = 0.5
 0.0f:top, 0.5f:center, 1.0f:bottom</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 <li>no_alpha : bool = False
 Ignore Alpha component.</li>
 <li>no_border : bool = False
@@ -754,8 +763,6 @@ Registers a callback.</li>
 Registers a drag callback for drag and drop.</li>
 <li>drop_callback : Callable = None
 Registers a drop callback for drag and drop.</li>
-<li>user_data : Any = None
-User data for callbacks.</li>
 <li>show : bool = True
 Attempt to render widget.</li>
 <li>enabled : bool = True
@@ -768,6 +775,8 @@ Used by filter widget.</li>
 Scroll tracking</li>
 <li>track_offset : float = 0.5
 0.0f:top, 0.5f:center, 1.0f:bottom</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 <li>no_alpha : bool = False
 Disable Alpha component.</li>
 <li>no_picker : bool = False
@@ -834,8 +843,6 @@ Registers a callback.</li>
 Registers a drag callback for drag and drop.</li>
 <li>drop_callback : Callable = None
 Registers a drop callback for drag and drop.</li>
-<li>user_data : Any = None
-User data for callbacks.</li>
 <li>show : bool = True
 Attempt to render widget.</li>
 <li>enabled : bool = True
@@ -848,6 +855,8 @@ Used by filter widget.</li>
 Scroll tracking</li>
 <li>track_offset : float = 0.5
 0.0f:top, 0.5f:center, 1.0f:bottom</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 <li>no_alpha : bool = False
 Ignore Alpha component.</li>
 <li>no_side_preview : bool = False
@@ -893,6 +902,8 @@ Overrides 'name' as label.</li>
 Unique id used to programmatically refer to the item.If label is unused this will be the label.</li>
 <li>source : int = 0
 Overrides 'id' as value storage key.</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 <li>
 <p>default_value : List[float] = (0.0, 0.0, 0.0, 0.0)</p>
 </li>
@@ -931,6 +942,8 @@ Overrides 'id' as value storage key.</li>
 Attempt to render widget.</li>
 <li>pos : List[int] = []
 Places the item relative to window coordinates, [0,0] is top left.</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 <li>
 <p>default_value : int = 0</p>
 </li>
@@ -979,8 +992,6 @@ Registers a callback.</li>
 Registers a drag callback for drag and drop.</li>
 <li>drop_callback : Callable = None
 Registers a drop callback for drag and drop.</li>
-<li>user_data : Any = None
-User data for callbacks.</li>
 <li>show : bool = True
 Attempt to render widget.</li>
 <li>enabled : bool = True
@@ -993,6 +1004,8 @@ Used by filter widget.</li>
 Scroll tracking</li>
 <li>track_offset : float = 0.5
 0.0f:top, 0.5f:center, 1.0f:bottom</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 <li>
 <p>default_value : str = ''</p>
 </li>
@@ -1035,8 +1048,6 @@ Registers a callback.</li>
 Registers a drag callback for drag and drop.</li>
 <li>drop_callback : Callable = None
 Registers a drop callback for drag and drop.</li>
-<li>user_data : Any = None
-User data for callbacks.</li>
 <li>show : bool = True
 Attempt to render widget.</li>
 <li>pos : List[int] = []
@@ -1047,6 +1058,8 @@ Used by filter widget.</li>
 Scroll tracking</li>
 <li>track_offset : float = 0.5
 0.0f:top, 0.5f:center, 1.0f:bottom</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 <li>
 <p>default_value : dict = {'month_day': 14, 'year':20, 'month':5}</p>
 </li>
@@ -1119,6 +1132,8 @@ Overrides 'name' as label.</li>
 Unique id used to programmatically refer to the item.If label is unused this will be the label.</li>
 <li>source : int = 0
 Overrides 'id' as value storage key.</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 <li>
 <p>default_value : List[float] = (0.0, 0.0, 0.0, 0.0)</p>
 </li>
@@ -1143,6 +1158,8 @@ Overrides 'name' as label.</li>
 Unique id used to programmatically refer to the item.If label is unused this will be the label.</li>
 <li>source : int = 0
 Overrides 'id' as value storage key.</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 <li>
 <p>default_value : float = 0.0</p>
 </li>
@@ -1183,8 +1200,6 @@ Registers a callback.</li>
 Registers a drag callback for drag and drop.</li>
 <li>drop_callback : Callable = None
 Registers a drop callback for drag and drop.</li>
-<li>user_data : Any = None
-User data for callbacks.</li>
 <li>show : bool = True
 Attempt to render widget.</li>
 <li>enabled : bool = True
@@ -1197,6 +1212,8 @@ Used by filter widget.</li>
 Scroll tracking</li>
 <li>track_offset : float = 0.5
 0.0f:top, 0.5f:center, 1.0f:bottom</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 <li>
 <p>default_value : float = 0.0</p>
 </li>
@@ -1249,8 +1266,6 @@ Registers a callback.</li>
 Registers a drag callback for drag and drop.</li>
 <li>drop_callback : Callable = None
 Registers a drop callback for drag and drop.</li>
-<li>user_data : Any = None
-User data for callbacks.</li>
 <li>show : bool = True
 Attempt to render widget.</li>
 <li>enabled : bool = True
@@ -1263,6 +1278,8 @@ Used by filter widget.</li>
 Scroll tracking</li>
 <li>track_offset : float = 0.5
 0.0f:top, 0.5f:center, 1.0f:bottom</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 <li>
 <p>default_value : List[float] = (0.0, 0.0, 0.0, 0.0)</p>
 </li>
@@ -1319,8 +1336,6 @@ Registers a callback.</li>
 Registers a drag callback for drag and drop.</li>
 <li>drop_callback : Callable = None
 Registers a drop callback for drag and drop.</li>
-<li>user_data : Any = None
-User data for callbacks.</li>
 <li>show : bool = True
 Attempt to render widget.</li>
 <li>enabled : bool = True
@@ -1333,6 +1348,8 @@ Used by filter widget.</li>
 Scroll tracking</li>
 <li>track_offset : float = 0.5
 0.0f:top, 0.5f:center, 1.0f:bottom</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 <li>
 <p>default_value : int = 0</p>
 </li>
@@ -1385,8 +1402,6 @@ Registers a callback.</li>
 Registers a drag callback for drag and drop.</li>
 <li>drop_callback : Callable = None
 Registers a drop callback for drag and drop.</li>
-<li>user_data : Any = None
-User data for callbacks.</li>
 <li>show : bool = True
 Attempt to render widget.</li>
 <li>enabled : bool = True
@@ -1399,6 +1414,8 @@ Used by filter widget.</li>
 Scroll tracking</li>
 <li>track_offset : float = 0.5
 0.0f:top, 0.5f:center, 1.0f:bottom</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 <li>
 <p>default_value : List[int] = (0, 0, 0, 0)</p>
 </li>
@@ -1445,10 +1462,10 @@ This item will be displayed before the specified item in the parent.</li>
 Overrides 'id' as value storage key.</li>
 <li>callback : Callable = None
 Registers a callback.</li>
-<li>user_data : Any = None
-User data for callbacks.</li>
 <li>show : bool = True
 Attempt to render widget.</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 <li>
 <p>default_value : List[float] = 0.0</p>
 </li>
@@ -1483,6 +1500,8 @@ Unique id used to programmatically refer to the item.If label is unused this wil
 Parent to add this item to. (runtime adding)</li>
 <li>show : bool = True
 Attempt to render widget.</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 <li>drag_data : Any = None
 Drag data</li>
 <li>payload_type : str = '$$DPG_PAYLOAD'</li>
@@ -1509,10 +1528,10 @@ This item will be displayed before the specified item in the parent.</li>
 Overrides 'id' as value storage key.</li>
 <li>callback : Callable = None
 Registers a callback.</li>
-<li>user_data : Any = None
-User data for callbacks.</li>
 <li>show : bool = True
 Attempt to render widget.</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 <li>
 <p>default_value : List[float] = (0.0, 0.0)</p>
 </li>
@@ -1546,6 +1565,8 @@ Parent to add this item to. (runtime adding)</li>
 This item will be displayed before the specified item in the parent.</li>
 <li>show : bool = True
 Attempt to render widget.</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 </ul></div>
 </dd>
 <dt id="dearpygui.core.add_drawlist"><code class="name flex">
@@ -1577,8 +1598,6 @@ Registers a callback.</li>
 Registers a drag callback for drag and drop.</li>
 <li>drop_callback : Callable = None
 Registers a drop callback for drag and drop.</li>
-<li>user_data : Any = None
-User data for callbacks.</li>
 <li>show : bool = True
 Attempt to render widget.</li>
 <li>pos : List[int] = []
@@ -1591,6 +1610,8 @@ Delays searching container for specified items until the end of the app. Possibl
 Scroll tracking</li>
 <li>track_offset : float = 0.5
 0.0f:top, 0.5f:center, 1.0f:bottom</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 </ul></div>
 </dd>
 <dt id="dearpygui.core.add_dummy"><code class="name flex">
@@ -1620,6 +1641,8 @@ This item will be displayed before the specified item in the parent.</li>
 Attempt to render widget.</li>
 <li>pos : List[int] = []
 Places the item relative to window coordinates, [0,0] is top left.</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 </ul></div>
 </dd>
 <dt id="dearpygui.core.add_dynamic_texture"><code class="name flex">
@@ -1648,6 +1671,8 @@ Places the item relative to window coordinates, [0,0] is top left.</li>
 Overrides 'name' as label.</li>
 <li>id : int = 0
 Unique id used to programmatically refer to the item.If label is unused this will be the label.</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 <li>parent : int = internal_dpg.mvReservedUUID_2
 Parent to add this item to. (runtime adding)</li>
 </ul></div>
@@ -1713,6 +1738,8 @@ This item will be displayed before the specified item in the parent.</li>
 Overrides 'id' as value storage key.</li>
 <li>show : bool = True
 Attempt to render widget.</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 <li>
 <p>contribute_to_bounds : bool = True</p>
 </li>
@@ -1740,10 +1767,10 @@ Width of the item.</li>
 Height of the item.</li>
 <li>callback : Callable = None
 Registers a callback.</li>
-<li>user_data : Any = None
-User data for callbacks.</li>
 <li>show : bool = True
 Attempt to render widget.</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 <li>default_path : str = ''
 Path that the file dialog will default to when opened.</li>
 <li>default_filename : str = '.'
@@ -1783,6 +1810,8 @@ Height of the item.</li>
 Parent to add this item to. (runtime adding)</li>
 <li>before : int = 0
 This item will be displayed before the specified item in the parent.</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 <li>custom_text : str = ''
 Replaces the displayed text in the drop down for this extension.</li>
 <li>color : List[float] = (-255, 0, 0, 255)</li>
@@ -1813,6 +1842,8 @@ This item will be displayed before the specified item in the parent.</li>
 Attempt to render widget.</li>
 <li>delay_search : str = False
 Delays searching container for specified items until the end of the app. Possible optimization when a container has many children that are not accessed often.</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 </ul></div>
 </dd>
 <dt id="dearpygui.core.add_float4_value"><code class="name flex">
@@ -1830,6 +1861,8 @@ Overrides 'name' as label.</li>
 Unique id used to programmatically refer to the item.If label is unused this will be the label.</li>
 <li>source : int = 0
 Overrides 'id' as value storage key.</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 <li>
 <p>default_value : List[float] = (0.0, 0.0, 0.0, 0.0)</p>
 </li>
@@ -1854,6 +1887,8 @@ Overrides 'name' as label.</li>
 Unique id used to programmatically refer to the item.If label is unused this will be the label.</li>
 <li>source : int = 0
 Overrides 'id' as value storage key.</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 <li>
 <p>default_value : float = 0.0</p>
 </li>
@@ -1878,6 +1913,8 @@ Overrides 'name' as label.</li>
 Unique id used to programmatically refer to the item.If label is unused this will be the label.</li>
 <li>source : int = 0
 Overrides 'id' as value storage key.</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 <li>
 <p>default_value : List[float] = ()</p>
 </li>
@@ -1934,6 +1971,8 @@ User data for callbacks.</li>
 Overrides 'name' as label.</li>
 <li>id : int = 0
 Unique id used to programmatically refer to the item.If label is unused this will be the label.</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 <li>
 <p>default_font : bool = False</p>
 </li>
@@ -1963,6 +2002,8 @@ Overrides 'name' as label.</li>
 Unique id used to programmatically refer to the item.If label is unused this will be the label.</li>
 <li>parent : int = 0
 Parent to add this item to. (runtime adding)</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 </ul></div>
 </dd>
 <dt id="dearpygui.core.add_font_range"><code class="name flex">
@@ -1990,6 +2031,8 @@ Overrides 'name' as label.</li>
 Unique id used to programmatically refer to the item.If label is unused this will be the label.</li>
 <li>parent : int = 0
 Parent to add this item to. (runtime adding)</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 </ul></div>
 </dd>
 <dt id="dearpygui.core.add_font_range_hint"><code class="name flex">
@@ -2012,6 +2055,8 @@ Overrides 'name' as label.</li>
 Unique id used to programmatically refer to the item.If label is unused this will be the label.</li>
 <li>parent : int = 0
 Parent to add this item to. (runtime adding)</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 </ul></div>
 </dd>
 <dt id="dearpygui.core.add_font_registry"><code class="name flex">
@@ -2029,6 +2074,8 @@ Overrides 'name' as label.</li>
 Unique id used to programmatically refer to the item.If label is unused this will be the label.</li>
 <li>show : bool = True
 Attempt to render widget.</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 </ul></div>
 </dd>
 <dt id="dearpygui.core.add_group"><code class="name flex">
@@ -2070,6 +2117,8 @@ Delays searching container for specified items until the end of the app. Possibl
 Scroll tracking</li>
 <li>track_offset : float = 0.5
 0.0f:top, 0.5f:center, 1.0f:bottom</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 <li>horizontal : bool = False
 Forces child widgets to be added in a horizontal layout.</li>
 <li>horizontal_spacing : float = -1
@@ -2091,6 +2140,8 @@ Overrides 'name' as label.</li>
 Unique id used to programmatically refer to the item.If label is unused this will be the label.</li>
 <li>show : bool = True
 Attempt to render widget.</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 </ul></div>
 </dd>
 <dt id="dearpygui.core.add_heat_series"><code class="name flex">
@@ -2127,6 +2178,8 @@ This item will be displayed before the specified item in the parent.</li>
 Overrides 'id' as value storage key.</li>
 <li>show : bool = True
 Attempt to render widget.</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 <li>scale_min : float = 0.0
 Sets the color scale min. Typically paired with the color scale widget scale_min.</li>
 <li>scale_max : float = 1.0
@@ -2171,6 +2224,8 @@ This item will be displayed before the specified item in the parent.</li>
 Overrides 'id' as value storage key.</li>
 <li>show : bool = True
 Attempt to render widget.</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 <li>
 <p>bins : int = -1</p>
 </li>
@@ -2223,6 +2278,8 @@ This item will be displayed before the specified item in the parent.</li>
 Overrides 'id' as value storage key.</li>
 <li>show : bool = True
 Attempt to render widget.</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 <li>contribute_to_bounds : bool = True</li>
 </ul></div>
 </dd>
@@ -2296,6 +2353,8 @@ Used by filter widget.</li>
 Scroll tracking</li>
 <li>track_offset : float = 0.5
 0.0f:top, 0.5f:center, 1.0f:bottom</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 <li>tint_color : List[float] = (255, 255, 255, 255)
 Applies a color tint to the entire texture.</li>
 <li>border_color : List[float] = (0, 0, 0, 0)
@@ -2344,8 +2403,6 @@ Registers a callback.</li>
 Registers a drag callback for drag and drop.</li>
 <li>drop_callback : Callable = None
 Registers a drop callback for drag and drop.</li>
-<li>user_data : Any = None
-User data for callbacks.</li>
 <li>show : bool = True
 Attempt to render widget.</li>
 <li>enabled : bool = True
@@ -2358,6 +2415,8 @@ Used by filter widget.</li>
 Scroll tracking</li>
 <li>track_offset : float = 0.5
 0.0f:top, 0.5f:center, 1.0f:bottom</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 <li>
 <p>frame_padding : int = -1</p>
 </li>
@@ -2407,16 +2466,13 @@ This item will be displayed before the specified item in the parent.</li>
 Overrides 'id' as value storage key.</li>
 <li>show : bool = True
 Attempt to render widget.</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 <li>uv_min : List[float] = (0.0, 0.0)
 normalized texture coordinates</li>
 <li>uv_max : List[float] = (1.0, 1.0)
 normalized texture coordinates</li>
-<li>
-<p>tint_color : List[int] = (255, 255, 255, 255)</p>
-</li>
-<li>
-<p>contribute_to_bounds : bool = True</p>
-</li>
+<li>tint_color : List[int] = (255, 255, 255, 255)</li>
 </ul></div>
 </dd>
 <dt id="dearpygui.core.add_input_float"><code class="name flex">
@@ -2450,8 +2506,6 @@ Registers a callback.</li>
 Registers a drag callback for drag and drop.</li>
 <li>drop_callback : Callable = None
 Registers a drop callback for drag and drop.</li>
-<li>user_data : Any = None
-User data for callbacks.</li>
 <li>show : bool = True
 Attempt to render widget.</li>
 <li>enabled : bool = True
@@ -2464,6 +2518,8 @@ Used by filter widget.</li>
 Scroll tracking</li>
 <li>track_offset : float = 0.5
 0.0f:top, 0.5f:center, 1.0f:bottom</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 <li>
 <p>default_value : float = 0.0</p>
 </li>
@@ -2521,8 +2577,6 @@ Registers a callback.</li>
 Registers a drag callback for drag and drop.</li>
 <li>drop_callback : Callable = None
 Registers a drop callback for drag and drop.</li>
-<li>user_data : Any = None
-User data for callbacks.</li>
 <li>show : bool = True
 Attempt to render widget.</li>
 <li>enabled : bool = True
@@ -2535,6 +2589,8 @@ Used by filter widget.</li>
 Scroll tracking</li>
 <li>track_offset : float = 0.5
 0.0f:top, 0.5f:center, 1.0f:bottom</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 <li>
 <p>default_value : List[float] = (0.0, 0.0, 0.0, 0.0)</p>
 </li>
@@ -2590,8 +2646,6 @@ Registers a callback.</li>
 Registers a drag callback for drag and drop.</li>
 <li>drop_callback : Callable = None
 Registers a drop callback for drag and drop.</li>
-<li>user_data : Any = None
-User data for callbacks.</li>
 <li>show : bool = True
 Attempt to render widget.</li>
 <li>enabled : bool = True
@@ -2604,6 +2658,8 @@ Used by filter widget.</li>
 Scroll tracking</li>
 <li>track_offset : float = 0.5
 0.0f:top, 0.5f:center, 1.0f:bottom</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 <li>
 <p>default_value : List[int] = 0</p>
 </li>
@@ -2658,8 +2714,6 @@ Registers a callback.</li>
 Registers a drag callback for drag and drop.</li>
 <li>drop_callback : Callable = None
 Registers a drop callback for drag and drop.</li>
-<li>user_data : Any = None
-User data for callbacks.</li>
 <li>show : bool = True
 Attempt to render widget.</li>
 <li>enabled : bool = True
@@ -2672,6 +2726,8 @@ Used by filter widget.</li>
 Scroll tracking</li>
 <li>track_offset : float = 0.5
 0.0f:top, 0.5f:center, 1.0f:bottom</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 <li>
 <p>default_value : List[int] = (0, 0, 0, 0)</p>
 </li>
@@ -2726,8 +2782,6 @@ Registers a callback.</li>
 Registers a drag callback for drag and drop.</li>
 <li>drop_callback : Callable = None
 Registers a drop callback for drag and drop.</li>
-<li>user_data : Any = None
-User data for callbacks.</li>
 <li>show : bool = True
 Attempt to render widget.</li>
 <li>enabled : bool = True
@@ -2740,6 +2794,8 @@ Used by filter widget.</li>
 Scroll tracking</li>
 <li>track_offset : float = 0.5
 0.0f:top, 0.5f:center, 1.0f:bottom</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 <li>
 <p>default_value : str = ''</p>
 </li>
@@ -2784,6 +2840,8 @@ Overrides 'name' as label.</li>
 Unique id used to programmatically refer to the item.If label is unused this will be the label.</li>
 <li>source : int = 0
 Overrides 'id' as value storage key.</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 <li>
 <p>default_value : List[int] = (0, 0, 0, 0)</p>
 </li>
@@ -2808,6 +2866,8 @@ Overrides 'name' as label.</li>
 Unique id used to programmatically refer to the item.If label is unused this will be the label.</li>
 <li>source : int = 0
 Overrides 'id' as value storage key.</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 <li>
 <p>default_value : int = 0</p>
 </li>
@@ -2838,10 +2898,10 @@ Overrides 'name' as label.</li>
 Unique id used to programmatically refer to the item.If label is unused this will be the label.</li>
 <li>callback : Callable = None
 Registers a callback.</li>
-<li>user_data : Any = None
-User data for callbacks.</li>
 <li>show : bool = True
 Attempt to render widget.</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 <li>parent : int = internal_dpg.mvReservedUUID_1
 Parent to add this item to. (runtime adding)</li>
 </ul></div>
@@ -2867,10 +2927,10 @@ Overrides 'name' as label.</li>
 Unique id used to programmatically refer to the item.If label is unused this will be the label.</li>
 <li>callback : Callable = None
 Registers a callback.</li>
-<li>user_data : Any = None
-User data for callbacks.</li>
 <li>show : bool = True
 Attempt to render widget.</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 <li>parent : int = internal_dpg.mvReservedUUID_1
 Parent to add this item to. (runtime adding)</li>
 </ul></div>
@@ -2896,10 +2956,10 @@ Overrides 'name' as label.</li>
 Unique id used to programmatically refer to the item.If label is unused this will be the label.</li>
 <li>callback : Callable = None
 Registers a callback.</li>
-<li>user_data : Any = None
-User data for callbacks.</li>
 <li>show : bool = True
 Attempt to render widget.</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 <li>parent : int = internal_dpg.mvReservedUUID_1
 Parent to add this item to. (runtime adding)</li>
 </ul></div>
@@ -2937,8 +2997,6 @@ Registers a callback.</li>
 Registers a drag callback for drag and drop.</li>
 <li>drop_callback : Callable = None
 Registers a drop callback for drag and drop.</li>
-<li>user_data : Any = None
-User data for callbacks.</li>
 <li>show : bool = True
 Attempt to render widget.</li>
 <li>pos : List[int] = []
@@ -2949,6 +3007,8 @@ Used by filter widget.</li>
 Scroll tracking</li>
 <li>track_offset : float = 0.5
 0.0f:top, 0.5f:center, 1.0f:bottom</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 <li>
 <p>default_value : float = 0.0</p>
 </li>
@@ -2991,7 +3051,8 @@ This item will be displayed before the specified item in the parent.</li>
 Overrides 'id' as value storage key.</li>
 <li>show : bool = True
 Attempt to render widget.</li>
-<li>contribute_to_bounds : bool = True</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 </ul></div>
 </dd>
 <dt id="dearpygui.core.add_listbox"><code class="name flex">
@@ -3031,8 +3092,6 @@ Registers a callback.</li>
 Registers a drag callback for drag and drop.</li>
 <li>drop_callback : Callable = None
 Registers a drop callback for drag and drop.</li>
-<li>user_data : Any = None
-User data for callbacks.</li>
 <li>show : bool = True
 Attempt to render widget.</li>
 <li>enabled : bool = True
@@ -3045,6 +3104,8 @@ Used by filter widget.</li>
 Scroll tracking</li>
 <li>track_offset : float = 0.5
 0.0f:top, 0.5f:center, 1.0f:bottom</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 <li>
 <p>default_value : str = ''</p>
 </li>
@@ -3081,6 +3142,8 @@ This item will be displayed before the specified item in the parent.</li>
 Attempt to render widget.</li>
 <li>pos : List[int] = []
 Places the item relative to window coordinates, [0,0] is top left.</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 <li>style : int = 0
 0 is rotating dots style, 1 is rotating bar style.</li>
 <li>circle_count : int = 8
@@ -3134,13 +3197,15 @@ Delays searching container for specified items until the end of the app. Possibl
 Scroll tracking</li>
 <li>track_offset : float = 0.5
 0.0f:top, 0.5f:center, 1.0f:bottom</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 </ul></div>
 </dd>
 <dt id="dearpygui.core.add_menu_bar"><code class="name flex">
 <span>def <span class="ident">add_menu_bar</span></span>(<span>...)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Adds a menu bar to a window. Must be followed by a call to end.</p>
+<div class="desc"><p>Adds a menu bar to a window.</p>
 <p>Return Type: int</p>
 <p>Keyword Arguments</p>
 <hr>
@@ -3157,6 +3222,8 @@ Parent to add this item to. (runtime adding)</li>
 Attempt to render widget.</li>
 <li>delay_search : str = False
 Delays searching container for specified items until the end of the app. Possible optimization when a container has many children that are not accessed often.</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 </ul></div>
 </dd>
 <dt id="dearpygui.core.add_menu_item"><code class="name flex">
@@ -3186,8 +3253,6 @@ Registers a callback.</li>
 Registers a drag callback for drag and drop.</li>
 <li>drop_callback : Callable = None
 Registers a drop callback for drag and drop.</li>
-<li>user_data : Any = None
-User data for callbacks.</li>
 <li>show : bool = True
 Attempt to render widget.</li>
 <li>enabled : bool = True
@@ -3198,6 +3263,8 @@ Used by filter widget.</li>
 Scroll tracking</li>
 <li>track_offset : float = 0.5
 0.0f:top, 0.5f:center, 1.0f:bottom</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 <li>
 <p>default_value : bool = False</p>
 </li>
@@ -3230,10 +3297,10 @@ Overrides 'name' as label.</li>
 Unique id used to programmatically refer to the item.If label is unused this will be the label.</li>
 <li>callback : Callable = None
 Registers a callback.</li>
-<li>user_data : Any = None
-User data for callbacks.</li>
 <li>show : bool = True
 Attempt to render widget.</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 <li>parent : int = internal_dpg.mvReservedUUID_1
 Parent to add this item to. (runtime adding)</li>
 </ul></div>
@@ -3259,10 +3326,10 @@ Overrides 'name' as label.</li>
 Unique id used to programmatically refer to the item.If label is unused this will be the label.</li>
 <li>callback : Callable = None
 Registers a callback.</li>
-<li>user_data : Any = None
-User data for callbacks.</li>
 <li>show : bool = True
 Attempt to render widget.</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 <li>parent : int = internal_dpg.mvReservedUUID_1
 Parent to add this item to. (runtime adding)</li>
 </ul></div>
@@ -3288,10 +3355,10 @@ Overrides 'name' as label.</li>
 Unique id used to programmatically refer to the item.If label is unused this will be the label.</li>
 <li>callback : Callable = None
 Registers a callback.</li>
-<li>user_data : Any = None
-User data for callbacks.</li>
 <li>show : bool = True
 Attempt to render widget.</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 <li>parent : int = internal_dpg.mvReservedUUID_1
 Parent to add this item to. (runtime adding)</li>
 </ul></div>
@@ -3319,10 +3386,10 @@ Overrides 'name' as label.</li>
 Unique id used to programmatically refer to the item.If label is unused this will be the label.</li>
 <li>callback : Callable = None
 Registers a callback.</li>
-<li>user_data : Any = None
-User data for callbacks.</li>
 <li>show : bool = True
 Attempt to render widget.</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 <li>parent : int = internal_dpg.mvReservedUUID_1
 Parent to add this item to. (runtime adding)</li>
 </ul></div>
@@ -3342,10 +3409,10 @@ Overrides 'name' as label.</li>
 Unique id used to programmatically refer to the item.If label is unused this will be the label.</li>
 <li>callback : Callable = None
 Registers a callback.</li>
-<li>user_data : Any = None
-User data for callbacks.</li>
 <li>show : bool = True
 Attempt to render widget.</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 <li>parent : int = internal_dpg.mvReservedUUID_1
 Parent to add this item to. (runtime adding)</li>
 </ul></div>
@@ -3371,10 +3438,10 @@ Overrides 'name' as label.</li>
 Unique id used to programmatically refer to the item.If label is unused this will be the label.</li>
 <li>callback : Callable = None
 Registers a callback.</li>
-<li>user_data : Any = None
-User data for callbacks.</li>
 <li>show : bool = True
 Attempt to render widget.</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 <li>parent : int = internal_dpg.mvReservedUUID_1
 Parent to add this item to. (runtime adding)</li>
 </ul></div>
@@ -3394,10 +3461,10 @@ Overrides 'name' as label.</li>
 Unique id used to programmatically refer to the item.If label is unused this will be the label.</li>
 <li>callback : Callable = None
 Registers a callback.</li>
-<li>user_data : Any = None
-User data for callbacks.</li>
 <li>show : bool = True
 Attempt to render widget.</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 <li>parent : int = internal_dpg.mvReservedUUID_1
 Parent to add this item to. (runtime adding)</li>
 </ul></div>
@@ -3437,6 +3504,8 @@ Delays searching container for specified items until the end of the app. Possibl
 Scroll tracking</li>
 <li>track_offset : float = 0.5
 0.0f:top, 0.5f:center, 1.0f:bottom</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 <li>draggable : bool = True
 Allow node to be draggable.</li>
 </ul></div>
@@ -3474,10 +3543,14 @@ Used by filter widget.</li>
 Scroll tracking</li>
 <li>track_offset : float = 0.5
 0.0f:top, 0.5f:center, 1.0f:bottom</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 <li>attribute_type : int = 0
 mvNode_Attr_Input, mvNode_Attr_Output, or mvNode_Attr_Static.</li>
 <li>shape : int = 1
 Pin shape.</li>
+<li>category : str = 'general'
+Category</li>
 </ul></div>
 </dd>
 <dt id="dearpygui.core.add_node_editor"><code class="name flex">
@@ -3515,6 +3588,8 @@ Delays searching container for specified items until the end of the app. Possibl
 Scroll tracking</li>
 <li>track_offset : float = 0.5
 0.0f:top, 0.5f:center, 1.0f:bottom</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 <li>delink_callback : Callable = None
 Callback ran when a link is detached.</li>
 </ul></div>
@@ -3546,6 +3621,8 @@ Unique id used to programmatically refer to the item.If label is unused this wil
 Parent to add this item to. (runtime adding)</li>
 <li>show : bool = True
 Attempt to render widget.</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 </ul></div>
 </dd>
 <dt id="dearpygui.core.add_pie_series"><code class="name flex">
@@ -3588,6 +3665,8 @@ This item will be displayed before the specified item in the parent.</li>
 Overrides 'id' as value storage key.</li>
 <li>show : bool = True
 Attempt to render widget.</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 <li>
 <p>format : str = '%0.2f'</p>
 </li>
@@ -3596,9 +3675,6 @@ Attempt to render widget.</li>
 </li>
 <li>
 <p>normalize : bool = False</p>
-</li>
-<li>
-<p>contribute_to_bounds : bool = True</p>
 </li>
 </ul></div>
 </dd>
@@ -3633,8 +3709,6 @@ Registers a callback.</li>
 Registers a drag callback for drag and drop.</li>
 <li>drop_callback : Callable = None
 Registers a drop callback for drag and drop.</li>
-<li>user_data : Any = None
-User data for callbacks.</li>
 <li>show : bool = True
 Attempt to render widget.</li>
 <li>pos : List[int] = []
@@ -3647,6 +3721,8 @@ Delays searching container for specified items until the end of the app. Possibl
 Scroll tracking</li>
 <li>track_offset : float = 0.5
 0.0f:top, 0.5f:center, 1.0f:bottom</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 <li>
 <p>no_title : bool = False</p>
 </li>
@@ -3700,6 +3776,8 @@ This item will be displayed before the specified item in the parent.</li>
 Overrides 'id' as value storage key.</li>
 <li>show : bool = True
 Attempt to render widget.</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 <li>
 <p>default_value : List[float] = (0.0, 0.0)</p>
 </li>
@@ -3742,6 +3820,8 @@ Registers a drag callback for drag and drop.</li>
 Registers a drop callback for drag and drop.</li>
 <li>show : bool = True
 Attempt to render widget.</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 <li>
 <p>no_gridlines : bool = False</p>
 </li>
@@ -3791,6 +3871,8 @@ Registers a drag callback for drag and drop.</li>
 Registers a drop callback for drag and drop.</li>
 <li>show : bool = True
 Attempt to render widget.</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 <li>location : int = 5
 location, mvPlot_Location_*</li>
 <li>
@@ -3842,6 +3924,8 @@ Used by filter widget.</li>
 Scroll tracking</li>
 <li>track_offset : float = 0.5
 0.0f:top, 0.5f:center, 1.0f:bottom</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 <li>overlay : str = ''
 Overlayed text.</li>
 <li>default_value : float = 0.0
@@ -3883,8 +3967,6 @@ Registers a callback.</li>
 Registers a drag callback for drag and drop.</li>
 <li>drop_callback : Callable = None
 Registers a drop callback for drag and drop.</li>
-<li>user_data : Any = None
-User data for callbacks.</li>
 <li>show : bool = True
 Attempt to render widget.</li>
 <li>enabled : bool = True
@@ -3897,6 +3979,8 @@ Used by filter widget.</li>
 Scroll tracking</li>
 <li>track_offset : float = 0.5
 0.0f:top, 0.5f:center, 1.0f:bottom</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 <li>
 <p>default_value : str = ''</p>
 </li>
@@ -3932,6 +4016,8 @@ Displays the radio options horizontally.</p>
 Overrides 'name' as label.</li>
 <li>id : int = 0
 Unique id used to programmatically refer to the item.If label is unused this will be the label.</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 <li>format : int = internal_dpg.mvFormat_Float_rgba
 Data format.</li>
 <li>parent : int = internal_dpg.mvReservedUUID_2
@@ -3981,6 +4067,8 @@ Parent to add this item to. (runtime adding)</li>
 This item will be displayed before the specified item in the parent.</li>
 <li>show : bool = True
 Attempt to render widget.</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 <li>xoffset : float = 0.0
 Offset from containing window.</li>
 <li>spacing : float = -1.0
@@ -4018,7 +4106,8 @@ This item will be displayed before the specified item in the parent.</li>
 Overrides 'id' as value storage key.</li>
 <li>show : bool = True
 Attempt to render widget.</li>
-<li>contribute_to_bounds : bool = True</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 </ul></div>
 </dd>
 <dt id="dearpygui.core.add_selectable"><code class="name flex">
@@ -4054,8 +4143,6 @@ Registers a callback.</li>
 Registers a drag callback for drag and drop.</li>
 <li>drop_callback : Callable = None
 Registers a drop callback for drag and drop.</li>
-<li>user_data : Any = None
-User data for callbacks.</li>
 <li>show : bool = True
 Attempt to render widget.</li>
 <li>enabled : bool = True
@@ -4068,6 +4155,8 @@ Used by filter widget.</li>
 Scroll tracking</li>
 <li>track_offset : float = 0.5
 0.0f:top, 0.5f:center, 1.0f:bottom</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 <li>
 <p>default_value : bool = False</p>
 </li>
@@ -4100,6 +4189,8 @@ This item will be displayed before the specified item in the parent.</li>
 Attempt to render widget.</li>
 <li>pos : List[int] = []
 Places the item relative to window coordinates, [0,0] is top left.</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 </ul></div>
 </dd>
 <dt id="dearpygui.core.add_series_value"><code class="name flex">
@@ -4117,6 +4208,8 @@ Overrides 'name' as label.</li>
 Unique id used to programmatically refer to the item.If label is unused this will be the label.</li>
 <li>source : int = 0
 Overrides 'id' as value storage key.</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 <li>
 <p>default_value : List[float] = ()</p>
 </li>
@@ -4157,12 +4250,9 @@ This item will be displayed before the specified item in the parent.</li>
 Overrides 'id' as value storage key.</li>
 <li>show : bool = True
 Attempt to render widget.</li>
-<li>
-<p>y2 : List[float] = []</p>
-</li>
-<li>
-<p>contribute_to_bounds : bool = True</p>
-</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
+<li>y2 : List[float] = []</li>
 </ul></div>
 </dd>
 <dt id="dearpygui.core.add_simple_plot"><code class="name flex">
@@ -4204,6 +4294,8 @@ Used by filter widget.</li>
 Scroll tracking</li>
 <li>track_offset : float = 0.5
 0.0f:top, 0.5f:center, 1.0f:bottom</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 <li>
 <p>default_value : List[float] = ()</p>
 </li>
@@ -4258,8 +4350,6 @@ Registers a callback.</li>
 Registers a drag callback for drag and drop.</li>
 <li>drop_callback : Callable = None
 Registers a drop callback for drag and drop.</li>
-<li>user_data : Any = None
-User data for callbacks.</li>
 <li>show : bool = True
 Attempt to render widget.</li>
 <li>enabled : bool = True
@@ -4272,6 +4362,8 @@ Used by filter widget.</li>
 Scroll tracking</li>
 <li>track_offset : float = 0.5
 0.0f:top, 0.5f:center, 1.0f:bottom</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 <li>
 <p>default_value : float = 0.0</p>
 </li>
@@ -4321,8 +4413,6 @@ Registers a callback.</li>
 Registers a drag callback for drag and drop.</li>
 <li>drop_callback : Callable = None
 Registers a drop callback for drag and drop.</li>
-<li>user_data : Any = None
-User data for callbacks.</li>
 <li>show : bool = True
 Attempt to render widget.</li>
 <li>enabled : bool = True
@@ -4335,6 +4425,8 @@ Used by filter widget.</li>
 Scroll tracking</li>
 <li>track_offset : float = 0.5
 0.0f:top, 0.5f:center, 1.0f:bottom</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 <li>
 <p>default_value : List[float] = (0.0, 0.0, 0.0, 0.0)</p>
 </li>
@@ -4386,8 +4478,6 @@ Registers a callback.</li>
 Registers a drag callback for drag and drop.</li>
 <li>drop_callback : Callable = None
 Registers a drop callback for drag and drop.</li>
-<li>user_data : Any = None
-User data for callbacks.</li>
 <li>show : bool = True
 Attempt to render widget.</li>
 <li>enabled : bool = True
@@ -4400,6 +4490,8 @@ Used by filter widget.</li>
 Scroll tracking</li>
 <li>track_offset : float = 0.5
 0.0f:top, 0.5f:center, 1.0f:bottom</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 <li>
 <p>default_value : int = 0</p>
 </li>
@@ -4449,8 +4541,6 @@ Registers a callback.</li>
 Registers a drag callback for drag and drop.</li>
 <li>drop_callback : Callable = None
 Registers a drop callback for drag and drop.</li>
-<li>user_data : Any = None
-User data for callbacks.</li>
 <li>show : bool = True
 Attempt to render widget.</li>
 <li>enabled : bool = True
@@ -4463,6 +4553,8 @@ Used by filter widget.</li>
 Scroll tracking</li>
 <li>track_offset : float = 0.5
 0.0f:top, 0.5f:center, 1.0f:bottom</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 <li>
 <p>default_value : List[int] = (0, 0, 0, 0)</p>
 </li>
@@ -4504,6 +4596,8 @@ This item will be displayed before the specified item in the parent.</li>
 Attempt to render widget.</li>
 <li>pos : List[int] = []
 Places the item relative to window coordinates, [0,0] is top left.</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 <li>count : int = 1
 Number of spacings to add the size is dependant on the curret style.</li>
 </ul></div>
@@ -4521,6 +4615,8 @@ Number of spacings to add the size is dependant on the curret style.</li>
 Overrides 'name' as label.</li>
 <li>id : int = 0
 Unique id used to programmatically refer to the item.If label is unused this will be the label.</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 </ul></div>
 </dd>
 <dt id="dearpygui.core.add_stair_series"><code class="name flex">
@@ -4554,7 +4650,8 @@ This item will be displayed before the specified item in the parent.</li>
 Overrides 'id' as value storage key.</li>
 <li>show : bool = True
 Attempt to render widget.</li>
-<li>contribute_to_bounds : bool = True</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 </ul></div>
 </dd>
 <dt id="dearpygui.core.add_static_texture"><code class="name flex">
@@ -4583,6 +4680,8 @@ Attempt to render widget.</li>
 Overrides 'name' as label.</li>
 <li>id : int = 0
 Unique id used to programmatically refer to the item.If label is unused this will be the label.</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 <li>parent : int = internal_dpg.mvReservedUUID_2
 Parent to add this item to. (runtime adding)</li>
 </ul></div>
@@ -4620,7 +4719,8 @@ This item will be displayed before the specified item in the parent.</li>
 Overrides 'id' as value storage key.</li>
 <li>show : bool = True
 Attempt to render widget.</li>
-<li>contribute_to_bounds : bool = True</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 </ul></div>
 </dd>
 <dt id="dearpygui.core.add_string_value"><code class="name flex">
@@ -4638,6 +4738,8 @@ Overrides 'name' as label.</li>
 Unique id used to programmatically refer to the item.If label is unused this will be the label.</li>
 <li>source : int = 0
 Overrides 'id' as value storage key.</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 <li>
 <p>default_value : str = ''</p>
 </li>
@@ -4682,6 +4784,8 @@ Delays searching container for specified items until the end of the app. Possibl
 Scroll tracking</li>
 <li>track_offset : float = 0.5
 0.0f:top, 0.5f:center, 1.0f:bottom</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 <li>closable : bool = False
 Creates a button on the tab that can hide the tab.</li>
 <li>no_tooltip : bool = False
@@ -4717,8 +4821,6 @@ Registers a callback.</li>
 Registers a drag callback for drag and drop.</li>
 <li>drop_callback : Callable = None
 Registers a drop callback for drag and drop.</li>
-<li>user_data : Any = None
-User data for callbacks.</li>
 <li>show : bool = True
 Attempt to render widget.</li>
 <li>pos : List[int] = []
@@ -4731,6 +4833,8 @@ Delays searching container for specified items until the end of the app. Possibl
 Scroll tracking</li>
 <li>track_offset : float = 0.5
 0.0f:top, 0.5f:center, 1.0f:bottom</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 <li>reorderable : bool = False
 Allows for the user to change the order of the tabs.</li>
 </ul></div>
@@ -4762,8 +4866,6 @@ Registers a callback.</li>
 Registers a drag callback for drag and drop.</li>
 <li>drop_callback : Callable = None
 Registers a drop callback for drag and drop.</li>
-<li>user_data : Any = None
-User data for callbacks.</li>
 <li>show : bool = True
 Attempt to render widget.</li>
 <li>filter_key : str = ''
@@ -4772,6 +4874,8 @@ Used by filter widget.</li>
 Scroll tracking</li>
 <li>track_offset : float = 0.5
 0.0f:top, 0.5f:center, 1.0f:bottom</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 <li>no_reorder : bool = False
 Disable reordering this tab or having another tab cross over this tab.</li>
 <li>leading : bool = False
@@ -4817,6 +4921,8 @@ Places the item relative to window coordinates, [0,0] is top left.</li>
 Used by filter widget.</li>
 <li>delay_search : str = False
 Delays searching container for specified items until the end of the app. Possible optimization when a container has many children that are not accessed often.</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 <li>header_row : bool = True
 show headers at the top of the columns</li>
 <li>
@@ -4900,6 +5006,8 @@ Parent to add this item to. (runtime adding)</li>
 This item will be displayed before the specified item in the parent.</li>
 <li>show : bool = True
 Attempt to render widget.</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 <li>
 <p>init_width_or_weight : float = 0.0</p>
 </li>
@@ -4958,6 +5066,8 @@ Parent to add this item to. (runtime adding)</li>
 This item will be displayed before the specified item in the parent.</li>
 <li>show : bool = True
 Attempt to render widget.</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 </ul></div>
 </dd>
 <dt id="dearpygui.core.add_table_row"><code class="name flex">
@@ -4983,6 +5093,8 @@ This item will be displayed before the specified item in the parent.</li>
 Attempt to render widget.</li>
 <li>filter_key : str = ''
 Used by filter widget.</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 </ul></div>
 </dd>
 <dt id="dearpygui.core.add_text"><code class="name flex">
@@ -5021,6 +5133,8 @@ Used by filter widget.</li>
 Scroll tracking</li>
 <li>track_offset : float = 0.5
 0.0f:top, 0.5f:center, 1.0f:bottom</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 <li>wrap : int = -1
 Number of pixels until wrapping starts.</li>
 <li>bullet : bool = False
@@ -5062,14 +5176,13 @@ This item will be displayed before the specified item in the parent.</li>
 Overrides 'id' as value storage key.</li>
 <li>show : bool = True
 Attempt to render widget.</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 <li>
 <p>x_offset : int = &hellip;</p>
 </li>
 <li>
 <p>y_offset : int = &hellip;</p>
-</li>
-<li>
-<p>contribute_to_bounds : bool = True</p>
 </li>
 <li>
 <p>vertical : bool = False</p>
@@ -5089,6 +5202,8 @@ Attempt to render widget.</li>
 Overrides 'name' as label.</li>
 <li>id : int = 0
 Unique id used to programmatically refer to the item.If label is unused this will be the label.</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 <li>show : bool = False
 Attempt to render widget.</li>
 </ul></div>
@@ -5106,6 +5221,8 @@ Attempt to render widget.</li>
 Overrides 'name' as label.</li>
 <li>id : int = 0
 Unique id used to programmatically refer to the item.If label is unused this will be the label.</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 <li>default_theme : bool = False</li>
 </ul></div>
 </dd>
@@ -5134,6 +5251,8 @@ Overrides 'name' as label.</li>
 Unique id used to programmatically refer to the item.If label is unused this will be the label.</li>
 <li>parent : int = 0
 Parent to add this item to. (runtime adding)</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 <li>category : int = 0
 Options include mvThemeCat_Core, mvThemeCat_Plots, mvThemeCat_Nodes.</li>
 </ul></div>
@@ -5166,6 +5285,8 @@ Overrides 'name' as label.</li>
 Unique id used to programmatically refer to the item.If label is unused this will be the label.</li>
 <li>parent : int = 0
 Parent to add this item to. (runtime adding)</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 <li>category : int = 0
 Options include mvThemeCat_Core, mvThemeCat_Plots, mvThemeCat_Nodes.</li>
 </ul></div>
@@ -5197,8 +5318,6 @@ Registers a callback.</li>
 Registers a drag callback for drag and drop.</li>
 <li>drop_callback : Callable = None
 Registers a drop callback for drag and drop.</li>
-<li>user_data : Any = None
-User data for callbacks.</li>
 <li>show : bool = True
 Attempt to render widget.</li>
 <li>pos : List[int] = []
@@ -5209,6 +5328,8 @@ Used by filter widget.</li>
 Scroll tracking</li>
 <li>track_offset : float = 0.5
 0.0f:top, 0.5f:center, 1.0f:bottom</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 <li>
 <p>default_value : dict = {'hour': 14, 'min': 32, 'sec': 23}</p>
 </li>
@@ -5262,6 +5383,8 @@ Overrides 'name' as label.</li>
 Unique id used to programmatically refer to the item.If label is unused this will be the label.</li>
 <li>show : bool = True
 Attempt to render widget.</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 </ul></div>
 </dd>
 <dt id="dearpygui.core.add_tree_node"><code class="name flex">
@@ -5301,6 +5424,8 @@ Delays searching container for specified items until the end of the app. Possibl
 Scroll tracking</li>
 <li>track_offset : float = 0.5
 0.0f:top, 0.5f:center, 1.0f:bottom</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 <li>default_open : bool = False
 Sets the tree node open by default.</li>
 <li>open_on_double_click : bool = False
@@ -5328,6 +5453,8 @@ Makes the tree selectable.</li>
 Overrides 'name' as label.</li>
 <li>id : int = 0
 Unique id used to programmatically refer to the item.If label is unused this will be the label.</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 </ul></div>
 </dd>
 <dt id="dearpygui.core.add_viewport_drawlist"><code class="name flex">
@@ -5349,8 +5476,35 @@ Attempt to render widget.</li>
 Used by filter widget.</li>
 <li>delay_search : str = False
 Delays searching container for specified items until the end of the app. Possible optimization when a container has many children that are not accessed often.</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 <li>front : bool = True
 Draws to the front of the view port instead of the back.</li>
+</ul></div>
+</dd>
+<dt id="dearpygui.core.add_viewport_menu_bar"><code class="name flex">
+<span>def <span class="ident">add_viewport_menu_bar</span></span>(<span>...)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Adds a menu bar to the viewport.</p>
+<p>Return Type: int</p>
+<p>Keyword Arguments</p>
+<hr>
+<ul>
+<li>label : str = None
+Overrides 'name' as label.</li>
+<li>id : int = 0
+Unique id used to programmatically refer to the item.If label is unused this will be the label.</li>
+<li>indent : int = -1
+Offsets the widget to the right the specified number multiplied by the indent style.</li>
+<li>parent : int = 0
+Parent to add this item to. (runtime adding)</li>
+<li>show : bool = True
+Attempt to render widget.</li>
+<li>delay_search : str = False
+Delays searching container for specified items until the end of the app. Possible optimization when a container has many children that are not accessed often.</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 </ul></div>
 </dd>
 <dt id="dearpygui.core.add_visible_handler"><code class="name flex">
@@ -5403,7 +5557,8 @@ This item will be displayed before the specified item in the parent.</li>
 Overrides 'id' as value storage key.</li>
 <li>show : bool = True
 Attempt to render widget.</li>
-<li>contribute_to_bounds : bool = True</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 </ul></div>
 </dd>
 <dt id="dearpygui.core.add_window"><code class="name flex">
@@ -5425,14 +5580,14 @@ Width of the item.</li>
 Height of the item.</li>
 <li>indent : int = -1
 Offsets the widget to the right the specified number multiplied by the indent style.</li>
-<li>user_data : Any = None
-User data for callbacks.</li>
 <li>show : bool = True
 Attempt to render widget.</li>
 <li>pos : List[int] = []
 Places the item relative to window coordinates, [0,0] is top left.</li>
 <li>delay_search : str = False
 Delays searching container for specified items until the end of the app. Possible optimization when a container has many children that are not accessed often.</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 <li>min_size : List[int] = [100, 100]
 Minimum window size.</li>
 <li>max_size : List[int] = [30000, 30000]
@@ -5653,6 +5808,8 @@ Parent to add this item to. (runtime adding)</li>
 This item will be displayed before the specified item in the parent.</li>
 <li>show : bool = True
 Attempt to render widget.</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 <li>
 <p>color : List[int] = (255, 255, 255, 255)</p>
 </li>
@@ -5695,6 +5852,8 @@ Parent to add this item to. (runtime adding)</li>
 This item will be displayed before the specified item in the parent.</li>
 <li>show : bool = True
 Attempt to render widget.</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 <li>
 <p>color : List[int] = (255, 255, 255, 255)</p>
 </li>
@@ -5736,6 +5895,8 @@ Parent to add this item to. (runtime adding)</li>
 This item will be displayed before the specified item in the parent.</li>
 <li>show : bool = True
 Attempt to render widget.</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 <li>
 <p>color : List[int] = (255, 255, 255, 255)</p>
 </li>
@@ -5777,6 +5938,8 @@ Parent to add this item to. (runtime adding)</li>
 This item will be displayed before the specified item in the parent.</li>
 <li>show : bool = True
 Attempt to render widget.</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 <li>
 <p>color : List[int] = (255, 255, 255, 255)</p>
 </li>
@@ -5819,6 +5982,8 @@ Parent to add this item to. (runtime adding)</li>
 This item will be displayed before the specified item in the parent.</li>
 <li>show : bool = True
 Attempt to render widget.</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 <li>
 <p>color : List[int] = (255, 255, 255, 255)</p>
 </li>
@@ -5866,6 +6031,8 @@ Parent to add this item to. (runtime adding)</li>
 This item will be displayed before the specified item in the parent.</li>
 <li>show : bool = True
 Attempt to render widget.</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 <li>uv_min : List[float] = (0.0, 0.0)
 Normalized coordinates on texture that will be drawn.</li>
 <li>uv_max : List[float] = (1.0, 1.0)
@@ -5900,6 +6067,8 @@ Parent to add this item to. (runtime adding)</li>
 This item will be displayed before the specified item in the parent.</li>
 <li>show : bool = True
 Attempt to render widget.</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 <li>
 <p>color : List[int] = (255, 255, 255, 255)</p>
 </li>
@@ -5932,6 +6101,8 @@ Parent to add this item to. (runtime adding)</li>
 This item will be displayed before the specified item in the parent.</li>
 <li>show : bool = True
 Attempt to render widget.</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 <li>
 <p>color : List[int] = (255, 255, 255, 255)</p>
 </li>
@@ -5967,6 +6138,8 @@ Parent to add this item to. (runtime adding)</li>
 This item will be displayed before the specified item in the parent.</li>
 <li>show : bool = True
 Attempt to render widget.</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 <li>closed : bool = False
 Will close the polyline by returning to the first point.</li>
 <li>
@@ -6012,6 +6185,8 @@ Parent to add this item to. (runtime adding)</li>
 This item will be displayed before the specified item in the parent.</li>
 <li>show : bool = True
 Attempt to render widget.</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 <li>
 <p>color : List[int] = (255, 255, 255, 255)</p>
 </li>
@@ -6050,6 +6225,8 @@ Parent to add this item to. (runtime adding)</li>
 This item will be displayed before the specified item in the parent.</li>
 <li>show : bool = True
 Attempt to render widget.</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 <li>
 <p>color : List[int] = (255, 255, 255, 255)</p>
 </li>
@@ -6090,6 +6267,8 @@ Parent to add this item to. (runtime adding)</li>
 This item will be displayed before the specified item in the parent.</li>
 <li>show : bool = True
 Attempt to render widget.</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 <li>
 <p>color : List[int] = (255, 255, 255, 255)</p>
 </li>
@@ -6130,6 +6309,8 @@ Parent to add this item to. (runtime adding)</li>
 This item will be displayed before the specified item in the parent.</li>
 <li>show : bool = True
 Attempt to render widget.</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
 <li>
 <p>color : List[int] = (255, 255, 255, 255)</p>
 </li>
@@ -6165,7 +6346,7 @@ add explicit dockspace over viewport</li>
 <span>def <span class="ident">fit_axis_data</span></span>(<span>...)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Undocumented function</p>
+<div class="desc"><p>Sets the axis boundries max and min in the data series currently on the plot.</p>
 <p>Return Type: None</p>
 <p>Required Arguments</p>
 <hr>
@@ -6210,7 +6391,7 @@ add explicit dockspace over viewport</li>
 <span>def <span class="ident">get_axis_limits</span></span>(<span>...)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Undocumented function</p>
+<div class="desc"><p>Gets the specified axis limits.</p>
 <p>Return Type: List[float]</p>
 <p>Required Arguments</p>
 <hr>
@@ -6250,6 +6431,13 @@ add explicit dockspace over viewport</li>
 <ul>
 <li>file_dialog : int</li>
 </ul></div>
+</dd>
+<dt id="dearpygui.core.get_frame_count"><code class="name flex">
+<span>def <span class="ident">get_frame_count</span></span>(<span>...)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Get frame count.</p>
+<p>Return Type: int</p></div>
 </dd>
 <dt id="dearpygui.core.get_global_font_scale"><code class="name flex">
 <span>def <span class="ident">get_global_font_scale</span></span>(<span>...)</span>
@@ -6331,7 +6519,7 @@ add explicit dockspace over viewport</li>
 <span>def <span class="ident">get_plot_query_area</span></span>(<span>...)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Undocumented function</p>
+<div class="desc"><p>Returns the last/current query area of the plot. (Requires plot 'query' kwarg to be enabled)</p>
 <p>Return Type: List[float]</p>
 <p>Required Arguments</p>
 <hr>
@@ -6573,7 +6761,7 @@ add explicit dockspace over viewport</li>
 <span>def <span class="ident">is_plot_queried</span></span>(<span>...)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Undocumented function</p>
+<div class="desc"><p>Returns true if the plot is currently being queried. (Requires plot 'query' kwarg to be enabled)</p>
 <p>Return Type: bool</p>
 <p>Required Arguments</p>
 <hr>
@@ -6744,7 +6932,7 @@ add explicit dockspace over viewport</li>
 <span>def <span class="ident">reset_axis_ticks</span></span>(<span>...)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Undocumented function</p>
+<div class="desc"><p>Removes the and manually set axis ticks and applys the default auto axis ticks.</p>
 <p>Return Type: None</p>
 <p>Required Arguments</p>
 <hr>
@@ -6768,7 +6956,7 @@ add explicit dockspace over viewport</li>
 <span>def <span class="ident">set_axis_limits</span></span>(<span>...)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Undocumented function</p>
+<div class="desc"><p>Sets limits on the axis for pan and zoom.</p>
 <p>Return Type: None</p>
 <p>Required Arguments</p>
 <hr>
@@ -6788,7 +6976,7 @@ add explicit dockspace over viewport</li>
 <span>def <span class="ident">set_axis_limits_auto</span></span>(<span>...)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Undocumented function</p>
+<div class="desc"><p>Removes all limits on specified axis.</p>
 <p>Return Type: None</p>
 <p>Required Arguments</p>
 <hr>
@@ -6800,7 +6988,7 @@ add explicit dockspace over viewport</li>
 <span>def <span class="ident">set_axis_ticks</span></span>(<span>...)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Undocumented function</p>
+<div class="desc"><p>Replaces axis ticks with 'label_pairs' argument</p>
 <p>Return Type: None</p>
 <p>Required Arguments</p>
 <hr>
@@ -6809,7 +6997,8 @@ add explicit dockspace over viewport</li>
 <p>axis : int</p>
 </li>
 <li>
-<p>label_pairs : Any</p>
+<p>label_pairs : Any
+Tuples of label and value in the form '((label, axis_value), (label, axis_value), &hellip;)'</p>
 </li>
 </ul></div>
 </dd>
@@ -7106,6 +7295,19 @@ add explicit dockspace over viewport</li>
 </li>
 </ul></div>
 </dd>
+<dt id="dearpygui.core.split_frame"><code class="name flex">
+<span>def <span class="ident">split_frame</span></span>(<span>...)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Waits one frame.</p>
+<p>Return Type: None</p>
+<p>Keyword Arguments</p>
+<hr>
+<ul>
+<li>delay : int = 32
+Minimal delay in in milliseconds</li>
+</ul></div>
+</dd>
 <dt id="dearpygui.core.stage_items"><code class="name flex">
 <span>def <span class="ident">stage_items</span></span>(<span>...)</span>
 </code></dt>
@@ -7318,6 +7520,7 @@ add explicit dockspace over viewport</li>
 <li><code><a title="dearpygui.core.add_tree_node" href="#dearpygui.core.add_tree_node">add_tree_node</a></code></li>
 <li><code><a title="dearpygui.core.add_value_registry" href="#dearpygui.core.add_value_registry">add_value_registry</a></code></li>
 <li><code><a title="dearpygui.core.add_viewport_drawlist" href="#dearpygui.core.add_viewport_drawlist">add_viewport_drawlist</a></code></li>
+<li><code><a title="dearpygui.core.add_viewport_menu_bar" href="#dearpygui.core.add_viewport_menu_bar">add_viewport_menu_bar</a></code></li>
 <li><code><a title="dearpygui.core.add_visible_handler" href="#dearpygui.core.add_visible_handler">add_visible_handler</a></code></li>
 <li><code><a title="dearpygui.core.add_vline_series" href="#dearpygui.core.add_vline_series">add_vline_series</a></code></li>
 <li><code><a title="dearpygui.core.add_window" href="#dearpygui.core.add_window">add_window</a></code></li>
@@ -7354,6 +7557,7 @@ add explicit dockspace over viewport</li>
 <li><code><a title="dearpygui.core.get_delta_time" href="#dearpygui.core.get_delta_time">get_delta_time</a></code></li>
 <li><code><a title="dearpygui.core.get_drawing_mouse_pos" href="#dearpygui.core.get_drawing_mouse_pos">get_drawing_mouse_pos</a></code></li>
 <li><code><a title="dearpygui.core.get_file_dialog_info" href="#dearpygui.core.get_file_dialog_info">get_file_dialog_info</a></code></li>
+<li><code><a title="dearpygui.core.get_frame_count" href="#dearpygui.core.get_frame_count">get_frame_count</a></code></li>
 <li><code><a title="dearpygui.core.get_global_font_scale" href="#dearpygui.core.get_global_font_scale">get_global_font_scale</a></code></li>
 <li><code><a title="dearpygui.core.get_item_configuration" href="#dearpygui.core.get_item_configuration">get_item_configuration</a></code></li>
 <li><code><a title="dearpygui.core.get_item_info" href="#dearpygui.core.get_item_info">get_item_info</a></code></li>
@@ -7425,6 +7629,7 @@ add explicit dockspace over viewport</li>
 <li><code><a title="dearpygui.core.show_implot_demo" href="#dearpygui.core.show_implot_demo">show_implot_demo</a></code></li>
 <li><code><a title="dearpygui.core.show_tool" href="#dearpygui.core.show_tool">show_tool</a></code></li>
 <li><code><a title="dearpygui.core.show_viewport" href="#dearpygui.core.show_viewport">show_viewport</a></code></li>
+<li><code><a title="dearpygui.core.split_frame" href="#dearpygui.core.split_frame">split_frame</a></code></li>
 <li><code><a title="dearpygui.core.stage_items" href="#dearpygui.core.stage_items">stage_items</a></code></li>
 <li><code><a title="dearpygui.core.stop_dearpygui" href="#dearpygui.core.stop_dearpygui">stop_dearpygui</a></code></li>
 <li><code><a title="dearpygui.core.top_container_stack" href="#dearpygui.core.top_container_stack">top_container_stack</a></code></li>

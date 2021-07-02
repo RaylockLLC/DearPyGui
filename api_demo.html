@@ -1829,7 +1829,7 @@ def show_demo():
 
                 with dpg.plot(label=&#34;Stock Prices&#34;, height=400, width=-1):
                     dpg.add_plot_legend()
-                    dpg.add_plot_axis(dpg.mvXAxis, label=&#34;Days&#34;)
+                    xaxis = dpg.add_plot_axis(dpg.mvXAxis, label=&#34;Days&#34;)
                     yaxis = dpg.add_plot_axis(dpg.mvYAxis, label=&#34;Price&#34;)
                     dpg.add_line_series(stock_datax, stock_data1, label=&#34;Stock 1&#34;, parent=yaxis)
                     dpg.set_item_theme(dpg.last_item(), stock_theme1)
@@ -1845,6 +1845,9 @@ def show_demo():
                     dpg.set_item_theme(dpg.last_item(), stock_theme3)
                     dpg.add_shade_series(stock_datax, stock_data5, y2=stock_data4, label=&#34;Shade between lines&#34;, parent=yaxis)
                     dpg.set_item_theme(dpg.last_item(), stock_theme4)
+
+                    dpg.fit_axis_data(xaxis)
+                    dpg.fit_axis_data(yaxis)
 
             with dpg.tree_node(label=&#34;Scatter Series&#34;):
 
@@ -1890,9 +1893,12 @@ def show_demo():
             with dpg.tree_node(label=&#34;Area Series&#34;):
 
                 with dpg.plot(label=&#34;Area Series&#34;, height=400, width=-1):
-                    dpg.add_plot_axis(dpg.mvXAxis, label=&#34;x&#34;)
-                    dpg.add_plot_axis(dpg.mvYAxis, label=&#34;y&#34;)
+                    xaxis = dpg.add_plot_axis(dpg.mvXAxis, label=&#34;x&#34;)
+                    yaxis = dpg.add_plot_axis(dpg.mvYAxis, label=&#34;y&#34;)
                     dpg.add_area_series([1,5,3],[0,0,3], fill=[255,50,100,190], parent=dpg.last_item())
+
+                    dpg.fit_axis_data(xaxis)
+                    dpg.fit_axis_data(yaxis)
 
             with dpg.tree_node(label=&#34;Infinite Lines&#34;):
 
@@ -1901,20 +1907,25 @@ def show_demo():
 
                 with dpg.plot(label=&#34;Infinite Lines&#34;, height=400, width=-1):
                     dpg.add_plot_legend()
-                    dpg.add_plot_axis(dpg.mvXAxis, label=&#34;x&#34;)
+                    xaxis = dpg.add_plot_axis(dpg.mvXAxis, label=&#34;x&#34;)
                     axis_id = dpg.add_plot_axis(dpg.mvYAxis, label=&#34;y&#34;)
                     dpg.add_vline_series(infinite_x_data, label=&#34;vertical&#34;, parent=axis_id)
                     dpg.add_hline_series(infinite_y_data, label=&#34;horizontal&#34;, parent=axis_id)
+
+                    dpg.fit_axis_data(xaxis)
+                    dpg.fit_axis_data(axis_id)
 
             with dpg.tree_node(label=&#34;Image Series&#34;):
 
                 with dpg.plot(label=&#34;Image Plot&#34;, height=400, width=-1):
                     dpg.add_plot_legend()
-                    dpg.add_plot_axis(dpg.mvXAxis, label=&#34;x&#34;)
+                    xaxis = dpg.add_plot_axis(dpg.mvXAxis, label=&#34;x&#34;)
                     yaxis_id = dpg.add_plot_axis(dpg.mvYAxis, label=&#34;y axis&#34;)
                     dpg.add_image_series(2, [300, 300], [400, 400], label=&#34;font atlas&#34;, parent=yaxis_id)
                     dpg.add_image_series(demo_static_texture_2, [150, 150], [200, 200], label=&#34;static 2&#34;, parent=yaxis_id)
                     dpg.add_image_series(demo_dynamic_texture_1, [-200, 100], [-100, 200], label=&#34;dynamic 1&#34;, parent=yaxis_id)
+                    dpg.fit_axis_data(xaxis)
+                    dpg.fit_axis_data(yaxis_id)
 
             with dpg.tree_node(label=&#34;Multi Axes Plot&#34;):
 
@@ -2003,9 +2014,12 @@ def show_demo():
                 dpg.add_text(&#34;UNIX timestamps are seconds since 00:00:00 UTC on 1 January 1970&#34;, bullet=True)
                 
                 with dpg.plot(label=&#34;Time Plot&#34;, height=400, width=-1):
-                    dpg.add_plot_axis(dpg.mvXAxis, label=&#34;Date&#34;, time=True)
-                    dpg.add_plot_axis(dpg.mvYAxis, label=&#34;Days since 1970&#34;)
+                    xaxis = dpg.add_plot_axis(dpg.mvXAxis, label=&#34;Date&#34;, time=True)
+                    yaxis = dpg.add_plot_axis(dpg.mvYAxis, label=&#34;Days since 1970&#34;)
                     dpg.add_line_series(timedatax, timedatay, label=&#34;Days&#34;, parent=dpg.last_item())
+
+                    dpg.fit_axis_data(xaxis)
+                    dpg.fit_axis_data(yaxis)
 
             with dpg.tree_node(label=&#34;Candle Stick Series&#34;):
 
@@ -2017,9 +2031,12 @@ def show_demo():
 
                 with dpg.plot(label=&#34;Candle Series&#34;, height=400, width=-1):
                     dpg.add_plot_legend()
-                    dpg.add_plot_axis(dpg.mvXAxis, label=&#34;Day&#34;, time=True)
-                    dpg.add_plot_axis(dpg.mvYAxis, label=&#34;USD&#34;)
+                    xaxis = dpg.add_plot_axis(dpg.mvXAxis, label=&#34;Day&#34;, time=True)
+                    yaxis = dpg.add_plot_axis(dpg.mvYAxis, label=&#34;USD&#34;)
                     dpg.add_candle_series(dates, opens, closes, lows, highs, label=&#34;GOOGL&#34;, parent=dpg.last_item())
+
+                    dpg.fit_axis_data(xaxis)
+                    dpg.fit_axis_data(yaxis)
 
             with dpg.tree_node(label=&#34;Heatmaps&#34;):
 
@@ -2091,7 +2108,7 @@ def show_demo():
                
                 with dpg.plot(label=&#34;Error Series&#34;, height=400, width=-1):
                     dpg.add_plot_legend()
-                    dpg.add_plot_axis(dpg.mvXAxis, label=&#34;x&#34;)
+                    xaxis = dpg.add_plot_axis(dpg.mvXAxis, label=&#34;x&#34;)
                     axis_id = dpg.add_plot_axis(dpg.mvYAxis, label=&#34;y&#34;)
 
                     dpg.add_bar_series(error1_x, error1_y, label=&#34;Bar&#34;, weight=0.25, parent=axis_id)
@@ -2099,6 +2116,9 @@ def show_demo():
                     dpg.add_line_series(error2_x, error2_y, label=&#34;Line&#34;, parent=axis_id)
                     #dpg.add_error_series(error2_x, error2_y, error2_neg, error2_pos, label=&#34;Line&#34;, color=[0, 255, 0], parent=axis_id)
                     dpg.add_error_series(error2_x, error2_y, error2_neg, error2_pos, label=&#34;Line&#34;, parent=axis_id)
+
+                    dpg.fit_axis_data(xaxis)
+                    dpg.fit_axis_data(axis_id)
 
             with dpg.tree_node(label=&#34;Custom Context Menus&#34;):
 
@@ -4278,7 +4298,7 @@ def show_demo():
 
                 with dpg.plot(label=&#34;Stock Prices&#34;, height=400, width=-1):
                     dpg.add_plot_legend()
-                    dpg.add_plot_axis(dpg.mvXAxis, label=&#34;Days&#34;)
+                    xaxis = dpg.add_plot_axis(dpg.mvXAxis, label=&#34;Days&#34;)
                     yaxis = dpg.add_plot_axis(dpg.mvYAxis, label=&#34;Price&#34;)
                     dpg.add_line_series(stock_datax, stock_data1, label=&#34;Stock 1&#34;, parent=yaxis)
                     dpg.set_item_theme(dpg.last_item(), stock_theme1)
@@ -4294,6 +4314,9 @@ def show_demo():
                     dpg.set_item_theme(dpg.last_item(), stock_theme3)
                     dpg.add_shade_series(stock_datax, stock_data5, y2=stock_data4, label=&#34;Shade between lines&#34;, parent=yaxis)
                     dpg.set_item_theme(dpg.last_item(), stock_theme4)
+
+                    dpg.fit_axis_data(xaxis)
+                    dpg.fit_axis_data(yaxis)
 
             with dpg.tree_node(label=&#34;Scatter Series&#34;):
 
@@ -4339,9 +4362,12 @@ def show_demo():
             with dpg.tree_node(label=&#34;Area Series&#34;):
 
                 with dpg.plot(label=&#34;Area Series&#34;, height=400, width=-1):
-                    dpg.add_plot_axis(dpg.mvXAxis, label=&#34;x&#34;)
-                    dpg.add_plot_axis(dpg.mvYAxis, label=&#34;y&#34;)
+                    xaxis = dpg.add_plot_axis(dpg.mvXAxis, label=&#34;x&#34;)
+                    yaxis = dpg.add_plot_axis(dpg.mvYAxis, label=&#34;y&#34;)
                     dpg.add_area_series([1,5,3],[0,0,3], fill=[255,50,100,190], parent=dpg.last_item())
+
+                    dpg.fit_axis_data(xaxis)
+                    dpg.fit_axis_data(yaxis)
 
             with dpg.tree_node(label=&#34;Infinite Lines&#34;):
 
@@ -4350,20 +4376,25 @@ def show_demo():
 
                 with dpg.plot(label=&#34;Infinite Lines&#34;, height=400, width=-1):
                     dpg.add_plot_legend()
-                    dpg.add_plot_axis(dpg.mvXAxis, label=&#34;x&#34;)
+                    xaxis = dpg.add_plot_axis(dpg.mvXAxis, label=&#34;x&#34;)
                     axis_id = dpg.add_plot_axis(dpg.mvYAxis, label=&#34;y&#34;)
                     dpg.add_vline_series(infinite_x_data, label=&#34;vertical&#34;, parent=axis_id)
                     dpg.add_hline_series(infinite_y_data, label=&#34;horizontal&#34;, parent=axis_id)
+
+                    dpg.fit_axis_data(xaxis)
+                    dpg.fit_axis_data(axis_id)
 
             with dpg.tree_node(label=&#34;Image Series&#34;):
 
                 with dpg.plot(label=&#34;Image Plot&#34;, height=400, width=-1):
                     dpg.add_plot_legend()
-                    dpg.add_plot_axis(dpg.mvXAxis, label=&#34;x&#34;)
+                    xaxis = dpg.add_plot_axis(dpg.mvXAxis, label=&#34;x&#34;)
                     yaxis_id = dpg.add_plot_axis(dpg.mvYAxis, label=&#34;y axis&#34;)
                     dpg.add_image_series(2, [300, 300], [400, 400], label=&#34;font atlas&#34;, parent=yaxis_id)
                     dpg.add_image_series(demo_static_texture_2, [150, 150], [200, 200], label=&#34;static 2&#34;, parent=yaxis_id)
                     dpg.add_image_series(demo_dynamic_texture_1, [-200, 100], [-100, 200], label=&#34;dynamic 1&#34;, parent=yaxis_id)
+                    dpg.fit_axis_data(xaxis)
+                    dpg.fit_axis_data(yaxis_id)
 
             with dpg.tree_node(label=&#34;Multi Axes Plot&#34;):
 
@@ -4452,9 +4483,12 @@ def show_demo():
                 dpg.add_text(&#34;UNIX timestamps are seconds since 00:00:00 UTC on 1 January 1970&#34;, bullet=True)
                 
                 with dpg.plot(label=&#34;Time Plot&#34;, height=400, width=-1):
-                    dpg.add_plot_axis(dpg.mvXAxis, label=&#34;Date&#34;, time=True)
-                    dpg.add_plot_axis(dpg.mvYAxis, label=&#34;Days since 1970&#34;)
+                    xaxis = dpg.add_plot_axis(dpg.mvXAxis, label=&#34;Date&#34;, time=True)
+                    yaxis = dpg.add_plot_axis(dpg.mvYAxis, label=&#34;Days since 1970&#34;)
                     dpg.add_line_series(timedatax, timedatay, label=&#34;Days&#34;, parent=dpg.last_item())
+
+                    dpg.fit_axis_data(xaxis)
+                    dpg.fit_axis_data(yaxis)
 
             with dpg.tree_node(label=&#34;Candle Stick Series&#34;):
 
@@ -4466,9 +4500,12 @@ def show_demo():
 
                 with dpg.plot(label=&#34;Candle Series&#34;, height=400, width=-1):
                     dpg.add_plot_legend()
-                    dpg.add_plot_axis(dpg.mvXAxis, label=&#34;Day&#34;, time=True)
-                    dpg.add_plot_axis(dpg.mvYAxis, label=&#34;USD&#34;)
+                    xaxis = dpg.add_plot_axis(dpg.mvXAxis, label=&#34;Day&#34;, time=True)
+                    yaxis = dpg.add_plot_axis(dpg.mvYAxis, label=&#34;USD&#34;)
                     dpg.add_candle_series(dates, opens, closes, lows, highs, label=&#34;GOOGL&#34;, parent=dpg.last_item())
+
+                    dpg.fit_axis_data(xaxis)
+                    dpg.fit_axis_data(yaxis)
 
             with dpg.tree_node(label=&#34;Heatmaps&#34;):
 
@@ -4540,7 +4577,7 @@ def show_demo():
                
                 with dpg.plot(label=&#34;Error Series&#34;, height=400, width=-1):
                     dpg.add_plot_legend()
-                    dpg.add_plot_axis(dpg.mvXAxis, label=&#34;x&#34;)
+                    xaxis = dpg.add_plot_axis(dpg.mvXAxis, label=&#34;x&#34;)
                     axis_id = dpg.add_plot_axis(dpg.mvYAxis, label=&#34;y&#34;)
 
                     dpg.add_bar_series(error1_x, error1_y, label=&#34;Bar&#34;, weight=0.25, parent=axis_id)
@@ -4548,6 +4585,9 @@ def show_demo():
                     dpg.add_line_series(error2_x, error2_y, label=&#34;Line&#34;, parent=axis_id)
                     #dpg.add_error_series(error2_x, error2_y, error2_neg, error2_pos, label=&#34;Line&#34;, color=[0, 255, 0], parent=axis_id)
                     dpg.add_error_series(error2_x, error2_y, error2_neg, error2_pos, label=&#34;Line&#34;, parent=axis_id)
+
+                    dpg.fit_axis_data(xaxis)
+                    dpg.fit_axis_data(axis_id)
 
             with dpg.tree_node(label=&#34;Custom Context Menus&#34;):
 
