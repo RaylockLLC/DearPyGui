@@ -2479,7 +2479,7 @@ normalized texture coordinates</li>
 <span>def <span class="ident">add_input_float</span></span>(<span>...)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Adds input for integers. Step buttons can be turned on or off.</p>
+<div class="desc"><p>Adds input for floats. Step buttons can be turned on or off.</p>
 <p>Return Type: int</p>
 <p>Keyword Arguments</p>
 <hr>
@@ -2619,7 +2619,7 @@ Activates a read only mode for the inputs.</li>
 <span>def <span class="ident">add_input_int</span></span>(<span>...)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Adds input for float. Step buttons can be turned on or off.</p>
+<div class="desc"><p>Adds input for an int. Step buttons can be turned on or off.</p>
 <p>Return Type: int</p>
 <p>Keyword Arguments</p>
 <hr>
@@ -2661,7 +2661,7 @@ Scroll tracking</li>
 <li>user_data : Any = None
 User data for callbacks.</li>
 <li>
-<p>default_value : List[int] = 0</p>
+<p>default_value : int = 0</p>
 </li>
 <li>
 <p>min_value : int = 0
@@ -5766,7 +5766,12 @@ Callback ran when window is closed.</li>
 <p>Keyword Arguments</p>
 <hr>
 <ul>
-<li>children_only : bool = False</li>
+<li>
+<p>children_only : bool = False</p>
+</li>
+<li>
+<p>slot : int = -1</p>
+</li>
 </ul></div>
 </dd>
 <dt id="dearpygui.core.does_item_exist"><code class="name flex">

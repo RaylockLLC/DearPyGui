@@ -3377,7 +3377,7 @@ def add_image_series(texture_id : int, bounds_min : List[float], bounds_max : Li
 
 def add_input_float(*, label: str =None, id: int =0, width: int =0, indent: int =-1, parent: int =0, before: int =0, source: int =0, payload_type: str =&#39;$$DPG_PAYLOAD&#39;, callback: Callable =None, drag_callback: Callable =None, drop_callback: Callable =None, show: bool =True, enabled: bool =True, pos: List[int] =[], filter_key: str =&#39;&#39;, tracked: bool =False, track_offset: float =0.5, user_data: Any =None, default_value: float =0.0, format: str =&#39;%.3f&#39;, min_value: float =0.0, max_value: float =100.0, step: float =0.1, step_fast: float =1.0, min_clamped: bool =False, max_clamped: bool =False, on_enter: bool =False, readonly: bool =False) -&gt; int:
         &#34;&#34;&#34;
-        Adds input for integers. Step buttons can be turned on or off.
+        Adds input for floats. Step buttons can be turned on or off.
         Args:
                 **label (str): Overrides &#39;name&#39; as label.
                 **id (int): Unique id used to programmatically refer to the item.If label is unused this will be the label.
@@ -3450,9 +3450,9 @@ def add_input_floatx(*, label: str =None, id: int =0, width: int =0, indent: int
 
         return internal_dpg.add_input_floatx(label=label, id=id, width=width, indent=indent, parent=parent, before=before, source=source, payload_type=payload_type, callback=callback, drag_callback=drag_callback, drop_callback=drop_callback, show=show, enabled=enabled, pos=pos, filter_key=filter_key, tracked=tracked, track_offset=track_offset, user_data=user_data, default_value=default_value, format=format, min_value=min_value, max_value=max_value, size=size, min_clamped=min_clamped, max_clamped=max_clamped, on_enter=on_enter, readonly=readonly)
 
-def add_input_int(*, label: str =None, id: int =0, width: int =0, indent: int =-1, parent: int =0, before: int =0, source: int =0, payload_type: str =&#39;$$DPG_PAYLOAD&#39;, callback: Callable =None, drag_callback: Callable =None, drop_callback: Callable =None, show: bool =True, enabled: bool =True, pos: List[int] =[], filter_key: str =&#39;&#39;, tracked: bool =False, track_offset: float =0.5, user_data: Any =None, default_value: List[int] =0, min_value: int =0, max_value: int =100, step: int =1, step_fast: int =100, min_clamped: bool =False, max_clamped: bool =False, on_enter: bool =False, readonly: bool =False) -&gt; int:
+def add_input_int(*, label: str =None, id: int =0, width: int =0, indent: int =-1, parent: int =0, before: int =0, source: int =0, payload_type: str =&#39;$$DPG_PAYLOAD&#39;, callback: Callable =None, drag_callback: Callable =None, drop_callback: Callable =None, show: bool =True, enabled: bool =True, pos: List[int] =[], filter_key: str =&#39;&#39;, tracked: bool =False, track_offset: float =0.5, user_data: Any =None, default_value: int =0, min_value: int =0, max_value: int =100, step: int =1, step_fast: int =100, min_clamped: bool =False, max_clamped: bool =False, on_enter: bool =False, readonly: bool =False) -&gt; int:
         &#34;&#34;&#34;
-        Adds input for float. Step buttons can be turned on or off.
+        Adds input for an int. Step buttons can be turned on or off.
         Args:
                 **label (str): Overrides &#39;name&#39; as label.
                 **id (int): Unique id used to programmatically refer to the item.If label is unused this will be the label.
@@ -3472,7 +3472,7 @@ def add_input_int(*, label: str =None, id: int =0, width: int =0, indent: int =-
                 **tracked (bool): Scroll tracking
                 **track_offset (float): 0.0f:top, 0.5f:center, 1.0f:bottom
                 **user_data (Any): User data for callbacks.
-                **default_value (List[int]): 
+                **default_value (int): 
                 **min_value (int): Value for lower limit of input. By default this limits the step buttons. Use clamped to limit manual input.
                 **max_value (int): Value for upper limit of input. By default this limits the step buttons. Use clamped to limit manual input.
                 **step (int): Increment to change value by when the step buttons are pressed. Setting this to a value of 0 or smaller will turn off step buttons.
@@ -5240,17 +5240,18 @@ def create_viewport(*, title: str =&#39;Dear PyGui&#39;, small_icon: str =&#39;&
 
         return internal_dpg.create_viewport(title=title, small_icon=small_icon, large_icon=large_icon, width=width, height=height, x_pos=x_pos, y_pos=y_pos, min_width=min_width, max_width=max_width, min_height=min_height, max_height=max_height, resizable=resizable, vsync=vsync, always_on_top=always_on_top, maximized_box=maximized_box, minimized_box=minimized_box, border=border, caption=caption, overlapped=overlapped, clear_color=clear_color)
 
-def delete_item(item : int, *, children_only: bool =False) -&gt; None:
+def delete_item(item : int, *, children_only: bool =False, slot: int =-1) -&gt; None:
         &#34;&#34;&#34;
         Undocumented
         Args:
                 item (int): 
                 **children_only (bool): 
+                **slot (int): 
         Returns:
                 None
         &#34;&#34;&#34;
 
-        return internal_dpg.delete_item(item, children_only=children_only)
+        return internal_dpg.delete_item(item, children_only=children_only, slot=slot)
 
 def does_item_exist(item : int) -&gt; bool:
         &#34;&#34;&#34;
@@ -10933,7 +10934,7 @@ mvReservedUUID_9=internal_dpg.mvReservedUUID_9</code></pre>
 <span>def <span class="ident">add_input_float</span></span>(<span>*, label: str = None, id: int = 0, width: int = 0, indent: int = -1, parent: int = 0, before: int = 0, source: int = 0, payload_type: str = '$$DPG_PAYLOAD', callback: Callable = None, drag_callback: Callable = None, drop_callback: Callable = None, show: bool = True, enabled: bool = True, pos: List[int] = [], filter_key: str = '', tracked: bool = False, track_offset: float = 0.5, user_data: Any = None, default_value: float = 0.0, format: str = '%.3f', min_value: float = 0.0, max_value: float = 100.0, step: float = 0.1, step_fast: float = 1.0, min_clamped: bool = False, max_clamped: bool = False, on_enter: bool = False, readonly: bool = False) ‑> int</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Adds input for integers. Step buttons can be turned on or off.</p>
+<div class="desc"><p>Adds input for floats. Step buttons can be turned on or off.</p>
 <h2 id="args">Args</h2>
 <dl>
 <dt><strong><code>**label</code></strong> :&ensp;<code>str</code></dt>
@@ -11001,7 +11002,7 @@ mvReservedUUID_9=internal_dpg.mvReservedUUID_9</code></pre>
 </summary>
 <pre><code class="python">def add_input_float(*, label: str =None, id: int =0, width: int =0, indent: int =-1, parent: int =0, before: int =0, source: int =0, payload_type: str =&#39;$$DPG_PAYLOAD&#39;, callback: Callable =None, drag_callback: Callable =None, drop_callback: Callable =None, show: bool =True, enabled: bool =True, pos: List[int] =[], filter_key: str =&#39;&#39;, tracked: bool =False, track_offset: float =0.5, user_data: Any =None, default_value: float =0.0, format: str =&#39;%.3f&#39;, min_value: float =0.0, max_value: float =100.0, step: float =0.1, step_fast: float =1.0, min_clamped: bool =False, max_clamped: bool =False, on_enter: bool =False, readonly: bool =False) -&gt; int:
         &#34;&#34;&#34;
-        Adds input for integers. Step buttons can be turned on or off.
+        Adds input for floats. Step buttons can be turned on or off.
         Args:
                 **label (str): Overrides &#39;name&#39; as label.
                 **id (int): Unique id used to programmatically refer to the item.If label is unused this will be the label.
@@ -11145,10 +11146,10 @@ mvReservedUUID_9=internal_dpg.mvReservedUUID_9</code></pre>
 </details>
 </dd>
 <dt id="dearpygui.dearpygui.add_input_int"><code class="name flex">
-<span>def <span class="ident">add_input_int</span></span>(<span>*, label: str = None, id: int = 0, width: int = 0, indent: int = -1, parent: int = 0, before: int = 0, source: int = 0, payload_type: str = '$$DPG_PAYLOAD', callback: Callable = None, drag_callback: Callable = None, drop_callback: Callable = None, show: bool = True, enabled: bool = True, pos: List[int] = [], filter_key: str = '', tracked: bool = False, track_offset: float = 0.5, user_data: Any = None, default_value: List[int] = 0, min_value: int = 0, max_value: int = 100, step: int = 1, step_fast: int = 100, min_clamped: bool = False, max_clamped: bool = False, on_enter: bool = False, readonly: bool = False) ‑> int</span>
+<span>def <span class="ident">add_input_int</span></span>(<span>*, label: str = None, id: int = 0, width: int = 0, indent: int = -1, parent: int = 0, before: int = 0, source: int = 0, payload_type: str = '$$DPG_PAYLOAD', callback: Callable = None, drag_callback: Callable = None, drop_callback: Callable = None, show: bool = True, enabled: bool = True, pos: List[int] = [], filter_key: str = '', tracked: bool = False, track_offset: float = 0.5, user_data: Any = None, default_value: int = 0, min_value: int = 0, max_value: int = 100, step: int = 1, step_fast: int = 100, min_clamped: bool = False, max_clamped: bool = False, on_enter: bool = False, readonly: bool = False) ‑> int</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Adds input for float. Step buttons can be turned on or off.</p>
+<div class="desc"><p>Adds input for an int. Step buttons can be turned on or off.</p>
 <h2 id="args">Args</h2>
 <dl>
 <dt><strong><code>**label</code></strong> :&ensp;<code>str</code></dt>
@@ -11187,7 +11188,7 @@ mvReservedUUID_9=internal_dpg.mvReservedUUID_9</code></pre>
 <dd>0.0f:top, 0.5f:center, 1.0f:bottom</dd>
 <dt><strong><code>**user_data</code></strong> :&ensp;<code>Any</code></dt>
 <dd>User data for callbacks.</dd>
-<dt><strong><code>**default_value</code></strong> :&ensp;<code>List[int]</code></dt>
+<dt><strong><code>**default_value</code></strong> :&ensp;<code>int</code></dt>
 <dd>&nbsp;</dd>
 <dt><strong><code>**min_value</code></strong> :&ensp;<code>int</code></dt>
 <dd>Value for lower limit of input. By default this limits the step buttons. Use clamped to limit manual input.</dd>
@@ -11212,9 +11213,9 @@ mvReservedUUID_9=internal_dpg.mvReservedUUID_9</code></pre>
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def add_input_int(*, label: str =None, id: int =0, width: int =0, indent: int =-1, parent: int =0, before: int =0, source: int =0, payload_type: str =&#39;$$DPG_PAYLOAD&#39;, callback: Callable =None, drag_callback: Callable =None, drop_callback: Callable =None, show: bool =True, enabled: bool =True, pos: List[int] =[], filter_key: str =&#39;&#39;, tracked: bool =False, track_offset: float =0.5, user_data: Any =None, default_value: List[int] =0, min_value: int =0, max_value: int =100, step: int =1, step_fast: int =100, min_clamped: bool =False, max_clamped: bool =False, on_enter: bool =False, readonly: bool =False) -&gt; int:
+<pre><code class="python">def add_input_int(*, label: str =None, id: int =0, width: int =0, indent: int =-1, parent: int =0, before: int =0, source: int =0, payload_type: str =&#39;$$DPG_PAYLOAD&#39;, callback: Callable =None, drag_callback: Callable =None, drop_callback: Callable =None, show: bool =True, enabled: bool =True, pos: List[int] =[], filter_key: str =&#39;&#39;, tracked: bool =False, track_offset: float =0.5, user_data: Any =None, default_value: int =0, min_value: int =0, max_value: int =100, step: int =1, step_fast: int =100, min_clamped: bool =False, max_clamped: bool =False, on_enter: bool =False, readonly: bool =False) -&gt; int:
         &#34;&#34;&#34;
-        Adds input for float. Step buttons can be turned on or off.
+        Adds input for an int. Step buttons can be turned on or off.
         Args:
                 **label (str): Overrides &#39;name&#39; as label.
                 **id (int): Unique id used to programmatically refer to the item.If label is unused this will be the label.
@@ -11234,7 +11235,7 @@ mvReservedUUID_9=internal_dpg.mvReservedUUID_9</code></pre>
                 **tracked (bool): Scroll tracking
                 **track_offset (float): 0.0f:top, 0.5f:center, 1.0f:bottom
                 **user_data (Any): User data for callbacks.
-                **default_value (List[int]): 
+                **default_value (int): 
                 **min_value (int): Value for lower limit of input. By default this limits the step buttons. Use clamped to limit manual input.
                 **max_value (int): Value for upper limit of input. By default this limits the step buttons. Use clamped to limit manual input.
                 **step (int): Increment to change value by when the step buttons are pressed. Setting this to a value of 0 or smaller will turn off step buttons.
@@ -16395,7 +16396,7 @@ def collapsing_header(*, label: str =None, id: int =0, indent: int =-1, parent: 
 </details>
 </dd>
 <dt id="dearpygui.dearpygui.delete_item"><code class="name flex">
-<span>def <span class="ident">delete_item</span></span>(<span>item: int, *, children_only: bool = False) ‑> NoneType</span>
+<span>def <span class="ident">delete_item</span></span>(<span>item: int, *, children_only: bool = False, slot: int = -1) ‑> NoneType</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Undocumented</p>
@@ -16405,6 +16406,8 @@ def collapsing_header(*, label: str =None, id: int =0, indent: int =-1, parent: 
 <dd>&nbsp;</dd>
 <dt><strong><code>**children_only</code></strong> :&ensp;<code>bool</code></dt>
 <dd>&nbsp;</dd>
+<dt><strong><code>**slot</code></strong> :&ensp;<code>int</code></dt>
+<dd>&nbsp;</dd>
 </dl>
 <h2 id="returns">Returns</h2>
 <p>None</p></div>
@@ -16412,17 +16415,18 @@ def collapsing_header(*, label: str =None, id: int =0, indent: int =-1, parent: 
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def delete_item(item : int, *, children_only: bool =False) -&gt; None:
+<pre><code class="python">def delete_item(item : int, *, children_only: bool =False, slot: int =-1) -&gt; None:
         &#34;&#34;&#34;
         Undocumented
         Args:
                 item (int): 
                 **children_only (bool): 
+                **slot (int): 
         Returns:
                 None
         &#34;&#34;&#34;
 
-        return internal_dpg.delete_item(item, children_only=children_only)</code></pre>
+        return internal_dpg.delete_item(item, children_only=children_only, slot=slot)</code></pre>
 </details>
 </dd>
 <dt id="dearpygui.dearpygui.disable_item"><code class="name flex">
