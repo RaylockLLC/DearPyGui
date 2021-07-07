@@ -1580,12 +1580,14 @@ def node_attribute(*, label: str =None, id: int =0, indent: int =-1, parent: int
         finally:
                 internal_dpg.pop_container_stack()
 @contextmanager
-def node_editor(*, label: str =None, id: int =0, parent: int =0, before: int =0, payload_type: str =&#39;$$DPG_PAYLOAD&#39;, callback: Callable =None, drag_callback: Callable =None, drop_callback: Callable =None, show: bool =True, filter_key: str =&#39;&#39;, delay_search: str =False, tracked: bool =False, track_offset: float =0.5, user_data: Any =None, delink_callback: Callable =None) -&gt; int:
+def node_editor(*, label: str =None, id: int =0, width: int =0, height: int =0, parent: int =0, before: int =0, payload_type: str =&#39;$$DPG_PAYLOAD&#39;, callback: Callable =None, drag_callback: Callable =None, drop_callback: Callable =None, show: bool =True, filter_key: str =&#39;&#39;, delay_search: str =False, tracked: bool =False, track_offset: float =0.5, user_data: Any =None, delink_callback: Callable =None, menubar: bool =False) -&gt; int:
         &#34;&#34;&#34;
         Adds a node editor.
         Args:
                 **label (str): Overrides &#39;name&#39; as label.
                 **id (int): Unique id used to programmatically refer to the item.If label is unused this will be the label.
+                **width (int): Width of the item.
+                **height (int): Height of the item.
                 **parent (int): Parent to add this item to. (runtime adding)
                 **before (int): This item will be displayed before the specified item in the parent.
                 **payload_type (str): Sender string type must be the same as the target for the target to run the payload_callback.
@@ -1599,11 +1601,12 @@ def node_editor(*, label: str =None, id: int =0, parent: int =0, before: int =0,
                 **track_offset (float): 0.0f:top, 0.5f:center, 1.0f:bottom
                 **user_data (Any): User data for callbacks.
                 **delink_callback (Callable): Callback ran when a link is detached.
+                **menubar (bool): Shows or hides the menubar.
         Yields:
                 int
         &#34;&#34;&#34;
         try:
-                widget = internal_dpg.add_node_editor(label=label, id=id, parent=parent, before=before, payload_type=payload_type, callback=callback, drag_callback=drag_callback, drop_callback=drop_callback, show=show, filter_key=filter_key, delay_search=delay_search, tracked=tracked, track_offset=track_offset, user_data=user_data, delink_callback=delink_callback)
+                widget = internal_dpg.add_node_editor(label=label, id=id, width=width, height=height, parent=parent, before=before, payload_type=payload_type, callback=callback, drag_callback=drag_callback, drop_callback=drop_callback, show=show, filter_key=filter_key, delay_search=delay_search, tracked=tracked, track_offset=track_offset, user_data=user_data, delink_callback=delink_callback, menubar=menubar)
                 internal_dpg.push_container_stack(widget)
                 yield widget
         finally:
@@ -3994,12 +3997,14 @@ def add_node_attribute(*, label: str =None, id: int =0, indent: int =-1, parent:
 
         return internal_dpg.add_node_attribute(label=label, id=id, indent=indent, parent=parent, before=before, payload_type=payload_type, drag_callback=drag_callback, drop_callback=drop_callback, show=show, filter_key=filter_key, tracked=tracked, track_offset=track_offset, user_data=user_data, attribute_type=attribute_type, shape=shape, category=category)
 
-def add_node_editor(*, label: str =None, id: int =0, parent: int =0, before: int =0, payload_type: str =&#39;$$DPG_PAYLOAD&#39;, callback: Callable =None, drag_callback: Callable =None, drop_callback: Callable =None, show: bool =True, filter_key: str =&#39;&#39;, delay_search: str =False, tracked: bool =False, track_offset: float =0.5, user_data: Any =None, delink_callback: Callable =None) -&gt; int:
+def add_node_editor(*, label: str =None, id: int =0, width: int =0, height: int =0, parent: int =0, before: int =0, payload_type: str =&#39;$$DPG_PAYLOAD&#39;, callback: Callable =None, drag_callback: Callable =None, drop_callback: Callable =None, show: bool =True, filter_key: str =&#39;&#39;, delay_search: str =False, tracked: bool =False, track_offset: float =0.5, user_data: Any =None, delink_callback: Callable =None, menubar: bool =False) -&gt; int:
         &#34;&#34;&#34;
         Adds a node editor.
         Args:
                 **label (str): Overrides &#39;name&#39; as label.
                 **id (int): Unique id used to programmatically refer to the item.If label is unused this will be the label.
+                **width (int): Width of the item.
+                **height (int): Height of the item.
                 **parent (int): Parent to add this item to. (runtime adding)
                 **before (int): This item will be displayed before the specified item in the parent.
                 **payload_type (str): Sender string type must be the same as the target for the target to run the payload_callback.
@@ -4013,11 +4018,12 @@ def add_node_editor(*, label: str =None, id: int =0, parent: int =0, before: int
                 **track_offset (float): 0.0f:top, 0.5f:center, 1.0f:bottom
                 **user_data (Any): User data for callbacks.
                 **delink_callback (Callable): Callback ran when a link is detached.
+                **menubar (bool): Shows or hides the menubar.
         Returns:
                 int
         &#34;&#34;&#34;
 
-        return internal_dpg.add_node_editor(label=label, id=id, parent=parent, before=before, payload_type=payload_type, callback=callback, drag_callback=drag_callback, drop_callback=drop_callback, show=show, filter_key=filter_key, delay_search=delay_search, tracked=tracked, track_offset=track_offset, user_data=user_data, delink_callback=delink_callback)
+        return internal_dpg.add_node_editor(label=label, id=id, width=width, height=height, parent=parent, before=before, payload_type=payload_type, callback=callback, drag_callback=drag_callback, drop_callback=drop_callback, show=show, filter_key=filter_key, delay_search=delay_search, tracked=tracked, track_offset=track_offset, user_data=user_data, delink_callback=delink_callback, menubar=menubar)
 
 def add_node_link(node_1 : int, node_2 : int, *, label: str =None, id: int =0, parent: int =0, show: bool =True, user_data: Any =None) -&gt; int:
         &#34;&#34;&#34;
@@ -5730,17 +5736,6 @@ def get_item_types() -&gt; dict:
         &#34;&#34;&#34;
 
         return internal_dpg.get_item_types()
-
-def get_links(node_editor : int) -&gt; List[List[str]]:
-        &#34;&#34;&#34;
-        Undocumented
-        Args:
-                node_editor (int): 
-        Returns:
-                List[List[str]]
-        &#34;&#34;&#34;
-
-        return internal_dpg.get_links(node_editor)
 
 def get_mouse_drag_delta() -&gt; float:
         &#34;&#34;&#34;
@@ -12658,7 +12653,7 @@ mvReservedUUID_9=internal_dpg.mvReservedUUID_9</code></pre>
 </details>
 </dd>
 <dt id="dearpygui.dearpygui.add_node_editor"><code class="name flex">
-<span>def <span class="ident">add_node_editor</span></span>(<span>*, label: str = None, id: int = 0, parent: int = 0, before: int = 0, payload_type: str = '$$DPG_PAYLOAD', callback: Callable = None, drag_callback: Callable = None, drop_callback: Callable = None, show: bool = True, filter_key: str = '', delay_search: str = False, tracked: bool = False, track_offset: float = 0.5, user_data: Any = None, delink_callback: Callable = None) ‑> int</span>
+<span>def <span class="ident">add_node_editor</span></span>(<span>*, label: str = None, id: int = 0, width: int = 0, height: int = 0, parent: int = 0, before: int = 0, payload_type: str = '$$DPG_PAYLOAD', callback: Callable = None, drag_callback: Callable = None, drop_callback: Callable = None, show: bool = True, filter_key: str = '', delay_search: str = False, tracked: bool = False, track_offset: float = 0.5, user_data: Any = None, delink_callback: Callable = None, menubar: bool = False) ‑> int</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Adds a node editor.</p>
@@ -12668,6 +12663,10 @@ mvReservedUUID_9=internal_dpg.mvReservedUUID_9</code></pre>
 <dd>Overrides 'name' as label.</dd>
 <dt><strong><code>**id</code></strong> :&ensp;<code>int</code></dt>
 <dd>Unique id used to programmatically refer to the item.If label is unused this will be the label.</dd>
+<dt><strong><code>**width</code></strong> :&ensp;<code>int</code></dt>
+<dd>Width of the item.</dd>
+<dt><strong><code>**height</code></strong> :&ensp;<code>int</code></dt>
+<dd>Height of the item.</dd>
 <dt><strong><code>**parent</code></strong> :&ensp;<code>int</code></dt>
 <dd>Parent to add this item to. (runtime adding)</dd>
 <dt><strong><code>**before</code></strong> :&ensp;<code>int</code></dt>
@@ -12694,6 +12693,8 @@ mvReservedUUID_9=internal_dpg.mvReservedUUID_9</code></pre>
 <dd>User data for callbacks.</dd>
 <dt><strong><code>**delink_callback</code></strong> :&ensp;<code>Callable</code></dt>
 <dd>Callback ran when a link is detached.</dd>
+<dt><strong><code>**menubar</code></strong> :&ensp;<code>bool</code></dt>
+<dd>Shows or hides the menubar.</dd>
 </dl>
 <h2 id="returns">Returns</h2>
 <p>int</p></div>
@@ -12701,12 +12702,14 @@ mvReservedUUID_9=internal_dpg.mvReservedUUID_9</code></pre>
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def add_node_editor(*, label: str =None, id: int =0, parent: int =0, before: int =0, payload_type: str =&#39;$$DPG_PAYLOAD&#39;, callback: Callable =None, drag_callback: Callable =None, drop_callback: Callable =None, show: bool =True, filter_key: str =&#39;&#39;, delay_search: str =False, tracked: bool =False, track_offset: float =0.5, user_data: Any =None, delink_callback: Callable =None) -&gt; int:
+<pre><code class="python">def add_node_editor(*, label: str =None, id: int =0, width: int =0, height: int =0, parent: int =0, before: int =0, payload_type: str =&#39;$$DPG_PAYLOAD&#39;, callback: Callable =None, drag_callback: Callable =None, drop_callback: Callable =None, show: bool =True, filter_key: str =&#39;&#39;, delay_search: str =False, tracked: bool =False, track_offset: float =0.5, user_data: Any =None, delink_callback: Callable =None, menubar: bool =False) -&gt; int:
         &#34;&#34;&#34;
         Adds a node editor.
         Args:
                 **label (str): Overrides &#39;name&#39; as label.
                 **id (int): Unique id used to programmatically refer to the item.If label is unused this will be the label.
+                **width (int): Width of the item.
+                **height (int): Height of the item.
                 **parent (int): Parent to add this item to. (runtime adding)
                 **before (int): This item will be displayed before the specified item in the parent.
                 **payload_type (str): Sender string type must be the same as the target for the target to run the payload_callback.
@@ -12720,11 +12723,12 @@ mvReservedUUID_9=internal_dpg.mvReservedUUID_9</code></pre>
                 **track_offset (float): 0.0f:top, 0.5f:center, 1.0f:bottom
                 **user_data (Any): User data for callbacks.
                 **delink_callback (Callable): Callback ran when a link is detached.
+                **menubar (bool): Shows or hides the menubar.
         Returns:
                 int
         &#34;&#34;&#34;
 
-        return internal_dpg.add_node_editor(label=label, id=id, parent=parent, before=before, payload_type=payload_type, callback=callback, drag_callback=drag_callback, drop_callback=drop_callback, show=show, filter_key=filter_key, delay_search=delay_search, tracked=tracked, track_offset=track_offset, user_data=user_data, delink_callback=delink_callback)</code></pre>
+        return internal_dpg.add_node_editor(label=label, id=id, width=width, height=height, parent=parent, before=before, payload_type=payload_type, callback=callback, drag_callback=drag_callback, drop_callback=drop_callback, show=show, filter_key=filter_key, delay_search=delay_search, tracked=tracked, track_offset=track_offset, user_data=user_data, delink_callback=delink_callback, menubar=menubar)</code></pre>
 </details>
 </dd>
 <dt id="dearpygui.dearpygui.add_node_link"><code class="name flex">
@@ -18597,34 +18601,6 @@ Args:</p>
     return internal_dpg.get_item_configuration(item)[&#34;width&#34;]</code></pre>
 </details>
 </dd>
-<dt id="dearpygui.dearpygui.get_links"><code class="name flex">
-<span>def <span class="ident">get_links</span></span>(<span>node_editor: int) ‑> List[List[str]]</span>
-</code></dt>
-<dd>
-<div class="desc"><p>Undocumented</p>
-<h2 id="args">Args</h2>
-<dl>
-<dt><strong><code>node_editor</code></strong> :&ensp;<code>int</code></dt>
-<dd>&nbsp;</dd>
-</dl>
-<h2 id="returns">Returns</h2>
-<p>List[List[str]]</p></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">def get_links(node_editor : int) -&gt; List[List[str]]:
-        &#34;&#34;&#34;
-        Undocumented
-        Args:
-                node_editor (int): 
-        Returns:
-                List[List[str]]
-        &#34;&#34;&#34;
-
-        return internal_dpg.get_links(node_editor)</code></pre>
-</details>
-</dd>
 <dt id="dearpygui.dearpygui.get_mouse_drag_delta"><code class="name flex">
 <span>def <span class="ident">get_mouse_drag_delta</span></span>(<span>) ‑> float</span>
 </code></dt>
@@ -20742,7 +20718,7 @@ def node_attribute(*, label: str =None, id: int =0, indent: int =-1, parent: int
 </details>
 </dd>
 <dt id="dearpygui.dearpygui.node_editor"><code class="name flex">
-<span>def <span class="ident">node_editor</span></span>(<span>*, label: str = None, id: int = 0, parent: int = 0, before: int = 0, payload_type: str = '$$DPG_PAYLOAD', callback: Callable = None, drag_callback: Callable = None, drop_callback: Callable = None, show: bool = True, filter_key: str = '', delay_search: str = False, tracked: bool = False, track_offset: float = 0.5, user_data: Any = None, delink_callback: Callable = None) ‑> int</span>
+<span>def <span class="ident">node_editor</span></span>(<span>*, label: str = None, id: int = 0, width: int = 0, height: int = 0, parent: int = 0, before: int = 0, payload_type: str = '$$DPG_PAYLOAD', callback: Callable = None, drag_callback: Callable = None, drop_callback: Callable = None, show: bool = True, filter_key: str = '', delay_search: str = False, tracked: bool = False, track_offset: float = 0.5, user_data: Any = None, delink_callback: Callable = None, menubar: bool = False) ‑> int</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Adds a node editor.</p>
@@ -20752,6 +20728,10 @@ def node_attribute(*, label: str =None, id: int =0, indent: int =-1, parent: int
 <dd>Overrides 'name' as label.</dd>
 <dt><strong><code>**id</code></strong> :&ensp;<code>int</code></dt>
 <dd>Unique id used to programmatically refer to the item.If label is unused this will be the label.</dd>
+<dt><strong><code>**width</code></strong> :&ensp;<code>int</code></dt>
+<dd>Width of the item.</dd>
+<dt><strong><code>**height</code></strong> :&ensp;<code>int</code></dt>
+<dd>Height of the item.</dd>
 <dt><strong><code>**parent</code></strong> :&ensp;<code>int</code></dt>
 <dd>Parent to add this item to. (runtime adding)</dd>
 <dt><strong><code>**before</code></strong> :&ensp;<code>int</code></dt>
@@ -20778,6 +20758,8 @@ def node_attribute(*, label: str =None, id: int =0, indent: int =-1, parent: int
 <dd>User data for callbacks.</dd>
 <dt><strong><code>**delink_callback</code></strong> :&ensp;<code>Callable</code></dt>
 <dd>Callback ran when a link is detached.</dd>
+<dt><strong><code>**menubar</code></strong> :&ensp;<code>bool</code></dt>
+<dd>Shows or hides the menubar.</dd>
 </dl>
 <h2 id="yields">Yields</h2>
 <p>int</p></div>
@@ -20786,12 +20768,14 @@ def node_attribute(*, label: str =None, id: int =0, indent: int =-1, parent: int
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">@contextmanager
-def node_editor(*, label: str =None, id: int =0, parent: int =0, before: int =0, payload_type: str =&#39;$$DPG_PAYLOAD&#39;, callback: Callable =None, drag_callback: Callable =None, drop_callback: Callable =None, show: bool =True, filter_key: str =&#39;&#39;, delay_search: str =False, tracked: bool =False, track_offset: float =0.5, user_data: Any =None, delink_callback: Callable =None) -&gt; int:
+def node_editor(*, label: str =None, id: int =0, width: int =0, height: int =0, parent: int =0, before: int =0, payload_type: str =&#39;$$DPG_PAYLOAD&#39;, callback: Callable =None, drag_callback: Callable =None, drop_callback: Callable =None, show: bool =True, filter_key: str =&#39;&#39;, delay_search: str =False, tracked: bool =False, track_offset: float =0.5, user_data: Any =None, delink_callback: Callable =None, menubar: bool =False) -&gt; int:
         &#34;&#34;&#34;
         Adds a node editor.
         Args:
                 **label (str): Overrides &#39;name&#39; as label.
                 **id (int): Unique id used to programmatically refer to the item.If label is unused this will be the label.
+                **width (int): Width of the item.
+                **height (int): Height of the item.
                 **parent (int): Parent to add this item to. (runtime adding)
                 **before (int): This item will be displayed before the specified item in the parent.
                 **payload_type (str): Sender string type must be the same as the target for the target to run the payload_callback.
@@ -20805,11 +20789,12 @@ def node_editor(*, label: str =None, id: int =0, parent: int =0, before: int =0,
                 **track_offset (float): 0.0f:top, 0.5f:center, 1.0f:bottom
                 **user_data (Any): User data for callbacks.
                 **delink_callback (Callable): Callback ran when a link is detached.
+                **menubar (bool): Shows or hides the menubar.
         Yields:
                 int
         &#34;&#34;&#34;
         try:
-                widget = internal_dpg.add_node_editor(label=label, id=id, parent=parent, before=before, payload_type=payload_type, callback=callback, drag_callback=drag_callback, drop_callback=drop_callback, show=show, filter_key=filter_key, delay_search=delay_search, tracked=tracked, track_offset=track_offset, user_data=user_data, delink_callback=delink_callback)
+                widget = internal_dpg.add_node_editor(label=label, id=id, width=width, height=height, parent=parent, before=before, payload_type=payload_type, callback=callback, drag_callback=drag_callback, drop_callback=drop_callback, show=show, filter_key=filter_key, delay_search=delay_search, tracked=tracked, track_offset=track_offset, user_data=user_data, delink_callback=delink_callback, menubar=menubar)
                 internal_dpg.push_container_stack(widget)
                 yield widget
         finally:
@@ -24123,7 +24108,6 @@ def window(*, label: str =None, id: int =0, width: int =0, height: int =0, inden
 <li><code><a title="dearpygui.dearpygui.get_item_types" href="#dearpygui.dearpygui.get_item_types">get_item_types</a></code></li>
 <li><code><a title="dearpygui.dearpygui.get_item_user_data" href="#dearpygui.dearpygui.get_item_user_data">get_item_user_data</a></code></li>
 <li><code><a title="dearpygui.dearpygui.get_item_width" href="#dearpygui.dearpygui.get_item_width">get_item_width</a></code></li>
-<li><code><a title="dearpygui.dearpygui.get_links" href="#dearpygui.dearpygui.get_links">get_links</a></code></li>
 <li><code><a title="dearpygui.dearpygui.get_mouse_drag_delta" href="#dearpygui.dearpygui.get_mouse_drag_delta">get_mouse_drag_delta</a></code></li>
 <li><code><a title="dearpygui.dearpygui.get_mouse_pos" href="#dearpygui.dearpygui.get_mouse_pos">get_mouse_pos</a></code></li>
 <li><code><a title="dearpygui.dearpygui.get_plot_mouse_pos" href="#dearpygui.dearpygui.get_plot_mouse_pos">get_plot_mouse_pos</a></code></li>

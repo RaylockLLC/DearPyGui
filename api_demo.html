@@ -780,7 +780,7 @@ def show_demo():
                 dpg.add_button(label=&#34;Button 3&#34;)
 
             with dpg.tree_node(label=&#34;Absolute Position Placement&#34;):
-                dpg.add_button(label=&#34;Set Button 2 Pos&#34;, callback=lambda: dpg.set_item_pos(B2, x=50, y=125))
+                dpg.add_button(label=&#34;Set Button 2 Pos&#34;, callback=lambda: dpg.set_item_pos(B2, (50, 125)))
                 dpg.add_button(label=&#34;Reset Button 2 Pos&#34;, callback=lambda: dpg.reset_pos(B2))
                 dpg.add_button(label=&#34;Button 1&#34;, pos=[50,50], width=75, height=75)
                 B2 = dpg.add_button(label=&#34;Button 2&#34;, width=75, height=75)
@@ -3249,7 +3249,7 @@ def show_demo():
                 dpg.add_button(label=&#34;Button 3&#34;)
 
             with dpg.tree_node(label=&#34;Absolute Position Placement&#34;):
-                dpg.add_button(label=&#34;Set Button 2 Pos&#34;, callback=lambda: dpg.set_item_pos(B2, x=50, y=125))
+                dpg.add_button(label=&#34;Set Button 2 Pos&#34;, callback=lambda: dpg.set_item_pos(B2, (50, 125)))
                 dpg.add_button(label=&#34;Reset Button 2 Pos&#34;, callback=lambda: dpg.reset_pos(B2))
                 dpg.add_button(label=&#34;Button 1&#34;, pos=[50,50], width=75, height=75)
                 B2 = dpg.add_button(label=&#34;Button 2&#34;, width=75, height=75)

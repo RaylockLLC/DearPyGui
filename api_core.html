@@ -3566,6 +3566,10 @@ Category</li>
 Overrides 'name' as label.</li>
 <li>id : int = 0
 Unique id used to programmatically refer to the item.If label is unused this will be the label.</li>
+<li>width : int = 0
+Width of the item.</li>
+<li>height : int = 0
+Height of the item.</li>
 <li>parent : int = 0
 Parent to add this item to. (runtime adding)</li>
 <li>before : int = 0
@@ -3592,6 +3596,8 @@ Scroll tracking</li>
 User data for callbacks.</li>
 <li>delink_callback : Callable = None
 Callback ran when a link is detached.</li>
+<li>menubar : bool = False
+Shows or hides the menubar.</li>
 </ul></div>
 </dd>
 <dt id="dearpygui.core.add_node_link"><code class="name flex">
