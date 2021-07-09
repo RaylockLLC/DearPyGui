@@ -3947,7 +3947,7 @@ Normalized value to fill the bar from 0.0 to 1.0.</li>
 <p>Optional Arguments</p>
 <hr>
 <ul>
-<li>items : int = ()
+<li>items : List[str] = ()
 A tuple of items to be shown as radio options. Can consist of any combination of types.</li>
 </ul>
 <p>Keyword Arguments</p>
@@ -4753,6 +4753,84 @@ User data for callbacks.</li>
 <p>parent : int = internal_dpg.mvReservedUUID_3
 Parent to add this item to. (runtime adding)</p>
 </li>
+</ul></div>
+</dd>
+<dt id="dearpygui.core.add_subplots"><code class="name flex">
+<span>def <span class="ident">add_subplots</span></span>(<span>...)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Adds a plot which is used to hold series, and can be drawn to with draw commands.</p>
+<p>Return Type: int</p>
+<p>Required Arguments</p>
+<hr>
+<ul>
+<li>
+<p>rows : int</p>
+</li>
+<li>
+<p>columns : int</p>
+</li>
+</ul>
+<p>Keyword Arguments</p>
+<hr>
+<ul>
+<li>label : str = None
+Overrides 'name' as label.</li>
+<li>id : int = 0
+Unique id used to programmatically refer to the item.If label is unused this will be the label.</li>
+<li>width : int = 0
+Width of the item.</li>
+<li>height : int = 0
+Height of the item.</li>
+<li>indent : int = -1
+Offsets the widget to the right the specified number multiplied by the indent style.</li>
+<li>parent : int = 0
+Parent to add this item to. (runtime adding)</li>
+<li>before : int = 0
+This item will be displayed before the specified item in the parent.</li>
+<li>callback : Callable = None
+Registers a callback.</li>
+<li>show : bool = True
+Attempt to render widget.</li>
+<li>pos : List[int] = []
+Places the item relative to window coordinates, [0,0] is top left.</li>
+<li>filter_key : str = ''
+Used by filter widget.</li>
+<li>delay_search : str = False
+Delays searching container for specified items until the end of the app. Possible optimization when a container has many children that are not accessed often.</li>
+<li>tracked : bool = False
+Scroll tracking</li>
+<li>track_offset : float = 0.5
+0.0f:top, 0.5f:center, 1.0f:bottom</li>
+<li>user_data : Any = None
+User data for callbacks.</li>
+<li>
+<p>row_ratios : List[float] = []</p>
+</li>
+<li>
+<p>column_ratios : List[float] = []</p>
+</li>
+<li>
+<p>no_title : bool = False</p>
+</li>
+<li>
+<p>no_menus : bool = False
+the user will not be able to open context menus with right-click</p>
+</li>
+<li>no_resize : bool = False
+resize splitters between subplot cells will be not be provided</li>
+<li>no_align : bool = False
+subplot edges will not be aligned vertically or horizontally</li>
+<li>link_rows : bool = False
+link the y-axis limits of all plots in each row (does not apply auxiliary y-axes)</li>
+<li>link_columns : bool = False
+link the x-axis limits of all plots in each column</li>
+<li>link_all_x : bool = False
+link the x-axis limits in every plot in the subplot</li>
+<li>link_all_y : bool = False
+link the y-axis limits in every plot in the subplot (does not apply to auxiliary y-axes)</li>
+<li>column_major : bool = False
+subplots are added in column major order instead of the default row major order</li>
 </ul></div>
 </dd>
 <dt id="dearpygui.core.add_tab"><code class="name flex">
@@ -6818,6 +6896,14 @@ add explicit dockspace over viewport</li>
 <hr>
 <ul>
 <li>file : str</li>
+</ul>
+<p>Keyword Arguments</p>
+<hr>
+<ul>
+<li>gamma : float = 1.0
+Gamma correction factor. (default is 1.0 to avoid automatic gamma correction on loading.</li>
+<li>gamma_scale_factor : float = 1.0
+Gamma scale factor.</li>
 </ul></div>
 </dd>
 <dt id="dearpygui.core.load_init_file"><code class="name flex">
@@ -7512,6 +7598,7 @@ Minimal delay in in milliseconds</li>
 <li><code><a title="dearpygui.core.add_static_texture" href="#dearpygui.core.add_static_texture">add_static_texture</a></code></li>
 <li><code><a title="dearpygui.core.add_stem_series" href="#dearpygui.core.add_stem_series">add_stem_series</a></code></li>
 <li><code><a title="dearpygui.core.add_string_value" href="#dearpygui.core.add_string_value">add_string_value</a></code></li>
+<li><code><a title="dearpygui.core.add_subplots" href="#dearpygui.core.add_subplots">add_subplots</a></code></li>
 <li><code><a title="dearpygui.core.add_tab" href="#dearpygui.core.add_tab">add_tab</a></code></li>
 <li><code><a title="dearpygui.core.add_tab_bar" href="#dearpygui.core.add_tab_bar">add_tab_bar</a></code></li>
 <li><code><a title="dearpygui.core.add_tab_button" href="#dearpygui.core.add_tab_button">add_tab_button</a></code></li>

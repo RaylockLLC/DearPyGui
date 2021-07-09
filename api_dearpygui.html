@@ -1671,6 +1671,48 @@ def staging_container(*, label: str =None, id: int =0, user_data: Any =None) -&g
         finally:
                 internal_dpg.pop_container_stack()
 @contextmanager
+def subplots(rows : int, columns : int, *, label: str =None, id: int =0, width: int =0, height: int =0, indent: int =-1, parent: int =0, before: int =0, callback: Callable =None, show: bool =True, pos: List[int] =[], filter_key: str =&#39;&#39;, delay_search: str =False, tracked: bool =False, track_offset: float =0.5, user_data: Any =None, row_ratios: List[float] =[], column_ratios: List[float] =[], no_title: bool =False, no_menus: bool =False, no_resize: bool =False, no_align: bool =False, link_rows: bool =False, link_columns: bool =False, link_all_x: bool =False, link_all_y: bool =False, column_major: bool =False) -&gt; int:
+        &#34;&#34;&#34;
+        Adds a plot which is used to hold series, and can be drawn to with draw commands.
+        Args:
+                rows (int): 
+                columns (int): 
+                **label (str): Overrides &#39;name&#39; as label.
+                **id (int): Unique id used to programmatically refer to the item.If label is unused this will be the label.
+                **width (int): Width of the item.
+                **height (int): Height of the item.
+                **indent (int): Offsets the widget to the right the specified number multiplied by the indent style.
+                **parent (int): Parent to add this item to. (runtime adding)
+                **before (int): This item will be displayed before the specified item in the parent.
+                **callback (Callable): Registers a callback.
+                **show (bool): Attempt to render widget.
+                **pos (List[int]): Places the item relative to window coordinates, [0,0] is top left.
+                **filter_key (str): Used by filter widget.
+                **delay_search (str): Delays searching container for specified items until the end of the app. Possible optimization when a container has many children that are not accessed often.
+                **tracked (bool): Scroll tracking
+                **track_offset (float): 0.0f:top, 0.5f:center, 1.0f:bottom
+                **user_data (Any): User data for callbacks.
+                **row_ratios (List[float]): 
+                **column_ratios (List[float]): 
+                **no_title (bool): 
+                **no_menus (bool): the user will not be able to open context menus with right-click
+                **no_resize (bool): resize splitters between subplot cells will be not be provided
+                **no_align (bool): subplot edges will not be aligned vertically or horizontally
+                **link_rows (bool): link the y-axis limits of all plots in each row (does not apply auxiliary y-axes)
+                **link_columns (bool): link the x-axis limits of all plots in each column
+                **link_all_x (bool): link the x-axis limits in every plot in the subplot
+                **link_all_y (bool): link the y-axis limits in every plot in the subplot (does not apply to auxiliary y-axes)
+                **column_major (bool): subplots are added in column major order instead of the default row major order
+        Yields:
+                int
+        &#34;&#34;&#34;
+        try:
+                widget = internal_dpg.add_subplots(rows, columns, label=label, id=id, width=width, height=height, indent=indent, parent=parent, before=before, callback=callback, show=show, pos=pos, filter_key=filter_key, delay_search=delay_search, tracked=tracked, track_offset=track_offset, user_data=user_data, row_ratios=row_ratios, column_ratios=column_ratios, no_title=no_title, no_menus=no_menus, no_resize=no_resize, no_align=no_align, link_rows=link_rows, link_columns=link_columns, link_all_x=link_all_x, link_all_y=link_all_y, column_major=column_major)
+                internal_dpg.push_container_stack(widget)
+                yield widget
+        finally:
+                internal_dpg.pop_container_stack()
+@contextmanager
 def tab(*, label: str =None, id: int =0, indent: int =-1, parent: int =0, before: int =0, payload_type: str =&#39;$$DPG_PAYLOAD&#39;, drag_callback: Callable =None, drop_callback: Callable =None, show: bool =True, filter_key: str =&#39;&#39;, delay_search: str =False, tracked: bool =False, track_offset: float =0.5, user_data: Any =None, closable: bool =False, no_tooltip: bool =False, order_mode: bool =0) -&gt; int:
         &#34;&#34;&#34;
         Adds a tab to a tab bar. Must be closed with thes end command.
@@ -4203,11 +4245,11 @@ def add_progress_bar(*, label: str =None, id: int =0, width: int =0, height: int
 
         return internal_dpg.add_progress_bar(label=label, id=id, width=width, height=height, indent=indent, parent=parent, before=before, source=source, payload_type=payload_type, drag_callback=drag_callback, drop_callback=drop_callback, show=show, pos=pos, filter_key=filter_key, tracked=tracked, track_offset=track_offset, user_data=user_data, overlay=overlay, default_value=default_value)
 
-def add_radio_button(items : int =(), *, label: str =None, id: int =0, indent: int =-1, parent: int =0, before: int =0, source: int =0, payload_type: str =&#39;$$DPG_PAYLOAD&#39;, callback: Callable =None, drag_callback: Callable =None, drop_callback: Callable =None, show: bool =True, enabled: bool =True, pos: List[int] =[], filter_key: str =&#39;&#39;, tracked: bool =False, track_offset: float =0.5, user_data: Any =None, default_value: str =&#39;&#39;, horizontal: bool =False) -&gt; int:
+def add_radio_button(items : List[str] =(), *, label: str =None, id: int =0, indent: int =-1, parent: int =0, before: int =0, source: int =0, payload_type: str =&#39;$$DPG_PAYLOAD&#39;, callback: Callable =None, drag_callback: Callable =None, drop_callback: Callable =None, show: bool =True, enabled: bool =True, pos: List[int] =[], filter_key: str =&#39;&#39;, tracked: bool =False, track_offset: float =0.5, user_data: Any =None, default_value: str =&#39;&#39;, horizontal: bool =False) -&gt; int:
         &#34;&#34;&#34;
         Adds a set of radio buttons. If items keyword is empty, nothing will be shown.
         Args:
-                *items (int): A tuple of items to be shown as radio options. Can consist of any combination of types.
+                *items (List[str]): A tuple of items to be shown as radio options. Can consist of any combination of types.
                 **label (str): Overrides &#39;name&#39; as label.
                 **id (int): Unique id used to programmatically refer to the item.If label is unused this will be the label.
                 **indent (int): Offsets the widget to the right the specified number multiplied by the indent style.
@@ -4665,6 +4707,44 @@ def add_string_value(*, label: str =None, id: int =0, source: int =0, user_data:
         &#34;&#34;&#34;
 
         return internal_dpg.add_string_value(label=label, id=id, source=source, user_data=user_data, default_value=default_value, parent=parent)
+
+def add_subplots(rows : int, columns : int, *, label: str =None, id: int =0, width: int =0, height: int =0, indent: int =-1, parent: int =0, before: int =0, callback: Callable =None, show: bool =True, pos: List[int] =[], filter_key: str =&#39;&#39;, delay_search: str =False, tracked: bool =False, track_offset: float =0.5, user_data: Any =None, row_ratios: List[float] =[], column_ratios: List[float] =[], no_title: bool =False, no_menus: bool =False, no_resize: bool =False, no_align: bool =False, link_rows: bool =False, link_columns: bool =False, link_all_x: bool =False, link_all_y: bool =False, column_major: bool =False) -&gt; int:
+        &#34;&#34;&#34;
+        Adds a plot which is used to hold series, and can be drawn to with draw commands.
+        Args:
+                rows (int): 
+                columns (int): 
+                **label (str): Overrides &#39;name&#39; as label.
+                **id (int): Unique id used to programmatically refer to the item.If label is unused this will be the label.
+                **width (int): Width of the item.
+                **height (int): Height of the item.
+                **indent (int): Offsets the widget to the right the specified number multiplied by the indent style.
+                **parent (int): Parent to add this item to. (runtime adding)
+                **before (int): This item will be displayed before the specified item in the parent.
+                **callback (Callable): Registers a callback.
+                **show (bool): Attempt to render widget.
+                **pos (List[int]): Places the item relative to window coordinates, [0,0] is top left.
+                **filter_key (str): Used by filter widget.
+                **delay_search (str): Delays searching container for specified items until the end of the app. Possible optimization when a container has many children that are not accessed often.
+                **tracked (bool): Scroll tracking
+                **track_offset (float): 0.0f:top, 0.5f:center, 1.0f:bottom
+                **user_data (Any): User data for callbacks.
+                **row_ratios (List[float]): 
+                **column_ratios (List[float]): 
+                **no_title (bool): 
+                **no_menus (bool): the user will not be able to open context menus with right-click
+                **no_resize (bool): resize splitters between subplot cells will be not be provided
+                **no_align (bool): subplot edges will not be aligned vertically or horizontally
+                **link_rows (bool): link the y-axis limits of all plots in each row (does not apply auxiliary y-axes)
+                **link_columns (bool): link the x-axis limits of all plots in each column
+                **link_all_x (bool): link the x-axis limits in every plot in the subplot
+                **link_all_y (bool): link the y-axis limits in every plot in the subplot (does not apply to auxiliary y-axes)
+                **column_major (bool): subplots are added in column major order instead of the default row major order
+        Returns:
+                int
+        &#34;&#34;&#34;
+
+        return internal_dpg.add_subplots(rows, columns, label=label, id=id, width=width, height=height, indent=indent, parent=parent, before=before, callback=callback, show=show, pos=pos, filter_key=filter_key, delay_search=delay_search, tracked=tracked, track_offset=track_offset, user_data=user_data, row_ratios=row_ratios, column_ratios=column_ratios, no_title=no_title, no_menus=no_menus, no_resize=no_resize, no_align=no_align, link_rows=link_rows, link_columns=link_columns, link_all_x=link_all_x, link_all_y=link_all_y, column_major=column_major)
 
 def add_tab(*, label: str =None, id: int =0, indent: int =-1, parent: int =0, before: int =0, payload_type: str =&#39;$$DPG_PAYLOAD&#39;, drag_callback: Callable =None, drop_callback: Callable =None, show: bool =True, filter_key: str =&#39;&#39;, delay_search: str =False, tracked: bool =False, track_offset: float =0.5, user_data: Any =None, closable: bool =False, no_tooltip: bool =False, order_mode: bool =0) -&gt; int:
         &#34;&#34;&#34;
@@ -6048,16 +6128,18 @@ def last_root() -&gt; int:
 
         return internal_dpg.last_root()
 
-def load_image(file : str) -&gt; Any:
+def load_image(file : str, *, gamma: float =1.0, gamma_scale_factor: float =1.0) -&gt; Any:
         &#34;&#34;&#34;
         Loads an image. Returns width, height, channels, mvBuffer
         Args:
                 file (str): 
+                **gamma (float): Gamma correction factor. (default is 1.0 to avoid automatic gamma correction on loading.
+                **gamma_scale_factor (float): Gamma scale factor.
         Returns:
                 Any
         &#34;&#34;&#34;
 
-        return internal_dpg.load_image(file)
+        return internal_dpg.load_image(file, gamma=gamma, gamma_scale_factor=gamma_scale_factor)
 
 def lock_mutex() -&gt; None:
         &#34;&#34;&#34;
@@ -7084,6 +7166,7 @@ mvSeriesValue=internal_dpg.mvSeriesValue
 mvRawTexture=internal_dpg.mvRawTexture
 mvFormat_Float_rgba=internal_dpg.mvFormat_Float_rgba
 mvFormat_Float_rgb=internal_dpg.mvFormat_Float_rgb
+mvSubPlots=internal_dpg.mvSubPlots
 mvReservedUUID_0=internal_dpg.mvReservedUUID_0
 mvReservedUUID_1=internal_dpg.mvReservedUUID_1
 mvReservedUUID_2=internal_dpg.mvReservedUUID_2
@@ -13231,13 +13314,13 @@ mvReservedUUID_9=internal_dpg.mvReservedUUID_9</code></pre>
 </details>
 </dd>
 <dt id="dearpygui.dearpygui.add_radio_button"><code class="name flex">
-<span>def <span class="ident">add_radio_button</span></span>(<span>items: int = (), *, label: str = None, id: int = 0, indent: int = -1, parent: int = 0, before: int = 0, source: int = 0, payload_type: str = '$$DPG_PAYLOAD', callback: Callable = None, drag_callback: Callable = None, drop_callback: Callable = None, show: bool = True, enabled: bool = True, pos: List[int] = [], filter_key: str = '', tracked: bool = False, track_offset: float = 0.5, user_data: Any = None, default_value: str = '', horizontal: bool = False) ‑> int</span>
+<span>def <span class="ident">add_radio_button</span></span>(<span>items: List[str] = (), *, label: str = None, id: int = 0, indent: int = -1, parent: int = 0, before: int = 0, source: int = 0, payload_type: str = '$$DPG_PAYLOAD', callback: Callable = None, drag_callback: Callable = None, drop_callback: Callable = None, show: bool = True, enabled: bool = True, pos: List[int] = [], filter_key: str = '', tracked: bool = False, track_offset: float = 0.5, user_data: Any = None, default_value: str = '', horizontal: bool = False) ‑> int</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Adds a set of radio buttons. If items keyword is empty, nothing will be shown.</p>
 <h2 id="args">Args</h2>
 <dl>
-<dt><strong><code>*items</code></strong> :&ensp;<code>int</code></dt>
+<dt><strong><code>*items</code></strong> :&ensp;<code>List[str]</code></dt>
 <dd>A tuple of items to be shown as radio options. Can consist of any combination of types.</dd>
 <dt><strong><code>**label</code></strong> :&ensp;<code>str</code></dt>
 <dd>Overrides 'name' as label.</dd>
@@ -13284,11 +13367,11 @@ mvReservedUUID_9=internal_dpg.mvReservedUUID_9</code></pre>
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def add_radio_button(items : int =(), *, label: str =None, id: int =0, indent: int =-1, parent: int =0, before: int =0, source: int =0, payload_type: str =&#39;$$DPG_PAYLOAD&#39;, callback: Callable =None, drag_callback: Callable =None, drop_callback: Callable =None, show: bool =True, enabled: bool =True, pos: List[int] =[], filter_key: str =&#39;&#39;, tracked: bool =False, track_offset: float =0.5, user_data: Any =None, default_value: str =&#39;&#39;, horizontal: bool =False) -&gt; int:
+<pre><code class="python">def add_radio_button(items : List[str] =(), *, label: str =None, id: int =0, indent: int =-1, parent: int =0, before: int =0, source: int =0, payload_type: str =&#39;$$DPG_PAYLOAD&#39;, callback: Callable =None, drag_callback: Callable =None, drop_callback: Callable =None, show: bool =True, enabled: bool =True, pos: List[int] =[], filter_key: str =&#39;&#39;, tracked: bool =False, track_offset: float =0.5, user_data: Any =None, default_value: str =&#39;&#39;, horizontal: bool =False) -&gt; int:
         &#34;&#34;&#34;
         Adds a set of radio buttons. If items keyword is empty, nothing will be shown.
         Args:
-                *items (int): A tuple of items to be shown as radio options. Can consist of any combination of types.
+                *items (List[str]): A tuple of items to be shown as radio options. Can consist of any combination of types.
                 **label (str): Overrides &#39;name&#39; as label.
                 **id (int): Unique id used to programmatically refer to the item.If label is unused this will be the label.
                 **indent (int): Offsets the widget to the right the specified number multiplied by the indent style.
@@ -14517,6 +14600,115 @@ mvReservedUUID_9=internal_dpg.mvReservedUUID_9</code></pre>
         &#34;&#34;&#34;
 
         return internal_dpg.add_string_value(label=label, id=id, source=source, user_data=user_data, default_value=default_value, parent=parent)</code></pre>
+</details>
+</dd>
+<dt id="dearpygui.dearpygui.add_subplots"><code class="name flex">
+<span>def <span class="ident">add_subplots</span></span>(<span>rows: int, columns: int, *, label: str = None, id: int = 0, width: int = 0, height: int = 0, indent: int = -1, parent: int = 0, before: int = 0, callback: Callable = None, show: bool = True, pos: List[int] = [], filter_key: str = '', delay_search: str = False, tracked: bool = False, track_offset: float = 0.5, user_data: Any = None, row_ratios: List[float] = [], column_ratios: List[float] = [], no_title: bool = False, no_menus: bool = False, no_resize: bool = False, no_align: bool = False, link_rows: bool = False, link_columns: bool = False, link_all_x: bool = False, link_all_y: bool = False, column_major: bool = False) ‑> int</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Adds a plot which is used to hold series, and can be drawn to with draw commands.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>rows</code></strong> :&ensp;<code>int</code></dt>
+<dd>&nbsp;</dd>
+<dt><strong><code>columns</code></strong> :&ensp;<code>int</code></dt>
+<dd>&nbsp;</dd>
+<dt><strong><code>**label</code></strong> :&ensp;<code>str</code></dt>
+<dd>Overrides 'name' as label.</dd>
+<dt><strong><code>**id</code></strong> :&ensp;<code>int</code></dt>
+<dd>Unique id used to programmatically refer to the item.If label is unused this will be the label.</dd>
+<dt><strong><code>**width</code></strong> :&ensp;<code>int</code></dt>
+<dd>Width of the item.</dd>
+<dt><strong><code>**height</code></strong> :&ensp;<code>int</code></dt>
+<dd>Height of the item.</dd>
+<dt><strong><code>**indent</code></strong> :&ensp;<code>int</code></dt>
+<dd>Offsets the widget to the right the specified number multiplied by the indent style.</dd>
+<dt><strong><code>**parent</code></strong> :&ensp;<code>int</code></dt>
+<dd>Parent to add this item to. (runtime adding)</dd>
+<dt><strong><code>**before</code></strong> :&ensp;<code>int</code></dt>
+<dd>This item will be displayed before the specified item in the parent.</dd>
+<dt><strong><code>**callback</code></strong> :&ensp;<code>Callable</code></dt>
+<dd>Registers a callback.</dd>
+<dt><strong><code>**show</code></strong> :&ensp;<code>bool</code></dt>
+<dd>Attempt to render widget.</dd>
+<dt><strong><code>**pos</code></strong> :&ensp;<code>List[int]</code></dt>
+<dd>Places the item relative to window coordinates, [0,0] is top left.</dd>
+<dt><strong><code>**filter_key</code></strong> :&ensp;<code>str</code></dt>
+<dd>Used by filter widget.</dd>
+<dt><strong><code>**delay_search</code></strong> :&ensp;<code>str</code></dt>
+<dd>Delays searching container for specified items until the end of the app. Possible optimization when a container has many children that are not accessed often.</dd>
+<dt><strong><code>**tracked</code></strong> :&ensp;<code>bool</code></dt>
+<dd>Scroll tracking</dd>
+<dt><strong><code>**track_offset</code></strong> :&ensp;<code>float</code></dt>
+<dd>0.0f:top, 0.5f:center, 1.0f:bottom</dd>
+<dt><strong><code>**user_data</code></strong> :&ensp;<code>Any</code></dt>
+<dd>User data for callbacks.</dd>
+<dt><strong><code>**row_ratios</code></strong> :&ensp;<code>List[float]</code></dt>
+<dd>&nbsp;</dd>
+<dt><strong><code>**column_ratios</code></strong> :&ensp;<code>List[float]</code></dt>
+<dd>&nbsp;</dd>
+<dt><strong><code>**no_title</code></strong> :&ensp;<code>bool</code></dt>
+<dd>&nbsp;</dd>
+<dt><strong><code>**no_menus</code></strong> :&ensp;<code>bool</code></dt>
+<dd>the user will not be able to open context menus with right-click</dd>
+<dt><strong><code>**no_resize</code></strong> :&ensp;<code>bool</code></dt>
+<dd>resize splitters between subplot cells will be not be provided</dd>
+<dt><strong><code>**no_align</code></strong> :&ensp;<code>bool</code></dt>
+<dd>subplot edges will not be aligned vertically or horizontally</dd>
+<dt><strong><code>**link_rows</code></strong> :&ensp;<code>bool</code></dt>
+<dd>link the y-axis limits of all plots in each row (does not apply auxiliary y-axes)</dd>
+<dt><strong><code>**link_columns</code></strong> :&ensp;<code>bool</code></dt>
+<dd>link the x-axis limits of all plots in each column</dd>
+<dt><strong><code>**link_all_x</code></strong> :&ensp;<code>bool</code></dt>
+<dd>link the x-axis limits in every plot in the subplot</dd>
+<dt><strong><code>**link_all_y</code></strong> :&ensp;<code>bool</code></dt>
+<dd>link the y-axis limits in every plot in the subplot (does not apply to auxiliary y-axes)</dd>
+<dt><strong><code>**column_major</code></strong> :&ensp;<code>bool</code></dt>
+<dd>subplots are added in column major order instead of the default row major order</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>int</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def add_subplots(rows : int, columns : int, *, label: str =None, id: int =0, width: int =0, height: int =0, indent: int =-1, parent: int =0, before: int =0, callback: Callable =None, show: bool =True, pos: List[int] =[], filter_key: str =&#39;&#39;, delay_search: str =False, tracked: bool =False, track_offset: float =0.5, user_data: Any =None, row_ratios: List[float] =[], column_ratios: List[float] =[], no_title: bool =False, no_menus: bool =False, no_resize: bool =False, no_align: bool =False, link_rows: bool =False, link_columns: bool =False, link_all_x: bool =False, link_all_y: bool =False, column_major: bool =False) -&gt; int:
+        &#34;&#34;&#34;
+        Adds a plot which is used to hold series, and can be drawn to with draw commands.
+        Args:
+                rows (int): 
+                columns (int): 
+                **label (str): Overrides &#39;name&#39; as label.
+                **id (int): Unique id used to programmatically refer to the item.If label is unused this will be the label.
+                **width (int): Width of the item.
+                **height (int): Height of the item.
+                **indent (int): Offsets the widget to the right the specified number multiplied by the indent style.
+                **parent (int): Parent to add this item to. (runtime adding)
+                **before (int): This item will be displayed before the specified item in the parent.
+                **callback (Callable): Registers a callback.
+                **show (bool): Attempt to render widget.
+                **pos (List[int]): Places the item relative to window coordinates, [0,0] is top left.
+                **filter_key (str): Used by filter widget.
+                **delay_search (str): Delays searching container for specified items until the end of the app. Possible optimization when a container has many children that are not accessed often.
+                **tracked (bool): Scroll tracking
+                **track_offset (float): 0.0f:top, 0.5f:center, 1.0f:bottom
+                **user_data (Any): User data for callbacks.
+                **row_ratios (List[float]): 
+                **column_ratios (List[float]): 
+                **no_title (bool): 
+                **no_menus (bool): the user will not be able to open context menus with right-click
+                **no_resize (bool): resize splitters between subplot cells will be not be provided
+                **no_align (bool): subplot edges will not be aligned vertically or horizontally
+                **link_rows (bool): link the y-axis limits of all plots in each row (does not apply auxiliary y-axes)
+                **link_columns (bool): link the x-axis limits of all plots in each column
+                **link_all_x (bool): link the x-axis limits in every plot in the subplot
+                **link_all_y (bool): link the y-axis limits in every plot in the subplot (does not apply to auxiliary y-axes)
+                **column_major (bool): subplots are added in column major order instead of the default row major order
+        Returns:
+                int
+        &#34;&#34;&#34;
+
+        return internal_dpg.add_subplots(rows, columns, label=label, id=id, width=width, height=height, indent=indent, parent=parent, before=before, callback=callback, show=show, pos=pos, filter_key=filter_key, delay_search=delay_search, tracked=tracked, track_offset=track_offset, user_data=user_data, row_ratios=row_ratios, column_ratios=column_ratios, no_title=no_title, no_menus=no_menus, no_resize=no_resize, no_align=no_align, link_rows=link_rows, link_columns=link_columns, link_all_x=link_all_x, link_all_y=link_all_y, column_major=column_major)</code></pre>
 </details>
 </dd>
 <dt id="dearpygui.dearpygui.add_tab"><code class="name flex">
@@ -20234,7 +20426,7 @@ Args:</p>
 </details>
 </dd>
 <dt id="dearpygui.dearpygui.load_image"><code class="name flex">
-<span>def <span class="ident">load_image</span></span>(<span>file: str) ‑> Any</span>
+<span>def <span class="ident">load_image</span></span>(<span>file: str, *, gamma: float = 1.0, gamma_scale_factor: float = 1.0) ‑> Any</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Loads an image. Returns width, height, channels, mvBuffer</p>
@@ -20242,6 +20434,10 @@ Args:</p>
 <dl>
 <dt><strong><code>file</code></strong> :&ensp;<code>str</code></dt>
 <dd>&nbsp;</dd>
+<dt><strong><code>**gamma</code></strong> :&ensp;<code>float</code></dt>
+<dd>Gamma correction factor. (default is 1.0 to avoid automatic gamma correction on loading.</dd>
+<dt><strong><code>**gamma_scale_factor</code></strong> :&ensp;<code>float</code></dt>
+<dd>Gamma scale factor.</dd>
 </dl>
 <h2 id="returns">Returns</h2>
 <p>Any</p></div>
@@ -20249,16 +20445,18 @@ Args:</p>
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def load_image(file : str) -&gt; Any:
+<pre><code class="python">def load_image(file : str, *, gamma: float =1.0, gamma_scale_factor: float =1.0) -&gt; Any:
         &#34;&#34;&#34;
         Loads an image. Returns width, height, channels, mvBuffer
         Args:
                 file (str): 
+                **gamma (float): Gamma correction factor. (default is 1.0 to avoid automatic gamma correction on loading.
+                **gamma_scale_factor (float): Gamma scale factor.
         Returns:
                 Any
         &#34;&#34;&#34;
 
-        return internal_dpg.load_image(file)</code></pre>
+        return internal_dpg.load_image(file, gamma=gamma, gamma_scale_factor=gamma_scale_factor)</code></pre>
 </details>
 </dd>
 <dt id="dearpygui.dearpygui.lock_mutex"><code class="name flex">
@@ -22890,6 +23088,120 @@ Args:</p>
         return internal_dpg.stop_dearpygui()</code></pre>
 </details>
 </dd>
+<dt id="dearpygui.dearpygui.subplots"><code class="name flex">
+<span>def <span class="ident">subplots</span></span>(<span>rows: int, columns: int, *, label: str = None, id: int = 0, width: int = 0, height: int = 0, indent: int = -1, parent: int = 0, before: int = 0, callback: Callable = None, show: bool = True, pos: List[int] = [], filter_key: str = '', delay_search: str = False, tracked: bool = False, track_offset: float = 0.5, user_data: Any = None, row_ratios: List[float] = [], column_ratios: List[float] = [], no_title: bool = False, no_menus: bool = False, no_resize: bool = False, no_align: bool = False, link_rows: bool = False, link_columns: bool = False, link_all_x: bool = False, link_all_y: bool = False, column_major: bool = False) ‑> int</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Adds a plot which is used to hold series, and can be drawn to with draw commands.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>rows</code></strong> :&ensp;<code>int</code></dt>
+<dd>&nbsp;</dd>
+<dt><strong><code>columns</code></strong> :&ensp;<code>int</code></dt>
+<dd>&nbsp;</dd>
+<dt><strong><code>**label</code></strong> :&ensp;<code>str</code></dt>
+<dd>Overrides 'name' as label.</dd>
+<dt><strong><code>**id</code></strong> :&ensp;<code>int</code></dt>
+<dd>Unique id used to programmatically refer to the item.If label is unused this will be the label.</dd>
+<dt><strong><code>**width</code></strong> :&ensp;<code>int</code></dt>
+<dd>Width of the item.</dd>
+<dt><strong><code>**height</code></strong> :&ensp;<code>int</code></dt>
+<dd>Height of the item.</dd>
+<dt><strong><code>**indent</code></strong> :&ensp;<code>int</code></dt>
+<dd>Offsets the widget to the right the specified number multiplied by the indent style.</dd>
+<dt><strong><code>**parent</code></strong> :&ensp;<code>int</code></dt>
+<dd>Parent to add this item to. (runtime adding)</dd>
+<dt><strong><code>**before</code></strong> :&ensp;<code>int</code></dt>
+<dd>This item will be displayed before the specified item in the parent.</dd>
+<dt><strong><code>**callback</code></strong> :&ensp;<code>Callable</code></dt>
+<dd>Registers a callback.</dd>
+<dt><strong><code>**show</code></strong> :&ensp;<code>bool</code></dt>
+<dd>Attempt to render widget.</dd>
+<dt><strong><code>**pos</code></strong> :&ensp;<code>List[int]</code></dt>
+<dd>Places the item relative to window coordinates, [0,0] is top left.</dd>
+<dt><strong><code>**filter_key</code></strong> :&ensp;<code>str</code></dt>
+<dd>Used by filter widget.</dd>
+<dt><strong><code>**delay_search</code></strong> :&ensp;<code>str</code></dt>
+<dd>Delays searching container for specified items until the end of the app. Possible optimization when a container has many children that are not accessed often.</dd>
+<dt><strong><code>**tracked</code></strong> :&ensp;<code>bool</code></dt>
+<dd>Scroll tracking</dd>
+<dt><strong><code>**track_offset</code></strong> :&ensp;<code>float</code></dt>
+<dd>0.0f:top, 0.5f:center, 1.0f:bottom</dd>
+<dt><strong><code>**user_data</code></strong> :&ensp;<code>Any</code></dt>
+<dd>User data for callbacks.</dd>
+<dt><strong><code>**row_ratios</code></strong> :&ensp;<code>List[float]</code></dt>
+<dd>&nbsp;</dd>
+<dt><strong><code>**column_ratios</code></strong> :&ensp;<code>List[float]</code></dt>
+<dd>&nbsp;</dd>
+<dt><strong><code>**no_title</code></strong> :&ensp;<code>bool</code></dt>
+<dd>&nbsp;</dd>
+<dt><strong><code>**no_menus</code></strong> :&ensp;<code>bool</code></dt>
+<dd>the user will not be able to open context menus with right-click</dd>
+<dt><strong><code>**no_resize</code></strong> :&ensp;<code>bool</code></dt>
+<dd>resize splitters between subplot cells will be not be provided</dd>
+<dt><strong><code>**no_align</code></strong> :&ensp;<code>bool</code></dt>
+<dd>subplot edges will not be aligned vertically or horizontally</dd>
+<dt><strong><code>**link_rows</code></strong> :&ensp;<code>bool</code></dt>
+<dd>link the y-axis limits of all plots in each row (does not apply auxiliary y-axes)</dd>
+<dt><strong><code>**link_columns</code></strong> :&ensp;<code>bool</code></dt>
+<dd>link the x-axis limits of all plots in each column</dd>
+<dt><strong><code>**link_all_x</code></strong> :&ensp;<code>bool</code></dt>
+<dd>link the x-axis limits in every plot in the subplot</dd>
+<dt><strong><code>**link_all_y</code></strong> :&ensp;<code>bool</code></dt>
+<dd>link the y-axis limits in every plot in the subplot (does not apply to auxiliary y-axes)</dd>
+<dt><strong><code>**column_major</code></strong> :&ensp;<code>bool</code></dt>
+<dd>subplots are added in column major order instead of the default row major order</dd>
+</dl>
+<h2 id="yields">Yields</h2>
+<p>int</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@contextmanager
+def subplots(rows : int, columns : int, *, label: str =None, id: int =0, width: int =0, height: int =0, indent: int =-1, parent: int =0, before: int =0, callback: Callable =None, show: bool =True, pos: List[int] =[], filter_key: str =&#39;&#39;, delay_search: str =False, tracked: bool =False, track_offset: float =0.5, user_data: Any =None, row_ratios: List[float] =[], column_ratios: List[float] =[], no_title: bool =False, no_menus: bool =False, no_resize: bool =False, no_align: bool =False, link_rows: bool =False, link_columns: bool =False, link_all_x: bool =False, link_all_y: bool =False, column_major: bool =False) -&gt; int:
+        &#34;&#34;&#34;
+        Adds a plot which is used to hold series, and can be drawn to with draw commands.
+        Args:
+                rows (int): 
+                columns (int): 
+                **label (str): Overrides &#39;name&#39; as label.
+                **id (int): Unique id used to programmatically refer to the item.If label is unused this will be the label.
+                **width (int): Width of the item.
+                **height (int): Height of the item.
+                **indent (int): Offsets the widget to the right the specified number multiplied by the indent style.
+                **parent (int): Parent to add this item to. (runtime adding)
+                **before (int): This item will be displayed before the specified item in the parent.
+                **callback (Callable): Registers a callback.
+                **show (bool): Attempt to render widget.
+                **pos (List[int]): Places the item relative to window coordinates, [0,0] is top left.
+                **filter_key (str): Used by filter widget.
+                **delay_search (str): Delays searching container for specified items until the end of the app. Possible optimization when a container has many children that are not accessed often.
+                **tracked (bool): Scroll tracking
+                **track_offset (float): 0.0f:top, 0.5f:center, 1.0f:bottom
+                **user_data (Any): User data for callbacks.
+                **row_ratios (List[float]): 
+                **column_ratios (List[float]): 
+                **no_title (bool): 
+                **no_menus (bool): the user will not be able to open context menus with right-click
+                **no_resize (bool): resize splitters between subplot cells will be not be provided
+                **no_align (bool): subplot edges will not be aligned vertically or horizontally
+                **link_rows (bool): link the y-axis limits of all plots in each row (does not apply auxiliary y-axes)
+                **link_columns (bool): link the x-axis limits of all plots in each column
+                **link_all_x (bool): link the x-axis limits in every plot in the subplot
+                **link_all_y (bool): link the y-axis limits in every plot in the subplot (does not apply to auxiliary y-axes)
+                **column_major (bool): subplots are added in column major order instead of the default row major order
+        Yields:
+                int
+        &#34;&#34;&#34;
+        try:
+                widget = internal_dpg.add_subplots(rows, columns, label=label, id=id, width=width, height=height, indent=indent, parent=parent, before=before, callback=callback, show=show, pos=pos, filter_key=filter_key, delay_search=delay_search, tracked=tracked, track_offset=track_offset, user_data=user_data, row_ratios=row_ratios, column_ratios=column_ratios, no_title=no_title, no_menus=no_menus, no_resize=no_resize, no_align=no_align, link_rows=link_rows, link_columns=link_columns, link_all_x=link_all_x, link_all_y=link_all_y, column_major=column_major)
+                internal_dpg.push_container_stack(widget)
+                yield widget
+        finally:
+                internal_dpg.pop_container_stack()</code></pre>
+</details>
+</dd>
 <dt id="dearpygui.dearpygui.tab"><code class="name flex">
 <span>def <span class="ident">tab</span></span>(<span>*, label: str = None, id: int = 0, indent: int = -1, parent: int = 0, before: int = 0, payload_type: str = '$$DPG_PAYLOAD', drag_callback: Callable = None, drop_callback: Callable = None, show: bool = True, filter_key: str = '', delay_search: str = False, tracked: bool = False, track_offset: float = 0.5, user_data: Any = None, closable: bool = False, no_tooltip: bool = False, order_mode: bool = 0) ‑> int</span>
 </code></dt>
@@ -24011,6 +24323,7 @@ def window(*, label: str =None, id: int =0, width: int =0, height: int =0, inden
 <li><code><a title="dearpygui.dearpygui.add_static_texture" href="#dearpygui.dearpygui.add_static_texture">add_static_texture</a></code></li>
 <li><code><a title="dearpygui.dearpygui.add_stem_series" href="#dearpygui.dearpygui.add_stem_series">add_stem_series</a></code></li>
 <li><code><a title="dearpygui.dearpygui.add_string_value" href="#dearpygui.dearpygui.add_string_value">add_string_value</a></code></li>
+<li><code><a title="dearpygui.dearpygui.add_subplots" href="#dearpygui.dearpygui.add_subplots">add_subplots</a></code></li>
 <li><code><a title="dearpygui.dearpygui.add_tab" href="#dearpygui.dearpygui.add_tab">add_tab</a></code></li>
 <li><code><a title="dearpygui.dearpygui.add_tab_bar" href="#dearpygui.dearpygui.add_tab_bar">add_tab_bar</a></code></li>
 <li><code><a title="dearpygui.dearpygui.add_tab_button" href="#dearpygui.dearpygui.add_tab_button">add_tab_button</a></code></li>
@@ -24265,6 +24578,7 @@ def window(*, label: str =None, id: int =0, width: int =0, height: int =0, inden
 <li><code><a title="dearpygui.dearpygui.staging_container" href="#dearpygui.dearpygui.staging_container">staging_container</a></code></li>
 <li><code><a title="dearpygui.dearpygui.start_dearpygui" href="#dearpygui.dearpygui.start_dearpygui">start_dearpygui</a></code></li>
 <li><code><a title="dearpygui.dearpygui.stop_dearpygui" href="#dearpygui.dearpygui.stop_dearpygui">stop_dearpygui</a></code></li>
+<li><code><a title="dearpygui.dearpygui.subplots" href="#dearpygui.dearpygui.subplots">subplots</a></code></li>
 <li><code><a title="dearpygui.dearpygui.tab" href="#dearpygui.dearpygui.tab">tab</a></code></li>
 <li><code><a title="dearpygui.dearpygui.tab_bar" href="#dearpygui.dearpygui.tab_bar">tab_bar</a></code></li>
 <li><code><a title="dearpygui.dearpygui.table" href="#dearpygui.dearpygui.table">table</a></code></li>
