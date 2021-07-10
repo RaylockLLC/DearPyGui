@@ -87,7 +87,7 @@ with open('api_demo.html', 'w') as f:
 ############################################################
 # THEMES
 # opening the simple file to scan for where to insert the logo
-with open('html\dearpygui\themes.html', 'r') as f:
+with open('html\\dearpygui\\themes.html', 'r') as f:
     api_html = f.readlines()
 for index, line in enumerate(api_html):
     if line == '<body>\n':
