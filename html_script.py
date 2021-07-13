@@ -114,7 +114,7 @@ with open('api_themes.html', 'w') as f:
 ############################################################
 # CORE
 # opening the core file to scan for where to insert the logo
-with open('html\dearpygui\core.html', 'r') as f:
+with open('html\dearpygui\_dearpygui.html', 'r') as f:
     api_html = f.readlines()
 for index, line in enumerate(api_html):
     if line == '<body>\n':
@@ -136,7 +136,7 @@ api_html.pop(index)
 api_html.insert(index, '<li><code><a title="dearpygui" href="index.html">dearpygui</a></code></li>\n')
 
 # writing the final api docs with logo
-with open('api_core.html', 'w') as f:
+with open('api__dearpygui.html', 'w') as f:
     f.writelines(api_html)
 
 # INDEX/HOMEPAGE
