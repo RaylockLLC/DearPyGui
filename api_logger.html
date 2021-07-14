@@ -33,12 +33,15 @@
 
 class mvLogger:
 
-    def __init__(self):
+    def __init__(self, parent=None):
         
         self.log_level = 0
         self._auto_scroll = True
         self.filter_id = None
-        self.window_id = dpg.add_window(label=&#34;mvLogger&#34;, pos=(200, 200), width=500, height=500)
+        if window:
+            self.window_id = parent
+        else:
+            self.window_id = dpg.add_window(label=&#34;mvLogger&#34;, pos=(200, 200), width=500, height=500)
         self.count = 0
         self.flush_count = 1000
 
@@ -142,6 +145,7 @@ class mvLogger:
 <dl>
 <dt id="dearpygui.logger.mvLogger"><code class="flex name class">
 <span>class <span class="ident">mvLogger</span></span>
+<span>(</span><span>parent=None)</span>
 </code></dt>
 <dd>
 <div class="desc"></div>
@@ -151,12 +155,15 @@ class mvLogger:
 </summary>
 <pre><code class="python">class mvLogger:
 
-    def __init__(self):
+    def __init__(self, parent=None):
         
         self.log_level = 0
         self._auto_scroll = True
         self.filter_id = None
-        self.window_id = dpg.add_window(label=&#34;mvLogger&#34;, pos=(200, 200), width=500, height=500)
+        if window:
+            self.window_id = parent
+        else:
+            self.window_id = dpg.add_window(label=&#34;mvLogger&#34;, pos=(200, 200), width=500, height=500)
         self.count = 0
         self.flush_count = 1000
 
