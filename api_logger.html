@@ -38,7 +38,7 @@ class mvLogger:
         self.log_level = 0
         self._auto_scroll = True
         self.filter_id = None
-        if window:
+        if parent:
             self.window_id = parent
         else:
             self.window_id = dpg.add_window(label=&#34;mvLogger&#34;, pos=(200, 200), width=500, height=500)
@@ -160,7 +160,7 @@ class mvLogger:
         self.log_level = 0
         self._auto_scroll = True
         self.filter_id = None
-        if window:
+        if parent:
             self.window_id = parent
         else:
             self.window_id = dpg.add_window(label=&#34;mvLogger&#34;, pos=(200, 200), width=500, height=500)
