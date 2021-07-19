@@ -848,7 +848,7 @@ def set_viewport_pos(pos: List[float]):
     Returns:
         None
     &#34;&#34;&#34;
-    internal_dpg.configure_viewport(0, pos=pos)
+    internal_dpg.configure_viewport(0, x_pos=pos[0], y_pos=pos[1])
 
 
 def set_viewport_width(width: int):
@@ -1775,7 +1775,7 @@ def tab_bar(*, label: str =None, id: int =0, indent: int =-1, parent: int =0, be
         finally:
                 internal_dpg.pop_container_stack()
 @contextmanager
-def table(*, label: str =None, id: int =0, width: int =0, height: int =0, indent: int =-1, parent: int =0, before: int =0, source: int =0, callback: Callable =None, show: bool =True, pos: List[int] =[], filter_key: str =&#39;&#39;, delay_search: bool =False, user_data: Any =None, header_row: bool =True, inner_width: int =0, policy: int =0, freeze_rows: int =0, freeze_columns: int =0, sort_multi: bool =False, sort_tristate: bool =False, resizable: bool =False, reorderable: bool =False, hideable: bool =False, sortable: bool =False, context_menu_in_body: bool =False, row_background: bool =False, borders_innerH: bool =False, borders_outerH: bool =False, borders_innerV: bool =False, borders_outerV: bool =False, no_host_extendX: bool =False, no_host_extendY: bool =False, no_keep_columns_visible: bool =False, precise_widths: bool =False, no_clip: bool =False, pad_outerX: bool =False, no_pad_outerX: bool =False, no_pad_innerX: bool =False, scrollX: bool =False, scrollY: bool =False) -&gt; int:
+def table(*, label: str =None, id: int =0, width: int =0, height: int =0, indent: int =-1, parent: int =0, before: int =0, source: int =0, callback: Callable =None, show: bool =True, pos: List[int] =[], filter_key: str =&#39;&#39;, delay_search: bool =False, user_data: Any =None, header_row: bool =True, inner_width: int =0, policy: int =0, freeze_rows: int =0, freeze_columns: int =0, sort_multi: bool =False, sort_tristate: bool =False, resizable: bool =False, reorderable: bool =False, hideable: bool =False, sortable: bool =False, context_menu_in_body: bool =False, row_background: bool =False, borders_innerH: bool =False, borders_outerH: bool =False, borders_innerV: bool =False, borders_outerV: bool =False, no_host_extendX: bool =False, no_host_extendY: bool =False, no_keep_columns_visible: bool =False, precise_widths: bool =False, no_clip: bool =False, pad_outerX: bool =False, no_pad_outerX: bool =False, no_pad_innerX: bool =False, scrollX: bool =False, scrollY: bool =False, no_saved_settings: bool =False) -&gt; int:
         &#34;&#34;&#34;
         Undocumented function
         Args:
@@ -1820,11 +1820,12 @@ def table(*, label: str =None, id: int =0, width: int =0, height: int =0, indent
                 **no_pad_innerX (bool): Disable inner padding between columns (double inner padding if BordersOuterV is on, single inner padding if BordersOuterV is off).
                 **scrollX (bool): Enable horizontal scrolling. Require &#39;outer_size&#39; parameter of BeginTable() to specify the container size. Changes default sizing policy. Because this create a child window, ScrollY is currently generally recommended when using ScrollX.
                 **scrollY (bool): Enable vertical scrolling.
+                **no_saved_settings (bool): Never load/save settings in .ini file.
         Yields:
                 int
         &#34;&#34;&#34;
         try:
-                widget = internal_dpg.add_table(label=label, id=id, width=width, height=height, indent=indent, parent=parent, before=before, source=source, callback=callback, show=show, pos=pos, filter_key=filter_key, delay_search=delay_search, user_data=user_data, header_row=header_row, inner_width=inner_width, policy=policy, freeze_rows=freeze_rows, freeze_columns=freeze_columns, sort_multi=sort_multi, sort_tristate=sort_tristate, resizable=resizable, reorderable=reorderable, hideable=hideable, sortable=sortable, context_menu_in_body=context_menu_in_body, row_background=row_background, borders_innerH=borders_innerH, borders_outerH=borders_outerH, borders_innerV=borders_innerV, borders_outerV=borders_outerV, no_host_extendX=no_host_extendX, no_host_extendY=no_host_extendY, no_keep_columns_visible=no_keep_columns_visible, precise_widths=precise_widths, no_clip=no_clip, pad_outerX=pad_outerX, no_pad_outerX=no_pad_outerX, no_pad_innerX=no_pad_innerX, scrollX=scrollX, scrollY=scrollY)
+                widget = internal_dpg.add_table(label=label, id=id, width=width, height=height, indent=indent, parent=parent, before=before, source=source, callback=callback, show=show, pos=pos, filter_key=filter_key, delay_search=delay_search, user_data=user_data, header_row=header_row, inner_width=inner_width, policy=policy, freeze_rows=freeze_rows, freeze_columns=freeze_columns, sort_multi=sort_multi, sort_tristate=sort_tristate, resizable=resizable, reorderable=reorderable, hideable=hideable, sortable=sortable, context_menu_in_body=context_menu_in_body, row_background=row_background, borders_innerH=borders_innerH, borders_outerH=borders_outerH, borders_innerV=borders_innerV, borders_outerV=borders_outerV, no_host_extendX=no_host_extendX, no_host_extendY=no_host_extendY, no_keep_columns_visible=no_keep_columns_visible, precise_widths=precise_widths, no_clip=no_clip, pad_outerX=pad_outerX, no_pad_outerX=no_pad_outerX, no_pad_innerX=no_pad_innerX, scrollX=scrollX, scrollY=scrollY, no_saved_settings=no_saved_settings)
                 internal_dpg.push_container_stack(widget)
                 yield widget
         finally:
@@ -2001,7 +2002,7 @@ def viewport_menu_bar(*, label: str =None, id: int =0, indent: int =-1, parent: 
         finally:
                 internal_dpg.pop_container_stack()
 @contextmanager
-def window(*, label: str =None, id: int =0, width: int =0, height: int =0, indent: int =-1, show: bool =True, pos: List[int] =[], delay_search: bool =False, user_data: Any =None, min_size: List[int] =[100, 100], max_size: List[int] =[30000, 30000], menubar: bool =False, collapsed: bool =False, autosize: bool =False, no_resize: bool =False, no_title_bar: bool =False, no_move: bool =False, no_scrollbar: bool =False, no_collapse: bool =False, horizontal_scrollbar: bool =False, no_focus_on_appearing: bool =False, no_bring_to_front_on_focus: bool =False, no_close: bool =False, no_background: bool =False, modal: bool =False, popup: bool =False, on_close: Callable =None) -&gt; int:
+def window(*, label: str =None, id: int =0, width: int =0, height: int =0, indent: int =-1, show: bool =True, pos: List[int] =[], delay_search: bool =False, user_data: Any =None, min_size: List[int] =[100, 100], max_size: List[int] =[30000, 30000], menubar: bool =False, collapsed: bool =False, autosize: bool =False, no_resize: bool =False, no_title_bar: bool =False, no_move: bool =False, no_scrollbar: bool =False, no_collapse: bool =False, horizontal_scrollbar: bool =False, no_focus_on_appearing: bool =False, no_bring_to_front_on_focus: bool =False, no_close: bool =False, no_background: bool =False, modal: bool =False, popup: bool =False, no_saved_settings: bool =False, on_close: Callable =None) -&gt; int:
         &#34;&#34;&#34;
         Creates a new window for following items to be added to.
         Args:
@@ -2031,12 +2032,13 @@ def window(*, label: str =None, id: int =0, width: int =0, height: int =0, inden
                 **no_background (bool): Sets Background and border alpha to transparent.
                 **modal (bool): Fills area behind window according to the theme and disables user ability to interact with anything except the window.
                 **popup (bool): Fills area behind window according to the theme, removes title bar, collapse and close. Window can be closed by selecting area in the background behind the window.
+                **no_saved_settings (bool): Never load/save settings in .ini file.
                 **on_close (Callable): Callback ran when window is closed.
         Yields:
                 int
         &#34;&#34;&#34;
         try:
-                widget = internal_dpg.add_window(label=label, id=id, width=width, height=height, indent=indent, show=show, pos=pos, delay_search=delay_search, user_data=user_data, min_size=min_size, max_size=max_size, menubar=menubar, collapsed=collapsed, autosize=autosize, no_resize=no_resize, no_title_bar=no_title_bar, no_move=no_move, no_scrollbar=no_scrollbar, no_collapse=no_collapse, horizontal_scrollbar=horizontal_scrollbar, no_focus_on_appearing=no_focus_on_appearing, no_bring_to_front_on_focus=no_bring_to_front_on_focus, no_close=no_close, no_background=no_background, modal=modal, popup=popup, on_close=on_close)
+                widget = internal_dpg.add_window(label=label, id=id, width=width, height=height, indent=indent, show=show, pos=pos, delay_search=delay_search, user_data=user_data, min_size=min_size, max_size=max_size, menubar=menubar, collapsed=collapsed, autosize=autosize, no_resize=no_resize, no_title_bar=no_title_bar, no_move=no_move, no_scrollbar=no_scrollbar, no_collapse=no_collapse, horizontal_scrollbar=horizontal_scrollbar, no_focus_on_appearing=no_focus_on_appearing, no_bring_to_front_on_focus=no_bring_to_front_on_focus, no_close=no_close, no_background=no_background, modal=modal, popup=popup, no_saved_settings=no_saved_settings, on_close=on_close)
                 internal_dpg.push_container_stack(widget)
                 yield widget
         finally:
@@ -4828,7 +4830,7 @@ def add_tab_button(*, label: str =None, id: int =0, indent: int =-1, parent: int
 
         return internal_dpg.add_tab_button(label=label, id=id, indent=indent, parent=parent, before=before, payload_type=payload_type, callback=callback, drag_callback=drag_callback, drop_callback=drop_callback, show=show, filter_key=filter_key, tracked=tracked, track_offset=track_offset, user_data=user_data, no_reorder=no_reorder, leading=leading, trailing=trailing, no_tooltip=no_tooltip)
 
-def add_table(*, label: str =None, id: int =0, width: int =0, height: int =0, indent: int =-1, parent: int =0, before: int =0, source: int =0, callback: Callable =None, show: bool =True, pos: List[int] =[], filter_key: str =&#39;&#39;, delay_search: bool =False, user_data: Any =None, header_row: bool =True, inner_width: int =0, policy: int =0, freeze_rows: int =0, freeze_columns: int =0, sort_multi: bool =False, sort_tristate: bool =False, resizable: bool =False, reorderable: bool =False, hideable: bool =False, sortable: bool =False, context_menu_in_body: bool =False, row_background: bool =False, borders_innerH: bool =False, borders_outerH: bool =False, borders_innerV: bool =False, borders_outerV: bool =False, no_host_extendX: bool =False, no_host_extendY: bool =False, no_keep_columns_visible: bool =False, precise_widths: bool =False, no_clip: bool =False, pad_outerX: bool =False, no_pad_outerX: bool =False, no_pad_innerX: bool =False, scrollX: bool =False, scrollY: bool =False) -&gt; int:
+def add_table(*, label: str =None, id: int =0, width: int =0, height: int =0, indent: int =-1, parent: int =0, before: int =0, source: int =0, callback: Callable =None, show: bool =True, pos: List[int] =[], filter_key: str =&#39;&#39;, delay_search: bool =False, user_data: Any =None, header_row: bool =True, inner_width: int =0, policy: int =0, freeze_rows: int =0, freeze_columns: int =0, sort_multi: bool =False, sort_tristate: bool =False, resizable: bool =False, reorderable: bool =False, hideable: bool =False, sortable: bool =False, context_menu_in_body: bool =False, row_background: bool =False, borders_innerH: bool =False, borders_outerH: bool =False, borders_innerV: bool =False, borders_outerV: bool =False, no_host_extendX: bool =False, no_host_extendY: bool =False, no_keep_columns_visible: bool =False, precise_widths: bool =False, no_clip: bool =False, pad_outerX: bool =False, no_pad_outerX: bool =False, no_pad_innerX: bool =False, scrollX: bool =False, scrollY: bool =False, no_saved_settings: bool =False) -&gt; int:
         &#34;&#34;&#34;
         Undocumented function
         Args:
@@ -4873,11 +4875,12 @@ def add_table(*, label: str =None, id: int =0, width: int =0, height: int =0, in
                 **no_pad_innerX (bool): Disable inner padding between columns (double inner padding if BordersOuterV is on, single inner padding if BordersOuterV is off).
                 **scrollX (bool): Enable horizontal scrolling. Require &#39;outer_size&#39; parameter of BeginTable() to specify the container size. Changes default sizing policy. Because this create a child window, ScrollY is currently generally recommended when using ScrollX.
                 **scrollY (bool): Enable vertical scrolling.
+                **no_saved_settings (bool): Never load/save settings in .ini file.
         Returns:
                 int
         &#34;&#34;&#34;
 
-        return internal_dpg.add_table(label=label, id=id, width=width, height=height, indent=indent, parent=parent, before=before, source=source, callback=callback, show=show, pos=pos, filter_key=filter_key, delay_search=delay_search, user_data=user_data, header_row=header_row, inner_width=inner_width, policy=policy, freeze_rows=freeze_rows, freeze_columns=freeze_columns, sort_multi=sort_multi, sort_tristate=sort_tristate, resizable=resizable, reorderable=reorderable, hideable=hideable, sortable=sortable, context_menu_in_body=context_menu_in_body, row_background=row_background, borders_innerH=borders_innerH, borders_outerH=borders_outerH, borders_innerV=borders_innerV, borders_outerV=borders_outerV, no_host_extendX=no_host_extendX, no_host_extendY=no_host_extendY, no_keep_columns_visible=no_keep_columns_visible, precise_widths=precise_widths, no_clip=no_clip, pad_outerX=pad_outerX, no_pad_outerX=no_pad_outerX, no_pad_innerX=no_pad_innerX, scrollX=scrollX, scrollY=scrollY)
+        return internal_dpg.add_table(label=label, id=id, width=width, height=height, indent=indent, parent=parent, before=before, source=source, callback=callback, show=show, pos=pos, filter_key=filter_key, delay_search=delay_search, user_data=user_data, header_row=header_row, inner_width=inner_width, policy=policy, freeze_rows=freeze_rows, freeze_columns=freeze_columns, sort_multi=sort_multi, sort_tristate=sort_tristate, resizable=resizable, reorderable=reorderable, hideable=hideable, sortable=sortable, context_menu_in_body=context_menu_in_body, row_background=row_background, borders_innerH=borders_innerH, borders_outerH=borders_outerH, borders_innerV=borders_innerV, borders_outerV=borders_outerV, no_host_extendX=no_host_extendX, no_host_extendY=no_host_extendY, no_keep_columns_visible=no_keep_columns_visible, precise_widths=precise_widths, no_clip=no_clip, pad_outerX=pad_outerX, no_pad_outerX=no_pad_outerX, no_pad_innerX=no_pad_innerX, scrollX=scrollX, scrollY=scrollY, no_saved_settings=no_saved_settings)
 
 def add_table_column(*, label: str =None, id: int =0, width: int =0, parent: int =0, before: int =0, show: bool =True, user_data: Any =None, init_width_or_weight: float =0.0, default_hide: bool =False, default_sort: bool =False, width_stretch: bool =False, width_fixed: bool =False, no_resize: bool =False, no_reorder: bool =False, no_hide: bool =False, no_clip: bool =False, no_sort: bool =False, no_sort_ascending: bool =False, no_sort_descending: bool =False, no_header_width: bool =False, prefer_sort_ascending: bool =True, prefer_sort_descending: bool =False, indent_enable: bool =False, indent_disable: bool =False) -&gt; int:
         &#34;&#34;&#34;
@@ -5227,7 +5230,7 @@ def add_vline_series(x : List[float], *, label: str =None, id: int =0, parent: i
 
         return internal_dpg.add_vline_series(x, label=label, id=id, parent=parent, before=before, source=source, show=show, user_data=user_data)
 
-def add_window(*, label: str =None, id: int =0, width: int =0, height: int =0, indent: int =-1, show: bool =True, pos: List[int] =[], delay_search: bool =False, user_data: Any =None, min_size: List[int] =[100, 100], max_size: List[int] =[30000, 30000], menubar: bool =False, collapsed: bool =False, autosize: bool =False, no_resize: bool =False, no_title_bar: bool =False, no_move: bool =False, no_scrollbar: bool =False, no_collapse: bool =False, horizontal_scrollbar: bool =False, no_focus_on_appearing: bool =False, no_bring_to_front_on_focus: bool =False, no_close: bool =False, no_background: bool =False, modal: bool =False, popup: bool =False, on_close: Callable =None) -&gt; int:
+def add_window(*, label: str =None, id: int =0, width: int =0, height: int =0, indent: int =-1, show: bool =True, pos: List[int] =[], delay_search: bool =False, user_data: Any =None, min_size: List[int] =[100, 100], max_size: List[int] =[30000, 30000], menubar: bool =False, collapsed: bool =False, autosize: bool =False, no_resize: bool =False, no_title_bar: bool =False, no_move: bool =False, no_scrollbar: bool =False, no_collapse: bool =False, horizontal_scrollbar: bool =False, no_focus_on_appearing: bool =False, no_bring_to_front_on_focus: bool =False, no_close: bool =False, no_background: bool =False, modal: bool =False, popup: bool =False, no_saved_settings: bool =False, on_close: Callable =None) -&gt; int:
         &#34;&#34;&#34;
         Creates a new window for following items to be added to.
         Args:
@@ -5257,12 +5260,13 @@ def add_window(*, label: str =None, id: int =0, width: int =0, height: int =0, i
                 **no_background (bool): Sets Background and border alpha to transparent.
                 **modal (bool): Fills area behind window according to the theme and disables user ability to interact with anything except the window.
                 **popup (bool): Fills area behind window according to the theme, removes title bar, collapse and close. Window can be closed by selecting area in the background behind the window.
+                **no_saved_settings (bool): Never load/save settings in .ini file.
                 **on_close (Callable): Callback ran when window is closed.
         Returns:
                 int
         &#34;&#34;&#34;
 
-        return internal_dpg.add_window(label=label, id=id, width=width, height=height, indent=indent, show=show, pos=pos, delay_search=delay_search, user_data=user_data, min_size=min_size, max_size=max_size, menubar=menubar, collapsed=collapsed, autosize=autosize, no_resize=no_resize, no_title_bar=no_title_bar, no_move=no_move, no_scrollbar=no_scrollbar, no_collapse=no_collapse, horizontal_scrollbar=horizontal_scrollbar, no_focus_on_appearing=no_focus_on_appearing, no_bring_to_front_on_focus=no_bring_to_front_on_focus, no_close=no_close, no_background=no_background, modal=modal, popup=popup, on_close=on_close)
+        return internal_dpg.add_window(label=label, id=id, width=width, height=height, indent=indent, show=show, pos=pos, delay_search=delay_search, user_data=user_data, min_size=min_size, max_size=max_size, menubar=menubar, collapsed=collapsed, autosize=autosize, no_resize=no_resize, no_title_bar=no_title_bar, no_move=no_move, no_scrollbar=no_scrollbar, no_collapse=no_collapse, horizontal_scrollbar=horizontal_scrollbar, no_focus_on_appearing=no_focus_on_appearing, no_bring_to_front_on_focus=no_bring_to_front_on_focus, no_close=no_close, no_background=no_background, modal=modal, popup=popup, no_saved_settings=no_saved_settings, on_close=on_close)
 
 def cleanup_dearpygui() -&gt; None:
         &#34;&#34;&#34;
@@ -6141,6 +6145,17 @@ def load_image(file : str, *, gamma: float =1.0, gamma_scale_factor: float =1.0)
 
         return internal_dpg.load_image(file, gamma=gamma, gamma_scale_factor=gamma_scale_factor)
 
+def load_init_file(file : str) -&gt; None:
+        &#34;&#34;&#34;
+        Load dpg.ini file.
+        Args:
+                file (str): 
+        Returns:
+                None
+        &#34;&#34;&#34;
+
+        return internal_dpg.load_init_file(file)
+
 def lock_mutex() -&gt; None:
         &#34;&#34;&#34;
         Locks mutex
@@ -6282,6 +6297,17 @@ def reset_pos(item : int) -&gt; None:
 
         return internal_dpg.reset_pos(item)
 
+def save_init_file(file : str) -&gt; None:
+        &#34;&#34;&#34;
+        Save dpg.ini file.
+        Args:
+                file (str): 
+        Returns:
+                None
+        &#34;&#34;&#34;
+
+        return internal_dpg.save_init_file(file)
+
 def set_axis_limits(axis : int, ymin : float, ymax : float) -&gt; None:
         &#34;&#34;&#34;
         Sets limits on the axis for pan and zoom.
@@ -6339,6 +6365,17 @@ def set_global_font_scale(scale : float) -&gt; None:
         &#34;&#34;&#34;
 
         return internal_dpg.set_global_font_scale(scale)
+
+def set_init_file(*, file: str =&#39;dpg.ini&#39;) -&gt; None:
+        &#34;&#34;&#34;
+        set dpg.ini file.
+        Args:
+                **file (str): dpg.ini by default
+        Returns:
+                None
+        &#34;&#34;&#34;
+
+        return internal_dpg.set_init_file(file=file)
 
 def set_item_children(item : int, source : int, slot : int) -&gt; dict:
         &#34;&#34;&#34;
@@ -14953,7 +14990,7 @@ mvReservedUUID_9=internal_dpg.mvReservedUUID_9</code></pre>
 </details>
 </dd>
 <dt id="dearpygui.dearpygui.add_table"><code class="name flex">
-<span>def <span class="ident">add_table</span></span>(<span>*, label: str = None, id: int = 0, width: int = 0, height: int = 0, indent: int = -1, parent: int = 0, before: int = 0, source: int = 0, callback: Callable = None, show: bool = True, pos: List[int] = [], filter_key: str = '', delay_search: bool = False, user_data: Any = None, header_row: bool = True, inner_width: int = 0, policy: int = 0, freeze_rows: int = 0, freeze_columns: int = 0, sort_multi: bool = False, sort_tristate: bool = False, resizable: bool = False, reorderable: bool = False, hideable: bool = False, sortable: bool = False, context_menu_in_body: bool = False, row_background: bool = False, borders_innerH: bool = False, borders_outerH: bool = False, borders_innerV: bool = False, borders_outerV: bool = False, no_host_extendX: bool = False, no_host_extendY: bool = False, no_keep_columns_visible: bool = False, precise_widths: bool = False, no_clip: bool = False, pad_outerX: bool = False, no_pad_outerX: bool = False, no_pad_innerX: bool = False, scrollX: bool = False, scrollY: bool = False) ‑> int</span>
+<span>def <span class="ident">add_table</span></span>(<span>*, label: str = None, id: int = 0, width: int = 0, height: int = 0, indent: int = -1, parent: int = 0, before: int = 0, source: int = 0, callback: Callable = None, show: bool = True, pos: List[int] = [], filter_key: str = '', delay_search: bool = False, user_data: Any = None, header_row: bool = True, inner_width: int = 0, policy: int = 0, freeze_rows: int = 0, freeze_columns: int = 0, sort_multi: bool = False, sort_tristate: bool = False, resizable: bool = False, reorderable: bool = False, hideable: bool = False, sortable: bool = False, context_menu_in_body: bool = False, row_background: bool = False, borders_innerH: bool = False, borders_outerH: bool = False, borders_innerV: bool = False, borders_outerV: bool = False, no_host_extendX: bool = False, no_host_extendY: bool = False, no_keep_columns_visible: bool = False, precise_widths: bool = False, no_clip: bool = False, pad_outerX: bool = False, no_pad_outerX: bool = False, no_pad_innerX: bool = False, scrollX: bool = False, scrollY: bool = False, no_saved_settings: bool = False) ‑> int</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Undocumented function</p>
@@ -15041,6 +15078,8 @@ mvReservedUUID_9=internal_dpg.mvReservedUUID_9</code></pre>
 <dd>Enable horizontal scrolling. Require 'outer_size' parameter of BeginTable() to specify the container size. Changes default sizing policy. Because this create a child window, ScrollY is currently generally recommended when using ScrollX.</dd>
 <dt><strong><code>**scrollY</code></strong> :&ensp;<code>bool</code></dt>
 <dd>Enable vertical scrolling.</dd>
+<dt><strong><code>**no_saved_settings</code></strong> :&ensp;<code>bool</code></dt>
+<dd>Never load/save settings in .ini file.</dd>
 </dl>
 <h2 id="returns">Returns</h2>
 <p>int</p></div>
@@ -15048,7 +15087,7 @@ mvReservedUUID_9=internal_dpg.mvReservedUUID_9</code></pre>
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def add_table(*, label: str =None, id: int =0, width: int =0, height: int =0, indent: int =-1, parent: int =0, before: int =0, source: int =0, callback: Callable =None, show: bool =True, pos: List[int] =[], filter_key: str =&#39;&#39;, delay_search: bool =False, user_data: Any =None, header_row: bool =True, inner_width: int =0, policy: int =0, freeze_rows: int =0, freeze_columns: int =0, sort_multi: bool =False, sort_tristate: bool =False, resizable: bool =False, reorderable: bool =False, hideable: bool =False, sortable: bool =False, context_menu_in_body: bool =False, row_background: bool =False, borders_innerH: bool =False, borders_outerH: bool =False, borders_innerV: bool =False, borders_outerV: bool =False, no_host_extendX: bool =False, no_host_extendY: bool =False, no_keep_columns_visible: bool =False, precise_widths: bool =False, no_clip: bool =False, pad_outerX: bool =False, no_pad_outerX: bool =False, no_pad_innerX: bool =False, scrollX: bool =False, scrollY: bool =False) -&gt; int:
+<pre><code class="python">def add_table(*, label: str =None, id: int =0, width: int =0, height: int =0, indent: int =-1, parent: int =0, before: int =0, source: int =0, callback: Callable =None, show: bool =True, pos: List[int] =[], filter_key: str =&#39;&#39;, delay_search: bool =False, user_data: Any =None, header_row: bool =True, inner_width: int =0, policy: int =0, freeze_rows: int =0, freeze_columns: int =0, sort_multi: bool =False, sort_tristate: bool =False, resizable: bool =False, reorderable: bool =False, hideable: bool =False, sortable: bool =False, context_menu_in_body: bool =False, row_background: bool =False, borders_innerH: bool =False, borders_outerH: bool =False, borders_innerV: bool =False, borders_outerV: bool =False, no_host_extendX: bool =False, no_host_extendY: bool =False, no_keep_columns_visible: bool =False, precise_widths: bool =False, no_clip: bool =False, pad_outerX: bool =False, no_pad_outerX: bool =False, no_pad_innerX: bool =False, scrollX: bool =False, scrollY: bool =False, no_saved_settings: bool =False) -&gt; int:
         &#34;&#34;&#34;
         Undocumented function
         Args:
@@ -15093,11 +15132,12 @@ mvReservedUUID_9=internal_dpg.mvReservedUUID_9</code></pre>
                 **no_pad_innerX (bool): Disable inner padding between columns (double inner padding if BordersOuterV is on, single inner padding if BordersOuterV is off).
                 **scrollX (bool): Enable horizontal scrolling. Require &#39;outer_size&#39; parameter of BeginTable() to specify the container size. Changes default sizing policy. Because this create a child window, ScrollY is currently generally recommended when using ScrollX.
                 **scrollY (bool): Enable vertical scrolling.
+                **no_saved_settings (bool): Never load/save settings in .ini file.
         Returns:
                 int
         &#34;&#34;&#34;
 
-        return internal_dpg.add_table(label=label, id=id, width=width, height=height, indent=indent, parent=parent, before=before, source=source, callback=callback, show=show, pos=pos, filter_key=filter_key, delay_search=delay_search, user_data=user_data, header_row=header_row, inner_width=inner_width, policy=policy, freeze_rows=freeze_rows, freeze_columns=freeze_columns, sort_multi=sort_multi, sort_tristate=sort_tristate, resizable=resizable, reorderable=reorderable, hideable=hideable, sortable=sortable, context_menu_in_body=context_menu_in_body, row_background=row_background, borders_innerH=borders_innerH, borders_outerH=borders_outerH, borders_innerV=borders_innerV, borders_outerV=borders_outerV, no_host_extendX=no_host_extendX, no_host_extendY=no_host_extendY, no_keep_columns_visible=no_keep_columns_visible, precise_widths=precise_widths, no_clip=no_clip, pad_outerX=pad_outerX, no_pad_outerX=no_pad_outerX, no_pad_innerX=no_pad_innerX, scrollX=scrollX, scrollY=scrollY)</code></pre>
+        return internal_dpg.add_table(label=label, id=id, width=width, height=height, indent=indent, parent=parent, before=before, source=source, callback=callback, show=show, pos=pos, filter_key=filter_key, delay_search=delay_search, user_data=user_data, header_row=header_row, inner_width=inner_width, policy=policy, freeze_rows=freeze_rows, freeze_columns=freeze_columns, sort_multi=sort_multi, sort_tristate=sort_tristate, resizable=resizable, reorderable=reorderable, hideable=hideable, sortable=sortable, context_menu_in_body=context_menu_in_body, row_background=row_background, borders_innerH=borders_innerH, borders_outerH=borders_outerH, borders_innerV=borders_innerV, borders_outerV=borders_outerV, no_host_extendX=no_host_extendX, no_host_extendY=no_host_extendY, no_keep_columns_visible=no_keep_columns_visible, precise_widths=precise_widths, no_clip=no_clip, pad_outerX=pad_outerX, no_pad_outerX=no_pad_outerX, no_pad_innerX=no_pad_innerX, scrollX=scrollX, scrollY=scrollY, no_saved_settings=no_saved_settings)</code></pre>
 </details>
 </dd>
 <dt id="dearpygui.dearpygui.add_table_column"><code class="name flex">
@@ -16055,7 +16095,7 @@ mvReservedUUID_9=internal_dpg.mvReservedUUID_9</code></pre>
 </details>
 </dd>
 <dt id="dearpygui.dearpygui.add_window"><code class="name flex">
-<span>def <span class="ident">add_window</span></span>(<span>*, label: str = None, id: int = 0, width: int = 0, height: int = 0, indent: int = -1, show: bool = True, pos: List[int] = [], delay_search: bool = False, user_data: Any = None, min_size: List[int] = [100, 100], max_size: List[int] = [30000, 30000], menubar: bool = False, collapsed: bool = False, autosize: bool = False, no_resize: bool = False, no_title_bar: bool = False, no_move: bool = False, no_scrollbar: bool = False, no_collapse: bool = False, horizontal_scrollbar: bool = False, no_focus_on_appearing: bool = False, no_bring_to_front_on_focus: bool = False, no_close: bool = False, no_background: bool = False, modal: bool = False, popup: bool = False, on_close: Callable = None) ‑> int</span>
+<span>def <span class="ident">add_window</span></span>(<span>*, label: str = None, id: int = 0, width: int = 0, height: int = 0, indent: int = -1, show: bool = True, pos: List[int] = [], delay_search: bool = False, user_data: Any = None, min_size: List[int] = [100, 100], max_size: List[int] = [30000, 30000], menubar: bool = False, collapsed: bool = False, autosize: bool = False, no_resize: bool = False, no_title_bar: bool = False, no_move: bool = False, no_scrollbar: bool = False, no_collapse: bool = False, horizontal_scrollbar: bool = False, no_focus_on_appearing: bool = False, no_bring_to_front_on_focus: bool = False, no_close: bool = False, no_background: bool = False, modal: bool = False, popup: bool = False, no_saved_settings: bool = False, on_close: Callable = None) ‑> int</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Creates a new window for following items to be added to.</p>
@@ -16113,6 +16153,8 @@ mvReservedUUID_9=internal_dpg.mvReservedUUID_9</code></pre>
 <dd>Fills area behind window according to the theme and disables user ability to interact with anything except the window.</dd>
 <dt><strong><code>**popup</code></strong> :&ensp;<code>bool</code></dt>
 <dd>Fills area behind window according to the theme, removes title bar, collapse and close. Window can be closed by selecting area in the background behind the window.</dd>
+<dt><strong><code>**no_saved_settings</code></strong> :&ensp;<code>bool</code></dt>
+<dd>Never load/save settings in .ini file.</dd>
 <dt><strong><code>**on_close</code></strong> :&ensp;<code>Callable</code></dt>
 <dd>Callback ran when window is closed.</dd>
 </dl>
@@ -16122,7 +16164,7 @@ mvReservedUUID_9=internal_dpg.mvReservedUUID_9</code></pre>
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def add_window(*, label: str =None, id: int =0, width: int =0, height: int =0, indent: int =-1, show: bool =True, pos: List[int] =[], delay_search: bool =False, user_data: Any =None, min_size: List[int] =[100, 100], max_size: List[int] =[30000, 30000], menubar: bool =False, collapsed: bool =False, autosize: bool =False, no_resize: bool =False, no_title_bar: bool =False, no_move: bool =False, no_scrollbar: bool =False, no_collapse: bool =False, horizontal_scrollbar: bool =False, no_focus_on_appearing: bool =False, no_bring_to_front_on_focus: bool =False, no_close: bool =False, no_background: bool =False, modal: bool =False, popup: bool =False, on_close: Callable =None) -&gt; int:
+<pre><code class="python">def add_window(*, label: str =None, id: int =0, width: int =0, height: int =0, indent: int =-1, show: bool =True, pos: List[int] =[], delay_search: bool =False, user_data: Any =None, min_size: List[int] =[100, 100], max_size: List[int] =[30000, 30000], menubar: bool =False, collapsed: bool =False, autosize: bool =False, no_resize: bool =False, no_title_bar: bool =False, no_move: bool =False, no_scrollbar: bool =False, no_collapse: bool =False, horizontal_scrollbar: bool =False, no_focus_on_appearing: bool =False, no_bring_to_front_on_focus: bool =False, no_close: bool =False, no_background: bool =False, modal: bool =False, popup: bool =False, no_saved_settings: bool =False, on_close: Callable =None) -&gt; int:
         &#34;&#34;&#34;
         Creates a new window for following items to be added to.
         Args:
@@ -16152,12 +16194,13 @@ mvReservedUUID_9=internal_dpg.mvReservedUUID_9</code></pre>
                 **no_background (bool): Sets Background and border alpha to transparent.
                 **modal (bool): Fills area behind window according to the theme and disables user ability to interact with anything except the window.
                 **popup (bool): Fills area behind window according to the theme, removes title bar, collapse and close. Window can be closed by selecting area in the background behind the window.
+                **no_saved_settings (bool): Never load/save settings in .ini file.
                 **on_close (Callable): Callback ran when window is closed.
         Returns:
                 int
         &#34;&#34;&#34;
 
-        return internal_dpg.add_window(label=label, id=id, width=width, height=height, indent=indent, show=show, pos=pos, delay_search=delay_search, user_data=user_data, min_size=min_size, max_size=max_size, menubar=menubar, collapsed=collapsed, autosize=autosize, no_resize=no_resize, no_title_bar=no_title_bar, no_move=no_move, no_scrollbar=no_scrollbar, no_collapse=no_collapse, horizontal_scrollbar=horizontal_scrollbar, no_focus_on_appearing=no_focus_on_appearing, no_bring_to_front_on_focus=no_bring_to_front_on_focus, no_close=no_close, no_background=no_background, modal=modal, popup=popup, on_close=on_close)</code></pre>
+        return internal_dpg.add_window(label=label, id=id, width=width, height=height, indent=indent, show=show, pos=pos, delay_search=delay_search, user_data=user_data, min_size=min_size, max_size=max_size, menubar=menubar, collapsed=collapsed, autosize=autosize, no_resize=no_resize, no_title_bar=no_title_bar, no_move=no_move, no_scrollbar=no_scrollbar, no_collapse=no_collapse, horizontal_scrollbar=horizontal_scrollbar, no_focus_on_appearing=no_focus_on_appearing, no_bring_to_front_on_focus=no_bring_to_front_on_focus, no_close=no_close, no_background=no_background, modal=modal, popup=popup, no_saved_settings=no_saved_settings, on_close=on_close)</code></pre>
 </details>
 </dd>
 <dt id="dearpygui.dearpygui.child"><code class="name flex">
@@ -20469,6 +20512,34 @@ Args:</p>
         return internal_dpg.load_image(file, gamma=gamma, gamma_scale_factor=gamma_scale_factor)</code></pre>
 </details>
 </dd>
+<dt id="dearpygui.dearpygui.load_init_file"><code class="name flex">
+<span>def <span class="ident">load_init_file</span></span>(<span>file: str) ‑> NoneType</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Load dpg.ini file.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>file</code></strong> :&ensp;<code>str</code></dt>
+<dd>&nbsp;</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>None</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def load_init_file(file : str) -&gt; None:
+        &#34;&#34;&#34;
+        Load dpg.ini file.
+        Args:
+                file (str): 
+        Returns:
+                None
+        &#34;&#34;&#34;
+
+        return internal_dpg.load_init_file(file)</code></pre>
+</details>
+</dd>
 <dt id="dearpygui.dearpygui.lock_mutex"><code class="name flex">
 <span>def <span class="ident">lock_mutex</span></span>(<span>) ‑> NoneType</span>
 </code></dt>
@@ -21336,6 +21407,34 @@ Args:</p>
         return internal_dpg.reset_pos(item)</code></pre>
 </details>
 </dd>
+<dt id="dearpygui.dearpygui.save_init_file"><code class="name flex">
+<span>def <span class="ident">save_init_file</span></span>(<span>file: str) ‑> NoneType</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Save dpg.ini file.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>file</code></strong> :&ensp;<code>str</code></dt>
+<dd>&nbsp;</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>None</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def save_init_file(file : str) -&gt; None:
+        &#34;&#34;&#34;
+        Save dpg.ini file.
+        Args:
+                file (str): 
+        Returns:
+                None
+        &#34;&#34;&#34;
+
+        return internal_dpg.save_init_file(file)</code></pre>
+</details>
+</dd>
 <dt id="dearpygui.dearpygui.set_axis_limits"><code class="name flex">
 <span>def <span class="ident">set_axis_limits</span></span>(<span>axis: int, ymin: float, ymax: float) ‑> NoneType</span>
 </code></dt>
@@ -21483,6 +21582,34 @@ Args:</p>
         &#34;&#34;&#34;
 
         return internal_dpg.set_global_font_scale(scale)</code></pre>
+</details>
+</dd>
+<dt id="dearpygui.dearpygui.set_init_file"><code class="name flex">
+<span>def <span class="ident">set_init_file</span></span>(<span>*, file: str = 'dpg.ini') ‑> NoneType</span>
+</code></dt>
+<dd>
+<div class="desc"><p>set dpg.ini file.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>**file</code></strong> :&ensp;<code>str</code></dt>
+<dd>dpg.ini by default</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>None</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def set_init_file(*, file: str =&#39;dpg.ini&#39;) -&gt; None:
+        &#34;&#34;&#34;
+        set dpg.ini file.
+        Args:
+                **file (str): dpg.ini by default
+        Returns:
+                None
+        &#34;&#34;&#34;
+
+        return internal_dpg.set_init_file(file=file)</code></pre>
 </details>
 </dd>
 <dt id="dearpygui.dearpygui.set_item_callback"><code class="name flex">
@@ -22441,7 +22568,7 @@ Args:</p>
     Returns:
         None
     &#34;&#34;&#34;
-    internal_dpg.configure_viewport(0, pos=pos)</code></pre>
+    internal_dpg.configure_viewport(0, x_pos=pos[0], y_pos=pos[1])</code></pre>
 </details>
 </dd>
 <dt id="dearpygui.dearpygui.set_viewport_resizable"><code class="name flex">
@@ -23398,7 +23525,7 @@ def tab_bar(*, label: str =None, id: int =0, indent: int =-1, parent: int =0, be
 </details>
 </dd>
 <dt id="dearpygui.dearpygui.table"><code class="name flex">
-<span>def <span class="ident">table</span></span>(<span>*, label: str = None, id: int = 0, width: int = 0, height: int = 0, indent: int = -1, parent: int = 0, before: int = 0, source: int = 0, callback: Callable = None, show: bool = True, pos: List[int] = [], filter_key: str = '', delay_search: bool = False, user_data: Any = None, header_row: bool = True, inner_width: int = 0, policy: int = 0, freeze_rows: int = 0, freeze_columns: int = 0, sort_multi: bool = False, sort_tristate: bool = False, resizable: bool = False, reorderable: bool = False, hideable: bool = False, sortable: bool = False, context_menu_in_body: bool = False, row_background: bool = False, borders_innerH: bool = False, borders_outerH: bool = False, borders_innerV: bool = False, borders_outerV: bool = False, no_host_extendX: bool = False, no_host_extendY: bool = False, no_keep_columns_visible: bool = False, precise_widths: bool = False, no_clip: bool = False, pad_outerX: bool = False, no_pad_outerX: bool = False, no_pad_innerX: bool = False, scrollX: bool = False, scrollY: bool = False) ‑> int</span>
+<span>def <span class="ident">table</span></span>(<span>*, label: str = None, id: int = 0, width: int = 0, height: int = 0, indent: int = -1, parent: int = 0, before: int = 0, source: int = 0, callback: Callable = None, show: bool = True, pos: List[int] = [], filter_key: str = '', delay_search: bool = False, user_data: Any = None, header_row: bool = True, inner_width: int = 0, policy: int = 0, freeze_rows: int = 0, freeze_columns: int = 0, sort_multi: bool = False, sort_tristate: bool = False, resizable: bool = False, reorderable: bool = False, hideable: bool = False, sortable: bool = False, context_menu_in_body: bool = False, row_background: bool = False, borders_innerH: bool = False, borders_outerH: bool = False, borders_innerV: bool = False, borders_outerV: bool = False, no_host_extendX: bool = False, no_host_extendY: bool = False, no_keep_columns_visible: bool = False, precise_widths: bool = False, no_clip: bool = False, pad_outerX: bool = False, no_pad_outerX: bool = False, no_pad_innerX: bool = False, scrollX: bool = False, scrollY: bool = False, no_saved_settings: bool = False) ‑> int</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Undocumented function</p>
@@ -23486,6 +23613,8 @@ def tab_bar(*, label: str =None, id: int =0, indent: int =-1, parent: int =0, be
 <dd>Enable horizontal scrolling. Require 'outer_size' parameter of BeginTable() to specify the container size. Changes default sizing policy. Because this create a child window, ScrollY is currently generally recommended when using ScrollX.</dd>
 <dt><strong><code>**scrollY</code></strong> :&ensp;<code>bool</code></dt>
 <dd>Enable vertical scrolling.</dd>
+<dt><strong><code>**no_saved_settings</code></strong> :&ensp;<code>bool</code></dt>
+<dd>Never load/save settings in .ini file.</dd>
 </dl>
 <h2 id="yields">Yields</h2>
 <p>int</p></div>
@@ -23494,7 +23623,7 @@ def tab_bar(*, label: str =None, id: int =0, indent: int =-1, parent: int =0, be
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">@contextmanager
-def table(*, label: str =None, id: int =0, width: int =0, height: int =0, indent: int =-1, parent: int =0, before: int =0, source: int =0, callback: Callable =None, show: bool =True, pos: List[int] =[], filter_key: str =&#39;&#39;, delay_search: bool =False, user_data: Any =None, header_row: bool =True, inner_width: int =0, policy: int =0, freeze_rows: int =0, freeze_columns: int =0, sort_multi: bool =False, sort_tristate: bool =False, resizable: bool =False, reorderable: bool =False, hideable: bool =False, sortable: bool =False, context_menu_in_body: bool =False, row_background: bool =False, borders_innerH: bool =False, borders_outerH: bool =False, borders_innerV: bool =False, borders_outerV: bool =False, no_host_extendX: bool =False, no_host_extendY: bool =False, no_keep_columns_visible: bool =False, precise_widths: bool =False, no_clip: bool =False, pad_outerX: bool =False, no_pad_outerX: bool =False, no_pad_innerX: bool =False, scrollX: bool =False, scrollY: bool =False) -&gt; int:
+def table(*, label: str =None, id: int =0, width: int =0, height: int =0, indent: int =-1, parent: int =0, before: int =0, source: int =0, callback: Callable =None, show: bool =True, pos: List[int] =[], filter_key: str =&#39;&#39;, delay_search: bool =False, user_data: Any =None, header_row: bool =True, inner_width: int =0, policy: int =0, freeze_rows: int =0, freeze_columns: int =0, sort_multi: bool =False, sort_tristate: bool =False, resizable: bool =False, reorderable: bool =False, hideable: bool =False, sortable: bool =False, context_menu_in_body: bool =False, row_background: bool =False, borders_innerH: bool =False, borders_outerH: bool =False, borders_innerV: bool =False, borders_outerV: bool =False, no_host_extendX: bool =False, no_host_extendY: bool =False, no_keep_columns_visible: bool =False, precise_widths: bool =False, no_clip: bool =False, pad_outerX: bool =False, no_pad_outerX: bool =False, no_pad_innerX: bool =False, scrollX: bool =False, scrollY: bool =False, no_saved_settings: bool =False) -&gt; int:
         &#34;&#34;&#34;
         Undocumented function
         Args:
@@ -23539,11 +23668,12 @@ def table(*, label: str =None, id: int =0, width: int =0, height: int =0, indent
                 **no_pad_innerX (bool): Disable inner padding between columns (double inner padding if BordersOuterV is on, single inner padding if BordersOuterV is off).
                 **scrollX (bool): Enable horizontal scrolling. Require &#39;outer_size&#39; parameter of BeginTable() to specify the container size. Changes default sizing policy. Because this create a child window, ScrollY is currently generally recommended when using ScrollX.
                 **scrollY (bool): Enable vertical scrolling.
+                **no_saved_settings (bool): Never load/save settings in .ini file.
         Yields:
                 int
         &#34;&#34;&#34;
         try:
-                widget = internal_dpg.add_table(label=label, id=id, width=width, height=height, indent=indent, parent=parent, before=before, source=source, callback=callback, show=show, pos=pos, filter_key=filter_key, delay_search=delay_search, user_data=user_data, header_row=header_row, inner_width=inner_width, policy=policy, freeze_rows=freeze_rows, freeze_columns=freeze_columns, sort_multi=sort_multi, sort_tristate=sort_tristate, resizable=resizable, reorderable=reorderable, hideable=hideable, sortable=sortable, context_menu_in_body=context_menu_in_body, row_background=row_background, borders_innerH=borders_innerH, borders_outerH=borders_outerH, borders_innerV=borders_innerV, borders_outerV=borders_outerV, no_host_extendX=no_host_extendX, no_host_extendY=no_host_extendY, no_keep_columns_visible=no_keep_columns_visible, precise_widths=precise_widths, no_clip=no_clip, pad_outerX=pad_outerX, no_pad_outerX=no_pad_outerX, no_pad_innerX=no_pad_innerX, scrollX=scrollX, scrollY=scrollY)
+                widget = internal_dpg.add_table(label=label, id=id, width=width, height=height, indent=indent, parent=parent, before=before, source=source, callback=callback, show=show, pos=pos, filter_key=filter_key, delay_search=delay_search, user_data=user_data, header_row=header_row, inner_width=inner_width, policy=policy, freeze_rows=freeze_rows, freeze_columns=freeze_columns, sort_multi=sort_multi, sort_tristate=sort_tristate, resizable=resizable, reorderable=reorderable, hideable=hideable, sortable=sortable, context_menu_in_body=context_menu_in_body, row_background=row_background, borders_innerH=borders_innerH, borders_outerH=borders_outerH, borders_innerV=borders_innerV, borders_outerV=borders_outerV, no_host_extendX=no_host_extendX, no_host_extendY=no_host_extendY, no_keep_columns_visible=no_keep_columns_visible, precise_widths=precise_widths, no_clip=no_clip, pad_outerX=pad_outerX, no_pad_outerX=no_pad_outerX, no_pad_innerX=no_pad_innerX, scrollX=scrollX, scrollY=scrollY, no_saved_settings=no_saved_settings)
                 internal_dpg.push_container_stack(widget)
                 yield widget
         finally:
@@ -24104,7 +24234,7 @@ def viewport_menu_bar(*, label: str =None, id: int =0, indent: int =-1, parent: 
 </details>
 </dd>
 <dt id="dearpygui.dearpygui.window"><code class="name flex">
-<span>def <span class="ident">window</span></span>(<span>*, label: str = None, id: int = 0, width: int = 0, height: int = 0, indent: int = -1, show: bool = True, pos: List[int] = [], delay_search: bool = False, user_data: Any = None, min_size: List[int] = [100, 100], max_size: List[int] = [30000, 30000], menubar: bool = False, collapsed: bool = False, autosize: bool = False, no_resize: bool = False, no_title_bar: bool = False, no_move: bool = False, no_scrollbar: bool = False, no_collapse: bool = False, horizontal_scrollbar: bool = False, no_focus_on_appearing: bool = False, no_bring_to_front_on_focus: bool = False, no_close: bool = False, no_background: bool = False, modal: bool = False, popup: bool = False, on_close: Callable = None) ‑> int</span>
+<span>def <span class="ident">window</span></span>(<span>*, label: str = None, id: int = 0, width: int = 0, height: int = 0, indent: int = -1, show: bool = True, pos: List[int] = [], delay_search: bool = False, user_data: Any = None, min_size: List[int] = [100, 100], max_size: List[int] = [30000, 30000], menubar: bool = False, collapsed: bool = False, autosize: bool = False, no_resize: bool = False, no_title_bar: bool = False, no_move: bool = False, no_scrollbar: bool = False, no_collapse: bool = False, horizontal_scrollbar: bool = False, no_focus_on_appearing: bool = False, no_bring_to_front_on_focus: bool = False, no_close: bool = False, no_background: bool = False, modal: bool = False, popup: bool = False, no_saved_settings: bool = False, on_close: Callable = None) ‑> int</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Creates a new window for following items to be added to.</p>
@@ -24162,6 +24292,8 @@ def viewport_menu_bar(*, label: str =None, id: int =0, indent: int =-1, parent: 
 <dd>Fills area behind window according to the theme and disables user ability to interact with anything except the window.</dd>
 <dt><strong><code>**popup</code></strong> :&ensp;<code>bool</code></dt>
 <dd>Fills area behind window according to the theme, removes title bar, collapse and close. Window can be closed by selecting area in the background behind the window.</dd>
+<dt><strong><code>**no_saved_settings</code></strong> :&ensp;<code>bool</code></dt>
+<dd>Never load/save settings in .ini file.</dd>
 <dt><strong><code>**on_close</code></strong> :&ensp;<code>Callable</code></dt>
 <dd>Callback ran when window is closed.</dd>
 </dl>
@@ -24172,7 +24304,7 @@ def viewport_menu_bar(*, label: str =None, id: int =0, indent: int =-1, parent: 
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">@contextmanager
-def window(*, label: str =None, id: int =0, width: int =0, height: int =0, indent: int =-1, show: bool =True, pos: List[int] =[], delay_search: bool =False, user_data: Any =None, min_size: List[int] =[100, 100], max_size: List[int] =[30000, 30000], menubar: bool =False, collapsed: bool =False, autosize: bool =False, no_resize: bool =False, no_title_bar: bool =False, no_move: bool =False, no_scrollbar: bool =False, no_collapse: bool =False, horizontal_scrollbar: bool =False, no_focus_on_appearing: bool =False, no_bring_to_front_on_focus: bool =False, no_close: bool =False, no_background: bool =False, modal: bool =False, popup: bool =False, on_close: Callable =None) -&gt; int:
+def window(*, label: str =None, id: int =0, width: int =0, height: int =0, indent: int =-1, show: bool =True, pos: List[int] =[], delay_search: bool =False, user_data: Any =None, min_size: List[int] =[100, 100], max_size: List[int] =[30000, 30000], menubar: bool =False, collapsed: bool =False, autosize: bool =False, no_resize: bool =False, no_title_bar: bool =False, no_move: bool =False, no_scrollbar: bool =False, no_collapse: bool =False, horizontal_scrollbar: bool =False, no_focus_on_appearing: bool =False, no_bring_to_front_on_focus: bool =False, no_close: bool =False, no_background: bool =False, modal: bool =False, popup: bool =False, no_saved_settings: bool =False, on_close: Callable =None) -&gt; int:
         &#34;&#34;&#34;
         Creates a new window for following items to be added to.
         Args:
@@ -24202,12 +24334,13 @@ def window(*, label: str =None, id: int =0, width: int =0, height: int =0, inden
                 **no_background (bool): Sets Background and border alpha to transparent.
                 **modal (bool): Fills area behind window according to the theme and disables user ability to interact with anything except the window.
                 **popup (bool): Fills area behind window according to the theme, removes title bar, collapse and close. Window can be closed by selecting area in the background behind the window.
+                **no_saved_settings (bool): Never load/save settings in .ini file.
                 **on_close (Callable): Callback ran when window is closed.
         Yields:
                 int
         &#34;&#34;&#34;
         try:
-                widget = internal_dpg.add_window(label=label, id=id, width=width, height=height, indent=indent, show=show, pos=pos, delay_search=delay_search, user_data=user_data, min_size=min_size, max_size=max_size, menubar=menubar, collapsed=collapsed, autosize=autosize, no_resize=no_resize, no_title_bar=no_title_bar, no_move=no_move, no_scrollbar=no_scrollbar, no_collapse=no_collapse, horizontal_scrollbar=horizontal_scrollbar, no_focus_on_appearing=no_focus_on_appearing, no_bring_to_front_on_focus=no_bring_to_front_on_focus, no_close=no_close, no_background=no_background, modal=modal, popup=popup, on_close=on_close)
+                widget = internal_dpg.add_window(label=label, id=id, width=width, height=height, indent=indent, show=show, pos=pos, delay_search=delay_search, user_data=user_data, min_size=min_size, max_size=max_size, menubar=menubar, collapsed=collapsed, autosize=autosize, no_resize=no_resize, no_title_bar=no_title_bar, no_move=no_move, no_scrollbar=no_scrollbar, no_collapse=no_collapse, horizontal_scrollbar=horizontal_scrollbar, no_focus_on_appearing=no_focus_on_appearing, no_bring_to_front_on_focus=no_bring_to_front_on_focus, no_close=no_close, no_background=no_background, modal=modal, popup=popup, no_saved_settings=no_saved_settings, on_close=on_close)
                 internal_dpg.push_container_stack(widget)
                 yield widget
         finally:
@@ -24522,6 +24655,7 @@ def window(*, label: str =None, id: int =0, width: int =0, height: int =0, inden
 <li><code><a title="dearpygui.dearpygui.last_item" href="#dearpygui.dearpygui.last_item">last_item</a></code></li>
 <li><code><a title="dearpygui.dearpygui.last_root" href="#dearpygui.dearpygui.last_root">last_root</a></code></li>
 <li><code><a title="dearpygui.dearpygui.load_image" href="#dearpygui.dearpygui.load_image">load_image</a></code></li>
+<li><code><a title="dearpygui.dearpygui.load_init_file" href="#dearpygui.dearpygui.load_init_file">load_init_file</a></code></li>
 <li><code><a title="dearpygui.dearpygui.lock_mutex" href="#dearpygui.dearpygui.lock_mutex">lock_mutex</a></code></li>
 <li><code><a title="dearpygui.dearpygui.maximize_viewport" href="#dearpygui.dearpygui.maximize_viewport">maximize_viewport</a></code></li>
 <li><code><a title="dearpygui.dearpygui.menu" href="#dearpygui.dearpygui.menu">menu</a></code></li>
@@ -24543,11 +24677,13 @@ def window(*, label: str =None, id: int =0, width: int =0, height: int =0, inden
 <li><code><a title="dearpygui.dearpygui.reset_axis_ticks" href="#dearpygui.dearpygui.reset_axis_ticks">reset_axis_ticks</a></code></li>
 <li><code><a title="dearpygui.dearpygui.reset_default_theme" href="#dearpygui.dearpygui.reset_default_theme">reset_default_theme</a></code></li>
 <li><code><a title="dearpygui.dearpygui.reset_pos" href="#dearpygui.dearpygui.reset_pos">reset_pos</a></code></li>
+<li><code><a title="dearpygui.dearpygui.save_init_file" href="#dearpygui.dearpygui.save_init_file">save_init_file</a></code></li>
 <li><code><a title="dearpygui.dearpygui.set_axis_limits" href="#dearpygui.dearpygui.set_axis_limits">set_axis_limits</a></code></li>
 <li><code><a title="dearpygui.dearpygui.set_axis_limits_auto" href="#dearpygui.dearpygui.set_axis_limits_auto">set_axis_limits_auto</a></code></li>
 <li><code><a title="dearpygui.dearpygui.set_axis_ticks" href="#dearpygui.dearpygui.set_axis_ticks">set_axis_ticks</a></code></li>
 <li><code><a title="dearpygui.dearpygui.set_exit_callback" href="#dearpygui.dearpygui.set_exit_callback">set_exit_callback</a></code></li>
 <li><code><a title="dearpygui.dearpygui.set_global_font_scale" href="#dearpygui.dearpygui.set_global_font_scale">set_global_font_scale</a></code></li>
+<li><code><a title="dearpygui.dearpygui.set_init_file" href="#dearpygui.dearpygui.set_init_file">set_init_file</a></code></li>
 <li><code><a title="dearpygui.dearpygui.set_item_callback" href="#dearpygui.dearpygui.set_item_callback">set_item_callback</a></code></li>
 <li><code><a title="dearpygui.dearpygui.set_item_children" href="#dearpygui.dearpygui.set_item_children">set_item_children</a></code></li>
 <li><code><a title="dearpygui.dearpygui.set_item_disabled_theme" href="#dearpygui.dearpygui.set_item_disabled_theme">set_item_disabled_theme</a></code></li>
