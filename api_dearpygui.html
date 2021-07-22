@@ -5615,7 +5615,7 @@ def draw_rectangle(pmin : List[float], pmax : List[float], *, label: str =None, 
 
         return internal_dpg.draw_rectangle(pmin, pmax, label=label, id=id, parent=parent, before=before, show=show, user_data=user_data, color=color, fill=fill, rounding=rounding, thickness=thickness)
 
-def draw_text(pos : List[float], text : str, *, label: str =None, id: int =0, parent: int =0, before: int =0, show: bool =True, user_data: Any =None, color: List[int] =(255, 255, 255, 255), size: int =10) -&gt; int:
+def draw_text(pos : List[float], text : str, *, label: str =None, id: int =0, parent: int =0, before: int =0, show: bool =True, user_data: Any =None, color: List[int] =(255, 255, 255, 255), size: float =10.0) -&gt; int:
         &#34;&#34;&#34;
         Draws a text on a drawing.
         Args:
@@ -5628,7 +5628,7 @@ def draw_text(pos : List[float], text : str, *, label: str =None, id: int =0, pa
                 **show (bool): Attempt to render widget.
                 **user_data (Any): User data for callbacks.
                 **color (List[int]): 
-                **size (int): 
+                **size (float): 
         Returns:
                 int
         &#34;&#34;&#34;
@@ -17550,7 +17550,7 @@ def draw_layer(*, label: str =None, id: int =0, parent: int =0, before: int =0, 
 </details>
 </dd>
 <dt id="dearpygui.dearpygui.draw_text"><code class="name flex">
-<span>def <span class="ident">draw_text</span></span>(<span>pos: List[float], text: str, *, label: str = None, id: int = 0, parent: int = 0, before: int = 0, show: bool = True, user_data: Any = None, color: List[int] = (255, 255, 255, 255), size: int = 10) ‑> int</span>
+<span>def <span class="ident">draw_text</span></span>(<span>pos: List[float], text: str, *, label: str = None, id: int = 0, parent: int = 0, before: int = 0, show: bool = True, user_data: Any = None, color: List[int] = (255, 255, 255, 255), size: float = 10.0) ‑> int</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Draws a text on a drawing.</p>
@@ -17574,7 +17574,7 @@ def draw_layer(*, label: str =None, id: int =0, parent: int =0, before: int =0, 
 <dd>User data for callbacks.</dd>
 <dt><strong><code>**color</code></strong> :&ensp;<code>List[int]</code></dt>
 <dd>&nbsp;</dd>
-<dt><strong><code>**size</code></strong> :&ensp;<code>int</code></dt>
+<dt><strong><code>**size</code></strong> :&ensp;<code>float</code></dt>
 <dd>&nbsp;</dd>
 </dl>
 <h2 id="returns">Returns</h2>
@@ -17583,7 +17583,7 @@ def draw_layer(*, label: str =None, id: int =0, parent: int =0, before: int =0, 
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def draw_text(pos : List[float], text : str, *, label: str =None, id: int =0, parent: int =0, before: int =0, show: bool =True, user_data: Any =None, color: List[int] =(255, 255, 255, 255), size: int =10) -&gt; int:
+<pre><code class="python">def draw_text(pos : List[float], text : str, *, label: str =None, id: int =0, parent: int =0, before: int =0, show: bool =True, user_data: Any =None, color: List[int] =(255, 255, 255, 255), size: float =10.0) -&gt; int:
         &#34;&#34;&#34;
         Draws a text on a drawing.
         Args:
@@ -17596,7 +17596,7 @@ def draw_layer(*, label: str =None, id: int =0, parent: int =0, before: int =0, 
                 **show (bool): Attempt to render widget.
                 **user_data (Any): User data for callbacks.
                 **color (List[int]): 
-                **size (int): 
+                **size (float): 
         Returns:
                 int
         &#34;&#34;&#34;
@@ -24454,6 +24454,15 @@ def window(*, label: str =None, id: int =0, width: int =0, height: int =0, inden
 </code></dt>
 <dd>
 <div class="desc"><p>mvBuffer object</p></div>
+<h3>Methods</h3>
+<dl>
+<dt id="dearpygui.dearpygui.mvBuffer.clear_value"><code class="name flex">
+<span>def <span class="ident">clear_value</span></span>(<span>...)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>clears buffer with specific value.</p></div>
+</dd>
+</dl>
 </dd>
 </dl>
 </section>
@@ -24868,6 +24877,9 @@ def window(*, label: str =None, id: int =0, width: int =0, height: int =0, inden
 <ul>
 <li>
 <h4><code><a title="dearpygui.dearpygui.mvBuffer" href="#dearpygui.dearpygui.mvBuffer">mvBuffer</a></code></h4>
+<ul class="">
+<li><code><a title="dearpygui.dearpygui.mvBuffer.clear_value" href="#dearpygui.dearpygui.mvBuffer.clear_value">clear_value</a></code></li>
+</ul>
 </li>
 </ul>
 </li>
